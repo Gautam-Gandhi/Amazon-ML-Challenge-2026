@@ -72,6 +72,13 @@ def test_extract_postal_code_us():
     assert extract_postal_code("No zip here", "US") == ""
 
 
+def test_extract_postal_code_does_not_match_leading_street_number():
+    # Regression: an unanchored 5-digit regex wrongly matched the street
+    # number here (17560) as if it were a ZIP -- this address has no ZIP at
+    # all, and the real signal only lives at the end of the string.
+    assert extract_postal_code("17560 Ellis Road, Tahlequah, OK", "US") == ""
+
+
 def test_extract_postal_code_india_is_sparse_by_design():
     # India PINs are essentially absent from this dataset (~0% detected per
     # docs/dataset_description.md) -- this asserts the extractor still works

@@ -51,8 +51,14 @@ _INDIC_SCRIPT_RANGES = (
     (0x0D00, 0x0D7F),  # Malayalam
 )
 _TOKEN_RE = re.compile(r"[a-z0-9]+")
-_US_ZIP_RE = re.compile(r"(?<!\d)\d{5}(?:-\d{4})?(?!\d)")
-_IN_PIN_RE = re.compile(r"(?<!\d)\d{6}(?!\d)")
+# Anchored to the end of the string (trailing punctuation/whitespace
+# allowed): a US ZIP or India PIN is the last token of an address when
+# present at all, and a bare unanchored \d{5} match instead tends to catch a
+# street number that happens to be five digits (e.g. "17560 Ellis Road,
+# Tahlequah, OK" has no ZIP at all, but an unanchored regex would wrongly
+# extract "17560").
+_US_ZIP_RE = re.compile(r"(?<!\d)(\d{5}(?:-\d{4})?)[.,\s]*$")
+_IN_PIN_RE = re.compile(r"(?<!\d)(\d{6})[.,\s]*$")
 
 # Variant -> canonical short token. Order-independent: applied as whole-token
 # replacement after tokenization, so "Corp." / "Corp" / "Corporation" all
@@ -191,8 +197,8 @@ def extract_postal_code(raw_address: str, country: str) -> str:
         return ""
     if country == "US":
         match = _US_ZIP_RE.search(raw_address)
-        return match.group(0) if match else ""
+        return match.group(1) if match else ""
     if country == "India":
         match = _IN_PIN_RE.search(raw_address)
-        return match.group(0) if match else ""
+        return match.group(1) if match else ""
     return ""
