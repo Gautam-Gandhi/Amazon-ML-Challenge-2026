@@ -1,2 +1,6 @@
 .DS_Store
 dataset/
+data/
+.venv/
+__pycache__/
+*.pyc
