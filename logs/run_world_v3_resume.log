@@ -1,0 +1,142 @@
+[     0.0s |   0.6GB] args: {'stage': 'search', 'tag': 'fold0', 'split': 'train', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 20000, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32, 'test_tag': 'fold0'}
+[   254.2s |   3.9GB] search train tag=fold1 country=India: q=441278 corpus=4133346 pairs=32853919 239s
+[   678.7s |   4.3GB] search train tag=fold1 country=US: q=662133 corpus=6186873 pairs=47394224 424s
+[   976.9s |   3.8GB] search train tag=fold0 country=India: q=441910 corpus=4133346 pairs=32897984 277s
+[  1366.2s |   4.9GB] search train tag=fold0 country=US: q=661500 corpus=6186873 pairs=47406825 389s
+[  1366.7s |   2.4GB] candidates train: 160552952 pairs, 72.8 per S1, files 4
+[  1373.5s |   7.3GB] blocking stats: {'pairs': 160552952, 'per_s1': 72.75304703009442, 'pair_recall': 0.9897911398578099, 'recall_only_name': 0.6797397086942035, 'recall_only_addr': 0.9009234306032771, 'recall_only_joint': 0.9626879574359173, 'recall_only_rev': 0.9288536224702538}
+[     0.0s |   0.6GB] args: {'stage': 'search', 'tag': 'fold0', 'split': 'test', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 20000, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32, 'test_tag': 'fold0'}
+[   845.6s |   3.5GB] search test tag=fold0 country=France: q=259452 corpus=1434993 pairs=17190496 831s
+[  1324.3s |   4.5GB] search test tag=fold0 country=India: q=809986 corpus=4717565 pairs=53990536 479s
+[  1696.1s |   4.0GB] search test tag=fold0 country=US: q=663106 corpus=3817031 pairs=41440099 372s
+[  1696.5s |   1.5GB] candidates test: 112621131 pairs, 65.0 per S1, files 3
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'split': 'test', 'run': 'exp01', 'max_cand': 15, 'keep_rrank': 2, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 1500, 'mode': None, 'thr': None}
+[     5.3s |   6.1GB] tables loaded
+[     9.4s |   4.2GB] test France: 17190496 candidate pairs -> 4865699 after pruning
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_match.py:168: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  feat = pl.concat([c, pl.DataFrame(f), sets, extra], how="horizontal")
+[    35.1s |   5.2GB] part 0: rows 3000000 cols 67 26s
+[    50.8s |   4.3GB] part 1: rows 1865699 cols 67 16s
+[    71.6s |   7.0GB] test India: 53990536 candidate pairs -> 15170241 after pruning
+[   103.6s |   6.2GB] part 2: rows 3000000 cols 67 32s
+[   135.9s |   6.9GB] part 3: rows 3000000 cols 67 32s
+[   167.7s |   6.5GB] part 4: rows 3000000 cols 67 32s
+[   199.6s |   6.4GB] part 5: rows 3000000 cols 67 32s
+[   231.7s |   6.4GB] part 6: rows 3000000 cols 67 32s
+[   234.3s |   3.7GB] part 7: rows 170241 cols 67 3s
+[   248.4s |   6.0GB] test US: 41440099 candidate pairs -> 12120229 after pruning
+[   272.9s |   5.8GB] part 8: rows 3000000 cols 67 24s
+[   297.1s |   5.5GB] part 9: rows 3000000 cols 67 24s
+[   322.0s |   5.5GB] part 10: rows 3000000 cols 67 25s
+[   346.6s |   5.6GB] part 11: rows 3000000 cols 67 25s
+[   347.8s |   4.3GB] part 12: rows 120229 cols 67 1s
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'run': 'exp03', 'keep_frac': 0.8, 'world_seed': 0, 'max_cand': 15, 'keep_rrank': 2, 'n_anchor': 3, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None}
+[    16.1s |   7.0GB] world k80s0: kept S1 1765615 / 2206821
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp03_dense.py:77: DeprecationWarning: `is_in` with a collection of the same datatype is ambiguous and deprecated.
+Please use `implode` to return to previous behavior.
+
+See https://github.com/pola-rs/polars/issues/22149 for more information.
+  cand = cand.filter(pl.col("s1").is_in(keep_idx))
+[    45.8s |   7.3GB] India: 52637811 candidates in world -> 13568252 after pruning
+[    77.7s |   6.4GB] part 0: rows 3000000 cols 67 32s
+[   110.1s |   6.2GB] part 1: rows 3000000 cols 67 32s
+[   142.0s |   6.3GB] part 2: rows 3000000 cols 67 32s
+[   173.9s |   4.6GB] part 3: rows 3000000 cols 67 32s
+[   192.3s |   4.9GB] part 4: rows 1568252 cols 67 18s
+[   242.8s |   8.3GB] US: 75824374 candidates in world -> 20005985 after pruning
+[   268.0s |   5.8GB] part 5: rows 3000000 cols 67 25s
+[   291.8s |   6.4GB] part 6: rows 3000000 cols 67 24s
+[   315.8s |   6.5GB] part 7: rows 3000000 cols 67 24s
+[   340.8s |   6.5GB] part 8: rows 3000000 cols 67 25s
+[   365.4s |   6.5GB] part 9: rows 3000000 cols 67 25s
+[   389.7s |   6.4GB] part 10: rows 3000000 cols 67 24s
+[   405.5s |   5.2GB] part 11: rows 2005985 cols 67 16s
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'run': 'exp07', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp07_tokfeat2.py:109: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  vc = x.str.split(" ").list.unique().explode().value_counts()
+[    52.1s |   5.1GB] train: idf 1932928, name noise vocab 1314034; noisiest name words: northside:8.3, eastgate:8.3, lndia:6.7, stil:6.5, stors:6.5, tekstails:6.5, phrnicr:6.4, jnrl:6.4, svits:6.4, bekri:6.4, tredrs:6.4, medikls:6.3, garmemts:6.3, motrs:6.2, pharmesi:6.2
+[   121.6s |   5.5GB] train part000.parquet: 3000000 rows
+[   178.1s |   3.0GB] train part001.parquet: 3000000 rows
+[   232.2s |   4.1GB] train part002.parquet: 3000000 rows
+[   286.2s |   4.3GB] train part003.parquet: 3000000 rows
+[   316.9s |   2.9GB] train part004.parquet: 1568252 rows
+[   343.9s |   4.1GB] train part005.parquet: 3000000 rows
+[   371.3s |   4.0GB] train part006.parquet: 3000000 rows
+[   399.0s |   4.1GB] train part007.parquet: 3000000 rows
+[   426.4s |   4.0GB] train part008.parquet: 3000000 rows
+[   454.2s |   4.1GB] train part009.parquet: 3000000 rows
+[   481.8s |   4.0GB] train part010.parquet: 3000000 rows
+[   502.2s |   3.3GB] train part011.parquet: 2005985 rows
+[   551.5s |   7.7GB] test: idf 1724376, name noise vocab 1099778; noisiest name words: eastgate:8.1, northside:8.1, participations:8.0, stors:7.0, stil:7.0, tekstails:6.9, jnrl:6.8, bekri:6.8, phrnicr:6.8, tredrs:6.8, svits:6.8, medikls:6.8, southside:6.7, motrs:6.7, garmemts:6.7
+[   592.4s |   4.6GB] test part000.parquet: 3000000 rows
+[   609.1s |   3.8GB] test part001.parquet: 1865699 rows
+[   659.1s |   4.9GB] test part002.parquet: 3000000 rows
+[   711.7s |   4.7GB] test part003.parquet: 3000000 rows
+[   762.2s |   4.5GB] test part004.parquet: 3000000 rows
+[   812.8s |   4.5GB] test part005.parquet: 3000000 rows
+[   864.0s |   4.4GB] test part006.parquet: 3000000 rows
+[   872.9s |   1.8GB] test part007.parquet: 170241 rows
+[   898.9s |   4.2GB] test part008.parquet: 3000000 rows
+[   925.7s |   4.2GB] test part009.parquet: 3000000 rows
+[   952.5s |   4.1GB] test part010.parquet: 3000000 rows
+[   979.1s |   4.2GB] test part011.parquet: 3000000 rows
+[   983.4s |   1.6GB] test part012.parquet: 120229 rows
+[     0.0s |   0.1GB] args: {'stage': 'train1', 'run': 'exp07', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+[    27.2s |   6.1GB] [stage1] features 102
+[0]	va-logloss:0.38127
+[200]	va-logloss:0.00948
+[400]	va-logloss:0.00882
+[600]	va-logloss:0.00868
+[713]	va-logloss:0.00867
+[   189.5s |   5.1GB] [stage1] fold 0: rows 7184762, best iter 663, logloss 0.00866, 112s
+[0]	va-logloss:0.37861
+[200]	va-logloss:0.00879
+[400]	va-logloss:0.00813
+[600]	va-logloss:0.00796
+[721]	va-logloss:0.00795
+[   337.1s |   5.0GB] [stage1] fold 1: rows 7102755, best iter 671, logloss 0.00794, 112s
+[   337.6s |   0.9GB] [stage1] top features: [('r_margin2', 13392.3), ('cos_j', 4846.4), ('num_tset', 2947.0), ('hn_prefix', 1875.3), ('hn_edit', 1864.0), ('num1_eq', 1616.8), ('b_nnum', 1305.8), ('tk_b_idfun', 1098.9), ('s1_gap_j', 1005.9), ('r_gap_j', 830.6), ('atk_b_nun', 793.0), ('atk_b_ncont', 773.7), ('tk_b_ncont', 725.9), ('tk_b_nun', 720.4), ('b_hassfx', 591.5), ('hn_logdiff', 510.9), ('tk_b_nsmax', 485.6), ('ncl_tsort', 458.9), ('sfx_eq', 431.2), ('b_ncomp', 383.2)]
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [06:13:10] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[   580.1s |   1.2GB] [exp05 stage1] assign decoding: 0.5:0.98525 0.6:0.98613 0.65:0.98646 0.7:0.98670 0.75:0.98685 0.8:0.98692 0.85:0.98677 0.9:0.98628
+[   588.3s |   1.3GB] [exp05 stage1] BEST thr=0.8 F0.5=0.98692 breakdown {'India': 0.98701, 'US': 0.98685, 'single': 0.98643, 'ngt1': 0.96004, 'ngt2': 0.98463, 'ngt3+': 0.98951}
+[     0.0s |   0.1GB] args: {'stage': 'feats2', 'run': 'exp07', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+[    70.4s |   2.9GB] consistency s1 0..499994: pairs 21998504
+[   116.7s |   3.6GB] consistency s1 499995..1000000: pairs 21647771
+[   161.1s |   3.9GB] consistency s1 1000001..1499727: pairs 21594690
+[   207.5s |   3.6GB] consistency s1 1499728..2000008: pairs 21590235
+[   226.6s |   3.1GB] consistency s1 2000009..2206820: pairs 8932000
+[   268.6s |   4.5GB] stage-2 feats train: 33574237
+[   474.2s |   2.1GB] consistency s1 0..399999: pairs 21347739
+[   520.0s |   3.3GB] consistency s1 400000..799999: pairs 21032096
+[   564.8s |   3.7GB] consistency s1 800000..1199999: pairs 20977959
+[   609.3s |   4.1GB] consistency s1 1200000..1599999: pairs 20997502
+[   624.5s |   3.5GB] consistency s1 1600000..1732543: pairs 6953445
+Traceback (most recent call last):
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp07_tokfeat2.py", line 179, in <module>
+    main()
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp07_tokfeat2.py", line 174, in main
+    {"train1": E5.stage_train1, "feats2": E5.stage_feats2, "train2": E5.stage_train2,
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp05_tokfeat.py", line 211, in stage_feats2
+    full.slice(st, n).write_parquet(os.path.join(out, os.path.basename(p)))
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\polars\dataframe\frame.py", line 4375, in write_parquet
+    self.lazy().sink_parquet(
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\polars\lazyframe\frame.py", line 3021, in sink_parquet
+    return _select_engine(engine).sink_parquet(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\polars\lazyframe\engine.py", line 616, in sink_parquet
+    return self._finish_sink(ldf_py, lazy=lazy, optimizations=optimizations)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\polars\lazyframe\engine.py", line 522, in _finish_sink
+    self.collect(lf, optimizations=optimizations)
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\polars\lazyframe\engine.py", line 443, in collect
+    return wrap_df(ldf.collect(self.name, callback))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+polars.exceptions.ComputeError: parquet: File out of specification: underlying IO error: There is not enough space on the disk. (os error 112)

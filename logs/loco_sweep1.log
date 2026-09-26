@@ -1,0 +1,8 @@
+India: train rows 3455272, eval rows 4748652
+US: train rows 5120142, eval rows 7000373
+SUMMARY base: US->IN @0.7 0.94091 best 0.95015@0.95 | IN->US @0.7 0.95940 best 0.97110@0.95
+SUMMARY mono: US->IN @0.7 0.91907 best 0.93829@0.98 | IN->US @0.7 0.95416 best 0.96676@0.95
+SUMMARY mono,d6: US->IN @0.7 0.92478 best 0.94053@0.97 | IN->US @0.7 0.95855 best 0.96704@0.93
+SUMMARY mono,drop=count+len: US->IN @0.7 0.92286 best 0.92692@0.9 | IN->US @0.7 0.94604 best 0.95099@0.9
+SUMMARY drop=count+len: US->IN @0.7 0.94345 best 0.94926@0.93 | IN->US @0.7 0.95994 best 0.96422@0.9
+SUMMARY mono,drop=count+len+cos: US->IN @0.7 0.92030 best 0.92483@0.85 | IN->US @0.7 0.94403 best 0.94820@0.85

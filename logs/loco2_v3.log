@@ -1,0 +1,26 @@
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\tools\loco2.py:62: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  d = pl.concat([d, pl.read_parquet(b)], how="horizontal")
+US: rows 20005985, feats 102
+India: rows 13568252, feats 102
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [06:51:46] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[US->India] stage 1 done
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\tools\loco2.py:42: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  f = pl.concat([t.drop("row"), cons.drop("row")], how="horizontal").rename({"p": "p1"}).drop("s1", "r")
+[LOCO2 US->India stage1] assign decoding: 0.5:0.94859 0.6:0.95281 0.7:0.95625 0.8:0.95909 0.85:0.96014 0.9:0.96063 0.93:0.96044 0.95:0.95970 0.97:0.95753
+[LOCO2 US->India stage1] BEST thr=0.9 F0.5=0.96063 breakdown {'India': 0.96063, 'single': 0.91407, 'ngt1': 0.90238, 'ngt2': 0.95456, 'ngt3+': 0.97003}
+[LOCO2 US->India stage2] assign decoding: 0.5:0.95654 0.6:0.95912 0.7:0.96093 0.8:0.96196 0.85:0.96197 0.9:0.96136 0.93:0.96034 0.95:0.95901 0.97:0.95611
+[LOCO2 US->India stage2] BEST thr=0.85 F0.5=0.96197 breakdown {'India': 0.96197, 'single': 0.92334, 'ngt1': 0.87109, 'ngt2': 0.95517, 'ngt3+': 0.97337}
+[India->US] stage 1 done
+[LOCO2 India->US stage1] assign decoding: 0.5:0.96810 0.6:0.97135 0.7:0.97421 0.8:0.97657 0.85:0.97737 0.9:0.97782 0.93:0.97770 0.95:0.97706 0.97:0.97499
+[LOCO2 India->US stage1] BEST thr=0.9 F0.5=0.97782 breakdown {'US': 0.97782, 'single': 0.9595, 'ngt1': 0.93863, 'ngt2': 0.97428, 'ngt3+': 0.98302}
+[LOCO2 India->US stage2] assign decoding: 0.5:0.97437 0.6:0.97637 0.7:0.97767 0.8:0.97843 0.85:0.97863 0.9:0.97852 0.93:0.97806 0.95:0.97723 0.97:0.97507
+[LOCO2 India->US stage2] BEST thr=0.85 F0.5=0.97863 breakdown {'US': 0.97863, 'single': 0.96339, 'ngt1': 0.92721, 'ngt2': 0.97528, 'ngt3+': 0.98447}

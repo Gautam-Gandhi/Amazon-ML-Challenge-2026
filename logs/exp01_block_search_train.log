@@ -1,0 +1,16 @@
+[     0.0s |   0.6GB] args: {'stage': 'search', 'tag': 'fold0', 'split': 'train', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 20000, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32}
+[   257.8s |   4.0GB] search train tag=fold1 country=India: q=441278 corpus=4133346 pairs=32802123 245s
+[   631.4s |   4.4GB] search train tag=fold1 country=US: q=662133 corpus=6186873 pairs=47367585 374s
+[   917.2s |   3.9GB] search train tag=fold0 country=India: q=441910 corpus=4133346 pairs=32848319 281s
+[  1374.8s |   4.3GB] search train tag=fold0 country=US: q=661500 corpus=6186873 pairs=47381664 456s
+[  1375.3s |   1.7GB] candidates train: 160399691 pairs, 72.7 per S1, files 4
+[  1382.2s |   6.4GB] blocking stats: {'pairs': 160399691, 'per_s1': 72.68359826193425, 'pair_recall': 0.9899162975322598, 'recall_only_name': 0.6805808572907945, 'recall_only_addr': 0.9026074297313627, 'recall_only_joint': 0.9623114370680113, 'recall_only_rev': 0.9276957830635221}
+[     0.0s |   0.6GB] args: {'stage': 'train', 'tag': 'full', 'split': 'train', 'dim': 128, 'epochs': 2, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 0, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32}
+[    10.6s |   2.4GB] train tag=full: matched S1=2083574 pairs=7638365 singles=123247 distractors=2681854
+[    45.3s |   1.3GB] ep0 batch 0/1528 loss 1.1942 (3s)
+[   235.2s |   2.6GB] ep0 batch 200/1528 loss 1.9670 (193s)
+[   512.8s |   2.3GB] ep0 batch 400/1528 loss 1.8985 (471s)
+[   681.1s |   1.7GB] ep0 batch 600/1528 loss 1.8337 (639s)
+[   900.9s |   2.9GB] ep0 batch 800/1528 loss 1.8650 (859s)
+[  1113.0s |   1.7GB] ep0 batch 1000/1528 loss 1.8857 (1071s)
+[  1318.8s |   2.8GB] ep0 batch 1200/1528 loss 1.8921 (1277s)

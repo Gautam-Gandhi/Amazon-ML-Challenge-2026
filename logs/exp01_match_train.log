@@ -1,0 +1,40 @@
+[     0.0s |   0.1GB] args: {'stage': 'train', 'split': 'train', 'run': 'exp01', 'max_cand': 0, 'keep_rrank': 1, 'neg_frac': 0.3, 'depth': 8, 'device': 'cpu', 'eta': 0.15, 'rounds': 800, 'mode': None, 'thr': None}
+[    17.8s |   4.8GB] train rows 38492639, positives 7514658, features 65
+[0]	va-logloss:0.36406
+[100]	va-logloss:0.01358
+[200]	va-logloss:0.01208
+[300]	va-logloss:0.01161
+[400]	va-logloss:0.01144
+[500]	va-logloss:0.01137
+[600]	va-logloss:0.01132
+[700]	va-logloss:0.01131
+[705]	va-logloss:0.01131
+[   462.3s |   2.0GB] fold 0: trained on 8432358 rows, best iter 655, best logloss 0.01129, 418s
+[0]	va-logloss:0.36391
+[100]	va-logloss:0.01281
+[200]	va-logloss:0.01138
+[300]	va-logloss:0.01092
+[400]	va-logloss:0.01078
+[500]	va-logloss:0.01070
+[600]	va-logloss:0.01066
+[605]	va-logloss:0.01066
+[   846.0s |   1.4GB] fold 1: trained on 8379177 rows, best iter 555, best logloss 0.01066, 365s
+[   958.5s |   1.5GB] top features: [('r_margin2', 9929.1), ('r_rank_j', 9337.1), ('r_gap_j', 3675.9), ('b_nnum', 2410.7), ('num_tset', 2402.4), ('num1_eq', 1846.9), ('cos_j', 444.9), ('b_domain', 399.4), ('b_ntok', 373.1), ('ncl_tsort', 368.4), ('num1_ratio', 289.1), ('b_native', 286.0), ('b_hassfx', 285.0), ('sfx_eq', 242.0), ('nc_first_eq', 218.9), ('ncl_jw', 189.5), ('num_jacc', 185.6), ('ad_tset', 180.5), ('a_hassfx', 138.0), ('rk_joint', 121.2), ('sfx_jacc', 117.1), ('a_ntok', 111.4), ('cos_n', 108.2), ('nc_jacc', 101.3), ('b_natok', 90.2)]
+[   969.9s |   0.9GB] upper bound F0.5 (perfect matcher on candidates): 0.99517; pair recall 0.98380
+[   976.4s |   1.5GB] decode thr thr=0.3: F0.5=0.97593 (pred pairs 7615850)
+[   982.9s |   0.4GB] decode thr thr=0.4: F0.5=0.97953 (pred pairs 7558659)
+[   989.7s |   1.2GB] decode thr thr=0.5: F0.5=0.98195 (pred pairs 7507974)
+[   994.7s |   1.2GB] decode thr thr=0.6: F0.5=0.98354 (pred pairs 7464976)
+[   999.8s |   1.3GB] decode thr thr=0.7: F0.5=0.98441 (pred pairs 7423707)
+[  1011.1s |   2.7GB] decode assign thr=0.3: F0.5=0.97974 (pred pairs 7551079)
+[  1020.6s |   2.7GB] decode assign thr=0.4: F0.5=0.98187 (pred pairs 7516147)
+[  1030.4s |   2.7GB] decode assign thr=0.5: F0.5=0.98329 (pred pairs 7482919)
+[  1041.1s |   2.7GB] decode assign thr=0.6: F0.5=0.98427 (pred pairs 7450805)
+[  1050.6s |   3.0GB] decode assign thr=0.7: F0.5=0.98480 (pred pairs 7417004)
+[  1065.6s |   3.2GB] decode efb thr=0.0: F0.5=0.98449 (pred pairs 7404239)
+[  1083.9s |   0.4GB] decode efb thr=0.1: F0.5=0.98449 (pred pairs 7404239)
+[  1097.9s |   3.3GB] decode efb thr=0.2: F0.5=0.98449 (pred pairs 7404239)
+[  1110.0s |   3.1GB] decode efb thr=0.3: F0.5=0.98449 (pred pairs 7404237)
+[  1121.9s |   3.4GB] decode efb thr=0.4: F0.5=0.98449 (pred pairs 7404168)
+[  1121.9s |   3.4GB] BEST decoding ('assign', 0.7) F0.5=0.98480
+[  1132.5s |   1.3GB] breakdown: {'f05_India': 0.9855, 'f05_US': 0.98432, 'f05_singletons': 0.97778, 'f05_nonsingle': 0.98521, 'f05_ngt1': 0.95472, 'f05_ngt2': 0.98233, 'f05_ngt3': 0.9867, 'f05_ngt4': 0.98825, 'f05_ngt5': 0.98918, 'f05_ngt6': 0.98972, 'f05_ngt7': 0.99006}

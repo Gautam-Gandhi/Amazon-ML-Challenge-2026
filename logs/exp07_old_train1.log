@@ -1,0 +1,17 @@
+[     0.0s |   0.1GB] args: {'stage': 'train1', 'run': 'exp07_old', 'test_feat': '', 'neg_frac': 0.3, 'depth': 8, 'device': 'cpu', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+[    50.0s |   2.8GB] [stage1] features 102
+[0]	va-logloss:0.38237
+[200]	va-logloss:0.00962
+[400]	va-logloss:0.00891
+[600]	va-logloss:0.00878
+[677]	va-logloss:0.00877
+[   631.2s |   5.1GB] [stage1] fold 0: rows 7179587, best iter 627, logloss 0.00877, 485s
+[0]	va-logloss:0.38017
+[200]	va-logloss:0.00932
+[400]	va-logloss:0.00851
+[600]	va-logloss:0.00834
+[795]	va-logloss:0.00831
+[  1231.2s |   4.9GB] [stage1] fold 1: rows 7106693, best iter 745, logloss 0.00831, 564s
+[  1231.7s |   0.9GB] [stage1] top features: [('r_margin2', 11342.9), ('cos_j', 8092.9), ('num_tset', 3105.3), ('hn_prefix', 1568.0), ('b_nnum', 1318.9), ('hn_edit', 1052.9), ('num1_eq', 1003.7), ('atk_b_ncont', 981.5), ('tk_b_idfun', 920.5), ('r_gap_j', 900.7), ('tk_b_nun', 888.6), ('hn_logdiff', 662.3), ('b_hassfx', 625.6), ('tk_b_ncont', 582.5), ('sfx_eq', 567.7), ('ncl_tsort', 510.8), ('tk_b_nsmax', 354.8), ('tk_b_nsmin', 328.9), ('b_natok', 317.7), ('b_ntok', 311.3)]
+[  1380.9s |   1.2GB] [exp05 stage1] assign decoding: 0.5:0.98501 0.6:0.98598 0.65:0.98631 0.7:0.98659 0.75:0.98676 0.8:0.98681 0.85:0.98668 0.9:0.98618
+[  1389.0s |   1.3GB] [exp05 stage1] BEST thr=0.8 F0.5=0.98681 breakdown {'India': 0.98706, 'US': 0.98664, 'single': 0.98624, 'ngt1': 0.95982, 'ngt2': 0.98448, 'ngt3+': 0.98943}

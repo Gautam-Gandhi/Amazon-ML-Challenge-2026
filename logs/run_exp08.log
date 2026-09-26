@@ -1,0 +1,106 @@
+[     0.0s |   0.5GB] args: {'stage': 'pairs', 'run': 'exp08', 'base': 'exp07', 'lo': 0.01, 'hi': 0.99, 'max_len': 96, 'bs': 64, 'lr': 3e-05, 'epochs': 2, 'loco': False, 'thr': None, 'unseen_thr': 0.9, 'unseen_mode': 'exp05', 'out_name': 'test_ce.parquet'}
+[     1.7s |   3.1GB] train: band (0.01,0.99) pairs 697461 of 33574237, pos rate 0.450
+[     3.4s |   3.5GB] test: band (0.01,0.99) pairs 997046 of 32156169
+[     0.0s |   0.5GB] args: {'stage': 'train', 'run': 'exp08', 'base': 'exp07', 'lo': 0.01, 'hi': 0.99, 'max_len': 96, 'bs': 64, 'lr': 3e-05, 'epochs': 2, 'loco': False, 'thr': None, 'unseen_thr': 0.9, 'unseen_mode': 'exp05', 'out_name': 'test_ce.parquet'}
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3139.48it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: intfloat/multilingual-e5-small
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[   485.8s |   0.5GB] tokenized train 697461 test 997046 in 441s; mean len 44.7
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3163.28it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: intfloat/multilingual-e5-small
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[   512.1s |   2.0GB] fold 0: train 346852 (pos 0.469), score 350609
+[   514.2s |   2.7GB]   ep0 step 0/5420 loss 0.6928 (2s)
+[   598.6s |   2.5GB]   ep0 step 500/5420 loss 0.6476 (86s)
+[   658.1s |   2.7GB]   ep0 step 1000/5420 loss 0.5941 (146s)
+[   712.6s |   2.8GB]   ep0 step 1500/5420 loss 0.5599 (200s)
+[   767.2s |   2.9GB]   ep0 step 2000/5420 loss 0.5026 (255s)
+[   821.0s |   3.0GB]   ep0 step 2500/5420 loss 0.5083 (309s)
+[   876.0s |   2.9GB]   ep0 step 3000/5420 loss 0.4877 (364s)
+[   930.5s |   2.9GB]   ep0 step 3500/5420 loss 0.4778 (418s)
+[   984.9s |   3.0GB]   ep0 step 4000/5420 loss 0.4657 (473s)
+[  1040.4s |   3.0GB]   ep0 step 4500/5420 loss 0.4531 (528s)
+[  1095.0s |   3.0GB]   ep0 step 5000/5420 loss 0.4329 (583s)
+[  1141.6s |   3.0GB]   ep1 step 0/5420 loss 0.2801 (629s)
+[  1196.9s |   3.0GB]   ep1 step 500/5420 loss 0.4382 (685s)
+[  1251.2s |   3.0GB]   ep1 step 1000/5420 loss 0.4043 (739s)
+[  1306.6s |   3.0GB]   ep1 step 1500/5420 loss 0.4061 (794s)
+[  1360.4s |   3.0GB]   ep1 step 2000/5420 loss 0.3988 (848s)
+[  1415.5s |   3.0GB]   ep1 step 2500/5420 loss 0.4035 (903s)
+[  1469.4s |   3.0GB]   ep1 step 3000/5420 loss 0.4331 (957s)
+[  1523.9s |   3.0GB]   ep1 step 3500/5420 loss 0.4081 (1012s)
+[  1578.5s |   3.0GB]   ep1 step 4000/5420 loss 0.4049 (1066s)
+[  1632.7s |   3.0GB]   ep1 step 4500/5420 loss 0.4163 (1120s)
+[  1687.4s |   3.0GB]   ep1 step 5000/5420 loss 0.4044 (1175s)
+[  2348.9s |   4.9GB] fold 0: OOF AUC ce 0.8973 vs stage-2 p 0.9384
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.70it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.70it/s]
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2965.12it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: intfloat/multilingual-e5-small
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[  2357.1s |   5.0GB] fold 1: train 350609 (pos 0.431), score 346852
+[  2357.8s |   5.0GB]   ep0 step 0/5479 loss 0.6902 (1s)
+[  2412.3s |   5.0GB]   ep0 step 500/5479 loss 0.6411 (55s)
+[  2466.7s |   5.0GB]   ep0 step 1000/5479 loss 0.5840 (110s)
+[  2521.7s |   5.0GB]   ep0 step 1500/5479 loss 0.5382 (165s)
+[  2575.2s |   5.0GB]   ep0 step 2000/5479 loss 0.5188 (218s)
+[  2629.2s |   5.0GB]   ep0 step 2500/5479 loss 0.4844 (272s)
+[  2683.6s |   5.0GB]   ep0 step 3000/5479 loss 0.4914 (326s)
+[  2737.9s |   5.0GB]   ep0 step 3500/5479 loss 0.4640 (381s)
+[  2792.8s |   5.0GB]   ep0 step 4000/5479 loss 0.4573 (436s)
+[  2847.3s |   5.0GB]   ep0 step 4500/5479 loss 0.4366 (490s)
+[  2900.8s |   5.0GB]   ep0 step 5000/5479 loss 0.4529 (544s)
+[  2952.3s |   5.0GB]   ep1 step 0/5479 loss 0.3137 (595s)
+[  3005.0s |   5.0GB]   ep1 step 500/5479 loss 0.4113 (648s)
+[  3058.8s |   5.0GB]   ep1 step 1000/5479 loss 0.4075 (702s)
+[  3111.4s |   5.0GB]   ep1 step 1500/5479 loss 0.3989 (754s)
+[  3163.5s |   5.0GB]   ep1 step 2000/5479 loss 0.4198 (806s)
+[  3215.5s |   5.0GB]   ep1 step 2500/5479 loss 0.4142 (858s)
+[  3268.6s |   5.0GB]   ep1 step 3000/5479 loss 0.4070 (912s)
+[  3323.8s |   4.5GB]   ep1 step 3500/5479 loss 0.3846 (967s)
+[  3379.3s |   4.5GB]   ep1 step 4000/5479 loss 0.3799 (1022s)
+[  3435.7s |   4.5GB]   ep1 step 4500/5479 loss 0.3785 (1079s)
+[  3490.5s |   4.5GB]   ep1 step 5000/5479 loss 0.3827 (1133s)
+[  4156.4s |   4.8GB] fold 1: OOF AUC ce 0.8945 vs stage-2 p 0.9421
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.47it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.47it/s]
+[     0.0s |   0.5GB] args: {'stage': 'stack', 'run': 'exp08', 'base': 'exp07', 'lo': 0.01, 'hi': 0.99, 'max_len': 96, 'bs': 64, 'lr': 3e-05, 'epochs': 2, 'loco': False, 'thr': None, 'unseen_thr': 0.9, 'unseen_mode': 'exp05', 'out_name': 'test_ce.parquet'}
+[     3.7s |   1.4GB] stacker fit on fold 0: coef [0.849 0.583 0.042] intercept -0.065
+[     3.9s |   1.4GB] stacker fit on fold 1: coef [0.818 0.587 0.04 ] intercept -0.102
+[    59.9s |   1.8GB] [exp05 (reference)] assign decoding: 0.5:0.98685 0.6:0.98755 0.65:0.98773 0.7:0.98783 0.75:0.98787 0.8:0.98780 0.85:0.98753 0.9:0.98685
+[    68.4s |   2.0GB] [exp05 (reference)] BEST thr=0.75 F0.5=0.98787 breakdown {'India': 0.98804, 'US': 0.98776, 'single': 0.99211, 'ngt1': 0.95084, 'ngt2': 0.98599, 'ngt3+': 0.99077}
+[   125.3s |   2.4GB] [exp06 stacked] assign decoding: 0.5:0.98882 0.6:0.98936 0.65:0.98951 0.7:0.98959 0.75:0.98957 0.8:0.98945 0.85:0.98918 0.9:0.98860
+[   133.1s |   2.5GB] [exp06 stacked] BEST thr=0.7 F0.5=0.98959 breakdown {'India': 0.99015, 'US': 0.98921, 'single': 0.9943, 'ngt1': 0.9614, 'ngt2': 0.98796, 'ngt3+': 0.99172}
+[   189.6s |   2.9GB] [exp06 CE alone in band] assign decoding: 0.5:0.98465 0.6:0.98510 0.65:0.98535 0.7:0.98545 0.75:0.98537 0.8:0.98491 0.85:0.98429 0.9:0.98391
+[   197.7s |   3.0GB] [exp06 CE alone in band] BEST thr=0.7 F0.5=0.98545 breakdown {'India': 0.98653, 'US': 0.98472, 'single': 0.98793, 'ngt1': 0.95129, 'ngt2': 0.98388, 'ngt3+': 0.98818}
+[     0.0s |   0.5GB] args: {'stage': 'predict2', 'run': 'exp08', 'base': 'exp07', 'lo': 0.01, 'hi': 0.99, 'max_len': 96, 'bs': 64, 'lr': 3e-05, 'epochs': 2, 'loco': False, 'thr': None, 'unseen_thr': 0.9, 'unseen_mode': 'exp05', 'out_name': 'test_ce.parquet'}
+[     1.3s |   0.6GB] in-country stacker coef [0.834 0.584 0.04 ]
+[    35.9s |   5.0GB] [exp05] test France: mean matches 3.130 empty 0.0652
+[    36.0s |   5.0GB] [exp05] test India: mean matches 3.373 empty 0.0581
+[    36.0s |   5.0GB] [exp05] test US: mean matches 3.381 empty 0.0581
+[    93.4s |   4.2GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (102505 empty, 1630039 non-empty).
+  candidate_pairs.tsv: 1732544 rows (0 empty, 1732544 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[    93.4s |   4.2GB] VALID
+EXP08_DONE

@@ -1,0 +1,5 @@
+features 65 (dropped [])
+[LOCO train US -> test India] assign decoding: 0.5:0.93908 0.6:0.94296 0.65:0.94484 0.7:0.94665 0.75:0.94849 0.8:0.95029 0.85:0.95217 0.9:0.95393
+[LOCO train US -> test India] BEST thr=0.9 F0.5=0.95393 breakdown {'India': 0.95393, 'single': 0.87809, 'ngt1': 0.89313, 'ngt2': 0.94727, 'ngt3+': 0.96593}
+[LOCO train India -> test US] assign decoding: 0.5:0.95311 0.6:0.95841 0.65:0.96078 0.7:0.96306 0.75:0.96516 0.8:0.96717 0.85:0.96901 0.9:0.97066
+[LOCO train India -> test US] BEST thr=0.9 F0.5=0.97066 breakdown {'US': 0.97066, 'single': 0.91801, 'ngt1': 0.92772, 'ngt2': 0.96723, 'ngt3+': 0.97878}

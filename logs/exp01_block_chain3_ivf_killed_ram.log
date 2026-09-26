@@ -1,0 +1,3 @@
+[     0.0s |   0.6GB] args: {'stage': 'search', 'tag': 'fold0', 'split': 'train', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 20000, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32}
+[   205.3s |   7.1GB] search train tag=fold1 country=India: q=441278 corpus=4133346 pairs=32801974 193s
+[   698.1s |   8.8GB] search train tag=fold1 country=US: q=662133 corpus=6186873 pairs=47367585 493s

@@ -1,0 +1,34 @@
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'run': 'exp07_old', 'test_feat': '', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp07_tokfeat2.py:109: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  vc = x.str.split(" ").list.unique().explode().value_counts()
+[    83.6s |   0.0GB] train: idf 1974339, name noise vocab 1353576; noisiest name words: northside:8.3, eastgate:8.3, doing:7.7, 5ervices:6.9, lndia:6.7, stil:6.5, stors:6.5, tekstails:6.5, phrnicr:6.4, jnrl:6.4, svits:6.4, bekri:6.4, tredrs:6.4, medikls:6.3, garmemts:6.3
+[   609.4s |   1.9GB] train part000.parquet: 3000000 rows
+[   716.5s |   0.5GB] train part001.parquet: 3000000 rows
+[   824.7s |   1.8GB] train part002.parquet: 3000000 rows
+[   933.1s |   1.2GB] train part003.parquet: 3000000 rows
+[  1023.7s |   2.2GB] train part004.parquet: 1557894 rows
+[  1070.0s |   2.9GB] train part005.parquet: 3000000 rows
+[  1132.6s |   3.4GB] train part006.parquet: 3000000 rows
+[  1173.7s |   3.1GB] train part007.parquet: 3000000 rows
+[  1267.1s |   0.8GB] train part008.parquet: 3000000 rows
+[  1313.7s |   2.2GB] train part009.parquet: 3000000 rows
+[  1387.9s |   2.7GB] train part010.parquet: 3000000 rows
+[  1420.8s |   2.4GB] train part011.parquet: 2009990 rows
+[  1548.9s |   6.0GB] test: idf 1758605, name noise vocab 1131904; noisiest name words: eastgate:8.1, northside:8.1, participations:8.0, doing:7.2, stors:7.0, stil:7.0, tekstails:6.9, jnrl:6.8, bekri:6.8, phrnicr:6.8, tredrs:6.8, svits:6.8, medikls:6.8, southside:6.7, motrs:6.7
+[  1643.7s |   3.6GB] test part000.parquet: 3000000 rows
+[  1666.2s |   3.1GB] test part001.parquet: 1837156 rows
+[  1737.5s |   2.5GB] test part002.parquet: 3000000 rows
+[  1864.8s |   0.8GB] test part003.parquet: 3000000 rows
+[  1949.3s |   3.1GB] test part004.parquet: 3000000 rows
+[  2040.2s |   2.7GB] test part005.parquet: 3000000 rows
+[  2166.4s |   2.5GB] test part006.parquet: 3000000 rows
+[  2181.0s |   1.5GB] test part007.parquet: 168840 rows
+[  2215.8s |   2.0GB] test part008.parquet: 3000000 rows
+[  2273.1s |   3.7GB] test part009.parquet: 3000000 rows
+[  2311.2s |   3.3GB] test part010.parquet: 3000000 rows
+[  2359.1s |   3.3GB] test part011.parquet: 3000000 rows
+[  2364.4s |   1.4GB] test part012.parquet: 121648 rows
+[     0.0s |   0.1GB] args: {'stage': 'train1', 'run': 'exp07_old', 'test_feat': '', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+[    25.1s |   7.7GB] [stage1] features 102
+[0]	va-logloss:0.38222
+[200]	va-logloss:0.00962

@@ -1,0 +1,21 @@
+India: train rows 3456692, eval rows 4751054
+US: train rows 5116920, eval rows 7001769
+[[base] US->India] BEST thr=0.93 F0.5=0.96298 breakdown {'India': 0.96298, 'single': 0.92453, 'ngt1': 0.90465, 'ngt2': 0.95694, 'ngt3+': 0.97182}
+[[base] India->US] BEST thr=0.93 F0.5=0.97852 breakdown {'US': 0.97852, 'single': 0.95495, 'ngt1': 0.93686, 'ngt2': 0.97508, 'ngt3+': 0.98427}
+SUMMARY base: US->IN @0.7 0.95718 best 0.96298@0.93 | IN->US @0.7 0.97239 best 0.97852@0.93
+  importance weights: mean 0.111, p10 0.100, p90 0.100
+[[iw10] US->India] BEST thr=0.98 F0.5=0.96807 breakdown {'India': 0.96807, 'single': 0.9422, 'ngt1': 0.91419, 'ngt2': 0.96202, 'ngt3+': 0.9756}
+  importance weights: mean 0.141, p10 0.100, p90 0.100
+[[iw10] India->US] BEST thr=0.98 F0.5=0.97682 breakdown {'US': 0.97682, 'single': 0.96004, 'ngt1': 0.92962, 'ngt2': 0.97202, 'ngt3+': 0.98278}
+SUMMARY iw10: US->IN @0.7 0.95528 best 0.96807@0.98 | IN->US @0.7 0.96766 best 0.97682@0.98
+  importance weights: mean 0.208, p10 0.200, p90 0.200
+[[iw5] US->India] BEST thr=0.97 F0.5=0.96899 breakdown {'India': 0.96899, 'single': 0.94334, 'ngt1': 0.9174, 'ngt2': 0.96313, 'ngt3+': 0.97627}
+  importance weights: mean 0.227, p10 0.200, p90 0.200
+[[iw5] India->US] BEST thr=0.97 F0.5=0.97731 breakdown {'US': 0.97731, 'single': 0.95946, 'ngt1': 0.93013, 'ngt2': 0.97308, 'ngt3+': 0.98323}
+SUMMARY iw5: US->IN @0.7 0.95820 best 0.96899@0.97 | IN->US @0.7 0.96867 best 0.97731@0.97
+  importance weights: mean 0.064, p10 0.050, p90 0.050
+[[iw20] US->India] BEST thr=0.98 F0.5=0.96877 breakdown {'India': 0.96877, 'single': 0.93447, 'ngt1': 0.91815, 'ngt2': 0.96364, 'ngt3+': 0.97649}
+  importance weights: mean 0.108, p10 0.050, p90 0.050
+[[iw20] India->US] BEST thr=0.98 F0.5=0.97640 breakdown {'US': 0.9764, 'single': 0.95733, 'ngt1': 0.9304, 'ngt2': 0.97146, 'ngt3+': 0.98249}
+SUMMARY iw20: US->IN @0.7 0.95469 best 0.96877@0.98 | IN->US @0.7 0.96761 best 0.97640@0.98
+LOCO_IW_DONE

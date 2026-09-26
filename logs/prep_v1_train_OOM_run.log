@@ -1,0 +1,56 @@
+[     1.1s |   2.5GB] train: S1=2206821 R=10320219
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\prep_v1.py:310: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  .explode("rid")
+[     3.6s |   4.9GB] GT pairs mapped: 7638365
+[    19.5s |   5.3GB] native names in GT pairs: 551240, aligned (same #tokens): 551230, token map size: 1347, component map size: 16
+[    36.8s |   3.4GB] train_s1: 2206821 rows normalized in 11s
+[   149.0s |   4.1GB] train_r: 10320219 rows normalized in 112s
+[   161.7s |   4.2GB] test: S1=1732544 R=9969589
+[   172.2s |   3.7GB] test_s1: 1732544 rows normalized in 11s
+Process SpawnPoolWorker-2:
+Process SpawnPoolWorker-4:
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\multiprocessing\pool.py", line 131, in worker
+    put((job, i, result))
+  File "C:\Program Files\Python311\Lib\multiprocessing\queues.py", line 371, in put
+    obj = _ForkingPickler.dumps(obj)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\multiprocessing\reduction.py", line 51, in dumps
+    cls(buf, protocol).dump(obj)
+MemoryError
+  File "C:\Program Files\Python311\Lib\multiprocessing\pool.py", line 131, in worker
+    put((job, i, result))
+  File "C:\Program Files\Python311\Lib\multiprocessing\queues.py", line 371, in put
+    obj = _ForkingPickler.dumps(obj)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\multiprocessing\reduction.py", line 51, in dumps
+    cls(buf, protocol).dump(obj)
+MemoryError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Program Files\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python311\Lib\multiprocessing\pool.py", line 134, in worker
+    util.debug("Possible encoding error while sending result: %s" % (
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+MemoryError
+  File "C:\Program Files\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Program Files\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python311\Lib\multiprocessing\pool.py", line 133, in worker
+    wrapped = MaybeEncodingError(e, result[1])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\multiprocessing\pool.py", line 86, in __init__
+    self.value = repr(value)
+                 ^^^^^^^^^^^
+MemoryError

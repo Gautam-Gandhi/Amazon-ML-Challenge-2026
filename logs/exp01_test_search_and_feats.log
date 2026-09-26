@@ -1,0 +1,27 @@
+[     0.0s |   0.6GB] args: {'stage': 'search', 'tag': 'fold0', 'split': 'test', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 20000, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32, 'test_tag': 'fold0'}
+[   158.8s |   3.6GB] search test tag=fold0 country=France: q=259452 corpus=1434993 pairs=17824589 134s
+[   691.2s |   4.5GB] search test tag=fold0 country=India: q=809986 corpus=4717565 pairs=53923119 532s
+[  1251.6s |   5.3GB] search test tag=fold0 country=US: q=663106 corpus=3817031 pairs=41416495 560s
+[  1271.6s |   1.5GB] candidates test: 113164203 pairs, 65.3 per S1, files 3
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'split': 'test', 'run': 'exp01', 'max_cand': 15, 'keep_rrank': 2, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 1500, 'mode': None, 'thr': None}
+[     4.8s |   5.9GB] tables loaded
+[     8.4s |   4.2GB] test France: 17824589 candidate pairs -> 5064251 after pruning
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_match.py:168: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  feat = pl.concat([c, pl.DataFrame(f), sets, extra], how="horizontal")
+[    30.9s |   5.1GB] part 0: rows 3000000 cols 67 23s
+[    46.5s |   4.5GB] part 1: rows 2064251 cols 67 16s
+[    58.2s |   7.2GB] test India: 53923119 candidate pairs -> 15168840 after pruning
+[    85.5s |   6.4GB] part 2: rows 3000000 cols 67 27s
+[   115.1s |   4.8GB] part 3: rows 3000000 cols 67 30s
+[   143.3s |   6.4GB] part 4: rows 3000000 cols 67 28s
+[   171.6s |   6.7GB] part 5: rows 3000000 cols 67 28s
+[   199.2s |   6.9GB] part 6: rows 3000000 cols 67 28s
+[   201.0s |   4.6GB] part 7: rows 168840 cols 67 2s
+[   209.8s |   5.6GB] test US: 41416495 candidate pairs -> 12121648 after pruning
+[   243.4s |   2.1GB] part 8: rows 3000000 cols 67 34s
+[   288.6s |   1.6GB] part 9: rows 3000000 cols 67 45s
+[   332.4s |   3.9GB] part 10: rows 3000000 cols 67 43s
+[   365.1s |   4.2GB] part 11: rows 3000000 cols 67 33s
+[   366.8s |   3.4GB] part 12: rows 121648 cols 67 2s
+TEST_CHAIN_DONE

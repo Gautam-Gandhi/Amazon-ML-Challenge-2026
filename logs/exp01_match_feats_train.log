@@ -1,0 +1,21 @@
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'split': 'train', 'run': 'exp01', 'max_cand': 15, 'keep_rrank': 2, 'neg_frac': 0.3, 'depth': 8, 'eta': 0.1, 'rounds': 1500, 'mode': None, 'thr': None}
+[     5.3s |   6.1GB] tables loaded
+[    27.5s |   2.6GB] train India: 65650442 candidate pairs -> 15533348 after pruning
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_match.py:168: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  feat = pl.concat([c, pl.DataFrame(f), sets, extra], how="horizontal")
+[    86.1s |   2.4GB] part 0: rows 3000000 cols 67 58s
+[   131.4s |   1.6GB] part 1: rows 3000000 cols 67 45s
+[   184.9s |   1.6GB] part 2: rows 3000000 cols 67 53s
+[   224.6s |   1.4GB] part 3: rows 3000000 cols 67 40s
+[   271.3s |   1.6GB] part 4: rows 3000000 cols 67 45s
+[   279.5s |   3.6GB] part 5: rows 533348 cols 67 8s
+[   315.5s |   4.9GB] train US: 94749249 candidate pairs -> 22959291 after pruning
+[   380.2s |   1.5GB] part 6: rows 3000000 cols 67 65s
+[   411.5s |   5.3GB] part 7: rows 3000000 cols 67 30s
+[   438.2s |   3.6GB] part 8: rows 3000000 cols 67 27s
+[   472.6s |   2.6GB] part 9: rows 3000000 cols 67 34s
+[   507.7s |   1.5GB] part 10: rows 3000000 cols 67 35s
+[   536.5s |   4.5GB] part 11: rows 3000000 cols 67 29s
+[   565.3s |   4.0GB] part 12: rows 3000000 cols 67 29s
+[   580.8s |   4.9GB] part 13: rows 1959291 cols 67 15s

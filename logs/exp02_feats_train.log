@@ -1,0 +1,11 @@
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'split': 'train', 'base': 'exp01', 'run': 'exp02', 'n_anchor': 3, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 1500, 'thr': None}
+[   126.1s |   1.8GB] consistency s1 0..399999: pairs 20080957
+[   199.8s |   2.1GB] consistency s1 400000..799999: pairs 19716179
+[   284.3s |   1.9GB] consistency s1 800000..1199999: pairs 19712638
+[   418.3s |   2.0GB] consistency s1 1200000..1599999: pairs 19690257
+[   470.2s |   2.0GB] consistency s1 1600000..1999999: pairs 19683516
+[   492.3s |   2.3GB] consistency s1 2000000..2206820: pairs 10167043
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp02_stack.py:121: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  full = pl.concat([t.drop("row"), cons.drop("row")], how="horizontal").rename({"p": "p1"})
+[   508.0s |   4.1GB] feat_v2 train: 38492639 rows, cols 20

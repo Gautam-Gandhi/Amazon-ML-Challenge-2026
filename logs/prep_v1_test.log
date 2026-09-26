@@ -1,0 +1,4 @@
+[     2.8s |   2.5GB] test: S1=1732544 R=9969589
+[    20.2s |   3.0GB] test_s1: 1732544 rows normalized in 11s
+[   141.5s |   4.2GB] test_r: 9969589 rows normalized in 121s
+[   148.2s |   4.2GB] done

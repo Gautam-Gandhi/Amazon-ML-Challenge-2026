@@ -1,0 +1,76 @@
+[     1.5s |   2.4GB] train: S1=2206821 R=10320219
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\prep_v3.py:245: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  .explode("rid")
+[     3.7s |   4.9GB] GT pairs mapped: 7638365
+[    17.7s |   5.6GB] native names in GT pairs: 551240, aligned (same #tokens): 551230, token map size: 1347, component map size: 16
+[    36.4s |   3.2GB] train_s1: 2206821 rows normalized in 14s
+[   105.1s |   4.8GB] train_r: 10320219 rows normalized in 69s
+[   108.4s |   4.2GB] test: S1=1732544 R=9969589
+[   121.5s |   3.8GB] test_s1: 1732544 rows normalized in 13s
+[   196.9s |   4.4GB] test_r: 9969589 rows normalized in 75s
+[   197.2s |   4.4GB] done
+[     0.0s |   0.6GB] args: {'stage': 'feats', 'tag': 'fold0', 'split': 'train', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 20000, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32, 'test_tag': 'fold0'}
+[    10.6s |   0.9GB] feats train_s1_name: rows=2206821 nnz=41585443 (18.8/row)
+[    16.8s |   1.1GB] feats train_s1_addr: rows=2206821 nnz=68392257 (31.0/row)
+[    39.3s |   1.6GB] feats train_r_name: rows=10320219 nnz=201810620 (19.6/row)
+[    66.7s |   1.9GB] feats train_r_addr: rows=10320219 nnz=283195705 (27.4/row)
+[    70.0s |   0.9GB] feats test_s1_name: rows=1732544 nnz=31198176 (18.0/row)
+[    76.4s |   1.1GB] feats test_s1_addr: rows=1732544 nnz=58988782 (34.0/row)
+[   122.1s |   1.6GB] feats test_r_name: rows=9969589 nnz=195189170 (19.6/row)
+[   150.5s |   1.9GB] feats test_r_addr: rows=9969589 nnz=297720751 (29.9/row)
+[     0.0s |   0.6GB] args: {'stage': 'train', 'tag': 'fold0', 'split': 'train', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 0, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32, 'test_tag': 'fold0'}
+[     5.8s |   2.3GB] train tag=fold0: matched S1=1041972 pairs=3817946 singles=61439 distractors=2681854
+[    19.5s |   5.7GB] ep0 batch 0/765 loss 1.5077 (1s)
+[    56.1s |   3.1GB] ep0 batch 200/765 loss 1.8787 (37s)
+[    89.7s |   3.3GB] ep0 batch 400/765 loss 1.7754 (71s)
+[   791.2s |   1.6GB] ep0 batch 600/765 loss 1.7138 (773s)
+[   868.8s |   2.6GB] epoch 0 done: mean loss 1.6808 time 850s
+[   871.1s |   2.3GB] ep1 batch 0/765 loss 0.6047 (1s)
+[   952.3s |   2.7GB] ep1 batch 200/765 loss 1.5083 (82s)
+[  1031.4s |   2.7GB] ep1 batch 400/765 loss 1.5193 (161s)
+[  1075.3s |   2.7GB] ep1 batch 600/765 loss 1.4856 (205s)
+[  1125.7s |   2.8GB] epoch 1 done: mean loss 1.4698 time 255s
+[  1131.5s |   2.2GB] ep2 batch 0/765 loss 0.5597 (1s)
+[  1190.5s |   2.7GB] ep2 batch 200/765 loss 1.4537 (60s)
+[  1256.6s |   2.6GB] ep2 batch 400/765 loss 1.3630 (126s)
+[  1323.6s |   2.4GB] ep2 batch 600/765 loss 1.4234 (193s)
+[  1427.3s |   2.4GB] epoch 2 done: mean loss 1.4314 time 297s
+[     0.0s |   0.6GB] args: {'stage': 'train', 'tag': 'fold1', 'split': 'train', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 0, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32, 'test_tag': 'fold0'}
+[     8.1s |   2.3GB] train tag=fold1: matched S1=1041602 pairs=3820419 singles=61808 distractors=2681854
+[    91.4s |   1.3GB] ep0 batch 0/763 loss 1.1140 (3s)
+[   290.3s |   2.6GB] ep0 batch 200/763 loss 1.8942 (202s)
+[   520.8s |   2.0GB] ep0 batch 400/763 loss 1.7237 (433s)
+[   742.1s |   2.6GB] ep0 batch 600/763 loss 1.6612 (654s)
+[   843.6s |   2.6GB] epoch 0 done: mean loss 1.6618 time 755s
+[   845.4s |   2.7GB] ep1 batch 0/763 loss 2.6052 (1s)
+[  1153.5s |   3.6GB] ep1 batch 200/763 loss 1.6158 (309s)
+[  1660.6s |   4.9GB] ep1 batch 400/763 loss 1.4692 (816s)
+[  1849.6s |   4.0GB] ep1 batch 600/763 loss 1.4656 (1005s)
+[  1996.4s |   4.0GB] epoch 1 done: mean loss 1.4333 time 1152s
+[  1999.0s |   4.0GB] ep2 batch 0/763 loss 2.0954 (2s)
+[  2187.0s |   4.0GB] ep2 batch 200/763 loss 1.4162 (190s)
+[  2379.3s |   4.0GB] ep2 batch 400/763 loss 1.5271 (382s)
+[  2571.8s |   4.0GB] ep2 batch 600/763 loss 1.4123 (574s)
+[  2726.2s |   4.0GB] epoch 2 done: mean loss 1.4216 time 729s
+[     0.0s |   0.6GB] args: {'stage': 'search', 'tag': 'fold0', 'split': 'train', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 20000, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32, 'test_tag': 'fold0'}
+Traceback (most recent call last):
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_block.py", line 583, in <module>
+    main()
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_block.py", line 579, in main
+    stage_search(args, log)
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_block.py", line 521, in stage_search
+    cn, ca = pair_cos(enc, model, job["s1"].to_numpy(), job["r"].to_numpy())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\site-packages\torch\utils\_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_block.py", line 425, in pair_cos
+    ca[i:i + bs] = (enc.batch(model, "s1", "addr", a) * enc.batch(model, "r", "addr", b)).sum(1).cpu().numpy()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_block.py", line 141, in batch
+    flat, off = gather(ip, ix, rows)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_block.py", line 113, in gather
+    flat = np.repeat(starts - offsets, lens) + np.arange(lens.sum())
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 140. MiB for an array with shape (18289072,) and data type int64

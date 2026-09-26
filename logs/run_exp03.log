@@ -1,0 +1,108 @@
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'run': 'exp03', 'keep_frac': 0.8, 'world_seed': 0, 'max_cand': 15, 'keep_rrank': 2, 'n_anchor': 3, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None}
+[     7.3s |   6.0GB] world k80s0: kept S1 1765615 / 2206821
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp03_dense.py:77: DeprecationWarning: `is_in` with a collection of the same datatype is ambiguous and deprecated.
+Please use `implode` to return to previous behavior.
+
+See https://github.com/pola-rs/polars/issues/22149 for more information.
+  cand = cand.filter(pl.col("s1").is_in(keep_idx))
+[    41.5s |   4.3GB] India: 52558535 candidates in world -> 13557894 after pruning
+[   111.2s |   1.4GB] part 0: rows 3000000 cols 67 70s
+[   147.6s |   4.0GB] part 1: rows 3000000 cols 67 36s
+[   191.5s |   2.8GB] part 2: rows 3000000 cols 67 44s
+[   244.5s |   2.0GB] part 3: rows 3000000 cols 67 53s
+[   273.5s |   4.6GB] part 4: rows 1557894 cols 67 29s
+[   327.4s |   7.5GB] US: 75784095 candidates in world -> 20009990 after pruning
+[   356.4s |   6.4GB] part 5: rows 3000000 cols 67 29s
+[   383.9s |   5.5GB] part 6: rows 3000000 cols 67 27s
+[   412.0s |   5.8GB] part 7: rows 3000000 cols 67 28s
+[   441.9s |   4.1GB] part 8: rows 3000000 cols 67 30s
+[   482.3s |   4.7GB] part 9: rows 3000000 cols 67 40s
+[   511.1s |   4.7GB] part 10: rows 3000000 cols 67 29s
+[   528.7s |   4.6GB] part 11: rows 2009990 cols 67 18s
+[     0.0s |   0.1GB] args: {'stage': 'train1', 'run': 'exp03', 'keep_frac': 0.8, 'world_seed': 0, 'max_cand': 15, 'keep_rrank': 2, 'n_anchor': 3, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None}
+[   137.2s |   2.2GB] [exp01 models, dense world] assign decoding: 0.5:0.98016 0.6:0.98171 0.65:0.98230 0.7:0.98279 0.75:0.98318 0.8:0.98339 0.85:0.98339 0.9:0.98302
+[   144.0s |   2.4GB] [exp01 models, dense world] BEST thr=0.8 F0.5=0.98339 breakdown {'India': 0.98383, 'US': 0.9831, 'single': 0.97459, 'ngt1': 0.95104, 'ngt2': 0.9806, 'ngt3+': 0.98716}
+[   155.8s |   4.9GB] [stage1] features 65
+[0]	va-logloss:0.38356
+[200]	va-logloss:0.01262
+[400]	va-logloss:0.01155
+[600]	va-logloss:0.01123
+[800]	va-logloss:0.01116
+[969]	va-logloss:0.01114
+[   292.0s |   3.3GB] [stage1] fold 0: rows 7179587, best iter 919, logloss 0.01112, 108s
+[0]	va-logloss:0.38131
+[200]	va-logloss:0.01256
+[400]	va-logloss:0.01145
+[600]	va-logloss:0.01112
+[800]	va-logloss:0.01100
+[948]	va-logloss:0.01098
+[   415.7s |   3.4GB] [stage1] fold 1: rows 7106693, best iter 898, logloss 0.01097, 105s
+[   416.1s |   0.8GB] [stage1] top features: [('r_margin2', 8001.6), ('cos_j', 2659.1), ('b_nnum', 1631.1), ('num_tset', 1540.0), ('num1_eq', 1060.2), ('num_jacc', 864.3), ('r_gap_j', 764.1), ('s1_gap_j', 531.1), ('ncl_tsort', 442.4), ('b_ntok', 382.2), ('num1_ratio', 302.5), ('b_hassfx', 293.7), ('nc_first_eq', 231.0), ('b_domain', 219.6), ('b_native', 212.4), ('sfx_eq', 209.6), ('ad_tset', 182.4), ('b_natok', 146.8), ('nc_jacc', 140.0), ('rk_joint', 138.1)]
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [11:37:43] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[   570.5s |   1.3GB] [stage1 dense-trained] assign decoding: 0.5:0.98217 0.6:0.98333 0.65:0.98373 0.7:0.98401 0.75:0.98417 0.8:0.98416 0.85:0.98392 0.9:0.98314
+[   578.8s |   1.5GB] [stage1 dense-trained] BEST thr=0.75 F0.5=0.98417 breakdown {'India': 0.98473, 'US': 0.9838, 'single': 0.97742, 'ngt1': 0.95308, 'ngt2': 0.98155, 'ngt3+': 0.98765}
+[     0.0s |   0.1GB] args: {'stage': 'feats2', 'run': 'exp03', 'keep_frac': 0.8, 'world_seed': 0, 'max_cand': 15, 'keep_rrank': 2, 'n_anchor': 3, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None}
+[    73.9s |   2.5GB] consistency s1 0..499994: pairs 21986372
+[   124.3s |   2.3GB] consistency s1 499995..1000000: pairs 21631104
+[   171.1s |   3.3GB] consistency s1 1000001..1499727: pairs 21588756
+[   221.7s |   3.0GB] consistency s1 1499728..2000008: pairs 21578126
+[   241.3s |   2.5GB] consistency s1 2000009..2206820: pairs 8929178
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp03_dense.py:228: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  full = pl.concat([t.drop("row"), cons.drop("row")], how="horizontal").rename({"p": "p1"})
+[   270.7s |   3.7GB] stage-2 feats train: 33567884 rows
+[   511.0s |   2.2GB] consistency s1 0..399999: pairs 21586454
+[   645.8s |   2.0GB] consistency s1 400000..799999: pairs 21292593
+[   704.0s |   2.2GB] consistency s1 800000..1199999: pairs 21241080
+[   753.7s |   3.2GB] consistency s1 1200000..1599999: pairs 21249401
+[   769.4s |   2.6GB] consistency s1 1600000..1732543: pairs 7043245
+[   774.1s |   3.8GB] stage-2 feats test: 32354739 rows
+[     0.0s |   0.1GB] args: {'stage': 'train2', 'run': 'exp03', 'keep_frac': 0.8, 'world_seed': 0, 'max_cand': 15, 'keep_rrank': 2, 'n_anchor': 3, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp03_dense.py:246: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(a), pl.read_parquet(b)], how="horizontal") for a, b in zip(p1, p2))
+[    15.4s |   5.8GB] [stage2] features 83
+[0]	va-logloss:0.37925
+[200]	va-logloss:0.00875
+[256]	va-logloss:0.00876
+[    83.9s |   4.2GB] [stage2] fold 0: rows 7179587, best iter 206, logloss 0.00874, 34s
+[0]	va-logloss:0.37710
+[200]	va-logloss:0.00851
+[328]	va-logloss:0.00851
+[   166.5s |   4.0GB] [stage2] fold 1: rows 7106693, best iter 278, logloss 0.00849, 43s
+[   166.8s |   0.7GB] [stage2] top features: [('p1', 48980.8), ('p_margin_r', 26686.5), ('p_nhi_s1', 5976.3), ('p_gap_s1', 4125.2), ('p_2nd_r', 109.0), ('num_tset', 87.7), ('num_inter', 85.5), ('num_jacc', 82.4), ('cons_num_max', 61.5), ('p_rank_s1', 60.8), ('r_margin2', 57.5), ('b_nnum', 46.1), ('p_sum_other_s1', 42.2), ('p_sum_s1', 36.1), ('cons_n_name90_ssrc', 35.9), ('cons_addr_max', 34.0), ('cons_n_anchor', 32.5), ('ad_ratio', 31.8), ('s1_rank_j', 28.1), ('ad_tset', 26.7)]
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [11:56:12] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[   305.2s |   1.2GB] [stage2 dense-trained] assign decoding: 0.5:0.98461 0.6:0.98546 0.65:0.98564 0.7:0.98576 0.75:0.98574 0.8:0.98558 0.85:0.98517 0.9:0.98419
+[   313.4s |   1.3GB] [stage2 dense-trained] BEST thr=0.7 F0.5=0.98576 breakdown {'India': 0.9862, 'US': 0.98548, 'single': 0.98582, 'ngt1': 0.94196, 'ngt2': 0.98347, 'ngt3+': 0.98959}
+[     0.0s |   0.1GB] args: {'stage': 'predict', 'run': 'exp03', 'keep_frac': 0.8, 'world_seed': 0, 'max_cand': 15, 'keep_rrank': 2, 'n_anchor': 3, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp03_dense.py:246: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(a), pl.read_parquet(b)], how="horizontal") for a, b in zip(p1, p2))
+[   110.6s |   3.4GB] decoded with assign thr=0.7
+[   112.1s |   3.6GB] test France: S1=259452 mean matches 3.360, empty 0.0569
+[   112.2s |   3.6GB] test India: S1=809986 mean matches 3.381, empty 0.0583
+[   112.2s |   3.6GB] test US: S1=663106 mean matches 3.404, empty 0.0581
+[   147.9s |   2.2GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (100507 empty, 1632037 non-empty).
+  candidate_pairs.tsv: 1732544 rows (0 empty, 1732544 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[   147.9s |   2.2GB] VALID
+EXP03_DONE

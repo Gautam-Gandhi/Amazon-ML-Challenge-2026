@@ -1,0 +1,9 @@
+.DS_Store
+dataset/
+data/
+.venv/
+__pycache__/
+*.pyc
+runs/
+submission_kit/
+work_v3/

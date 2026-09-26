@@ -1,0 +1,23 @@
+[     0.0s |   0.6GB] args: {'stage': 'train', 'tag': 'fold0', 'split': 'train', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 20000, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3}
+[     9.1s |   2.3GB] train tag=fold0: matched S1=1041972 pairs=3817946 singles=61439 distractors=2681854
+[    31.5s |   1.6GB] ep0 batch 0/765 loss 1.5353 (2s)
+[    62.5s |   4.0GB] ep0 batch 200/765 loss 1.8640 (33s)
+[    92.2s |   4.3GB] ep0 batch 400/765 loss 1.7601 (63s)
+[   121.7s |   4.3GB] ep0 batch 600/765 loss 1.7024 (93s)
+[   145.9s |   4.3GB] epoch 0 done: mean loss 1.6683 time 117s
+[   430.2s |   5.0GB] [eval India] q=20000 pairs=69500 name@5=0.4780 name@10=0.5674 name@20=0.6246 name@30=0.6531 name@50=0.6912 addr@5=0.7718 addr@10=0.8532 addr@20=0.8875 addr@30=0.9000 addr@50=0.9120 joint@5=0.8943 joint@10=0.9631 joint@20=0.9727 joint@30=0.9757 joint@50=0.9788 union20x3=0.9874
+[   473.3s |   4.7GB] [eval US] q=20000 pairs=68944 name@5=0.5312 name@10=0.6521 name@20=0.7345 name@30=0.7658 name@50=0.7981 addr@5=0.7941 addr@10=0.8887 addr@20=0.9258 addr@30=0.9363 addr@50=0.9439 joint@5=0.8923 joint@10=0.9657 joint@20=0.9757 joint@30=0.9791 joint@50=0.9828 union20x3=0.9893
+[   473.7s |   3.7GB] ep1 batch 0/765 loss 0.6011 (0s)
+[   504.6s |   4.1GB] ep1 batch 200/765 loss 1.5035 (31s)
+[   534.7s |   4.1GB] ep1 batch 400/765 loss 1.5122 (61s)
+[   565.5s |   4.3GB] ep1 batch 600/765 loss 1.4748 (92s)
+[   591.5s |   4.6GB] epoch 1 done: mean loss 1.4579 time 118s
+[   880.7s |   4.6GB] [eval India] q=20000 pairs=69500 name@5=0.4788 name@10=0.5702 name@20=0.6285 name@30=0.6576 name@50=0.6958 addr@5=0.7762 addr@10=0.8578 addr@20=0.8901 addr@30=0.9032 addr@50=0.9158 joint@5=0.8957 joint@10=0.9648 joint@20=0.9737 joint@30=0.9770 joint@50=0.9797 union20x3=0.9876
+[   924.2s |   4.2GB] [eval US] q=20000 pairs=68944 name@5=0.5324 name@10=0.6543 name@20=0.7348 name@30=0.7671 name@50=0.7993 addr@5=0.8026 addr@10=0.8941 addr@20=0.9286 addr@30=0.9383 addr@50=0.9454 joint@5=0.8945 joint@10=0.9671 joint@20=0.9767 joint@30=0.9805 joint@50=0.9835 union20x3=0.9894
+[   924.7s |   3.2GB] ep2 batch 0/765 loss 0.5474 (0s)
+[   955.0s |   3.7GB] ep2 batch 200/765 loss 1.4628 (30s)
+[   985.8s |   3.9GB] ep2 batch 400/765 loss 1.3588 (61s)
+[  1016.7s |   3.9GB] ep2 batch 600/765 loss 1.4141 (92s)
+[  1040.4s |   3.9GB] epoch 2 done: mean loss 1.4203 time 116s
+[  1343.9s |   4.4GB] [eval India] q=20000 pairs=69500 name@5=0.4777 name@10=0.5684 name@20=0.6257 name@30=0.6543 name@50=0.6922 addr@5=0.7765 addr@10=0.8591 addr@20=0.8921 addr@30=0.9053 addr@50=0.9171 joint@5=0.8955 joint@10=0.9651 joint@20=0.9739 joint@30=0.9770 joint@50=0.9796 union20x3=0.9872
+[  1387.6s |   4.2GB] [eval US] q=20000 pairs=68944 name@5=0.5307 name@10=0.6513 name@20=0.7319 name@30=0.7638 name@50=0.7965 addr@5=0.8052 addr@10=0.8960 addr@20=0.9297 addr@30=0.9391 addr@50=0.9456 joint@5=0.8938 joint@10=0.9673 joint@20=0.9769 joint@30=0.9806 joint@50=0.9833 union20x3=0.9895

@@ -1,0 +1,35 @@
+[     0.0s |   0.6GB] args: {'stage': 'prep', 'base': 'exp03', 'run': 'exp04', 'thr': None}
+[     3.1s |   2.0GB] test_s1: 259452 addresses changed
+[    44.3s |   6.1GB] test_r: 936602 addresses changed
+[    45.0s |   7.3GB]    880 Rue Georges Vancauwenbergue, Dunkerque, Hauts-de-France  ->  880 r georges vancauwenbergue dunkerque frhdf
+[    45.0s |   7.3GB]    90 Bis Route De Dissignac, Saint-nazaire, Pays de la Loire  ->  90 bis rte de dissignac st nazaire frpdl
+[    45.0s |   7.3GB]    64 QUAI LERAY, PORNIC, Pays de la Loire  ->  64 quai leray pornic frpdl
+[    45.0s |   7.3GB]    80 Rue Du Beau Laurier, Tourcoing  ->  80 r du beau laurier tourcoing
+[    45.0s |   7.3GB]    48 AVE LIEUTENANT DE LAVENNE DE LA MONTOISE, Nantes, Loire-Atlantique  ->  48 ave lieutenant de lavenne de la montoise nantes frpdl
+[     0.0s |   0.6GB] args: {'stage': 'emb', 'base': 'exp03', 'run': 'exp04', 'thr': None}
+[    11.4s |   1.1GB] hashed test_s1_addr
+[    43.2s |   3.1GB] hashed test_r_addr
+[     0.0s |   0.6GB] args: {'stage': 'search', 'base': 'exp03', 'run': 'exp04', 'thr': None}
+[    97.9s |   5.6GB] search test tag=fold0 country=France: q=259452 corpus=1434993 pairs=17093384 81s
+[    97.9s |   5.6GB] skip existing C:\Users\gandh\Downloads\amazon-ml-challenge-2026\data\cache\cand_v2\test\India_fold0.parquet
+[    97.9s |   5.6GB] skip existing C:\Users\gandh\Downloads\amazon-ml-challenge-2026\data\cache\cand_v2\test\US_fold0.parquet
+[    98.1s |   3.0GB] candidates test: 112432998 pairs, 64.9 per S1, files 3
+[     0.0s |   0.6GB] args: {'stage': 'feats', 'base': 'exp03', 'run': 'exp04', 'thr': None}
+[     5.5s |   6.8GB] tables loaded
+[     9.6s |   4.9GB] test France: 17093384 candidate pairs -> 4837156 after pruning
+[    35.2s |   6.0GB] part 0: rows 3000000 cols 67 26s
+[    50.9s |   4.8GB] part 1: rows 1837156 cols 67 16s
+[    70.1s |   7.3GB] test India: 53923119 candidate pairs -> 15168840 after pruning
+[   106.6s |   1.7GB] part 2: rows 3000000 cols 67 36s
+[   145.5s |   6.2GB] part 3: rows 3000000 cols 67 39s
+[   180.4s |   5.2GB] part 4: rows 3000000 cols 67 35s
+[   222.6s |   4.8GB] part 5: rows 3000000 cols 67 42s
+[   259.3s |   6.6GB] part 6: rows 3000000 cols 67 37s
+[   261.6s |   4.3GB] part 7: rows 168840 cols 67 2s
+[   273.1s |   5.4GB] test US: 41416495 candidate pairs -> 12121648 after pruning
+[   298.1s |   5.7GB] part 8: rows 3000000 cols 67 25s
+[   324.0s |   5.9GB] part 9: rows 3000000 cols 67 26s
+[   349.9s |   6.0GB] part 10: rows 3000000 cols 67 26s
+[   375.4s |   5.5GB] part 11: rows 3000000 cols 67 25s
+[   376.8s |   4.3GB] part 12: rows 121648 cols 67 1s
+EXP04_TESTSIDE_DONE

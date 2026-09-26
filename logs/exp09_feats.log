@@ -1,0 +1,30 @@
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'run': 'exp09', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+[     7.5s |   3.5GB] train: tables ready
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp09_consensus.py:39: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  return keys.with_columns(tok_list.alias(col)).explode(col).filter(pl.col(col).is_not_null() & (pl.col(col) != ""))
+[    78.8s |   3.2GB] train part000.parquet: 3000000 rows
+[   136.0s |   3.0GB] train part001.parquet: 3000000 rows
+[   177.8s |   3.2GB] train part002.parquet: 3000000 rows
+[   213.3s |   3.3GB] train part003.parquet: 3000000 rows
+[   221.8s |   5.5GB] train part004.parquet: 1568252 rows
+[   238.7s |   3.2GB] train part005.parquet: 3000000 rows
+[   254.6s |   3.4GB] train part006.parquet: 3000000 rows
+[   268.1s |   3.8GB] train part007.parquet: 3000000 rows
+[   280.4s |   3.5GB] train part008.parquet: 3000000 rows
+[   293.1s |   4.0GB] train part009.parquet: 3000000 rows
+[   305.7s |   3.8GB] train part010.parquet: 3000000 rows
+[   313.6s |   5.4GB] train part011.parquet: 2005985 rows
+[   316.6s |   6.9GB] test: tables ready
+[   330.7s |   5.7GB] test part000.parquet: 3000000 rows
+[   338.2s |   7.6GB] test part001.parquet: 1865699 rows
+[   354.7s |   6.5GB] test part002.parquet: 3000000 rows
+[   370.7s |   6.0GB] test part003.parquet: 3000000 rows
+[   386.7s |   5.9GB] test part004.parquet: 3000000 rows
+[   402.3s |   6.0GB] test part005.parquet: 3000000 rows
+[   418.3s |   5.4GB] test part006.parquet: 3000000 rows
+[   419.3s |   5.1GB] test part007.parquet: 170241 rows
+[   434.0s |   3.2GB] test part008.parquet: 3000000 rows
+[   446.9s |   3.7GB] test part009.parquet: 3000000 rows
+[   459.6s |   3.5GB] test part010.parquet: 3000000 rows
+[   472.3s |   3.4GB] test part011.parquet: 3000000 rows
+[   473.1s |   4.6GB] test part012.parquet: 120229 rows

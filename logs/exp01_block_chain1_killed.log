@@ -1,0 +1,27 @@
+[     0.0s |   0.6GB] args: {'stage': 'train', 'tag': 'fold1', 'split': 'train', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 0, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3}
+[    10.8s |   2.2GB] train tag=fold1: matched S1=1041602 pairs=3820419 singles=61808 distractors=2681854
+[    29.7s |   5.7GB] ep0 batch 0/763 loss 1.1651 (1s)
+[   113.5s |   6.5GB] ep0 batch 200/763 loss 1.8965 (85s)
+[   195.5s |   6.5GB] ep0 batch 400/763 loss 1.7131 (167s)
+[   275.1s |   6.5GB] ep0 batch 600/763 loss 1.6413 (247s)
+[   338.8s |   6.5GB] epoch 0 done: mean loss 1.6461 time 310s
+[   340.2s |   6.5GB] ep1 batch 0/763 loss 2.8483 (1s)
+[   420.1s |   6.2GB] ep1 batch 200/763 loss 1.5669 (80s)
+[   497.8s |   6.2GB] ep1 batch 400/763 loss 1.4390 (158s)
+[   581.2s |   6.2GB] ep1 batch 600/763 loss 1.4457 (242s)
+[   646.5s |   6.2GB] epoch 1 done: mean loss 1.4162 time 307s
+[   648.2s |   6.2GB] ep2 batch 0/763 loss 2.0511 (1s)
+[   731.4s |   5.5GB] ep2 batch 200/763 loss 1.4040 (84s)
+[   820.2s |   5.5GB] ep2 batch 400/763 loss 1.5081 (173s)
+[   895.1s |   5.5GB] ep2 batch 600/763 loss 1.3939 (247s)
+[   966.3s |   5.5GB] epoch 2 done: mean loss 1.4095 time 319s
+[     0.0s |   0.6GB] args: {'stage': 'train', 'tag': 'full', 'split': 'train', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 0, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3}
+[    10.8s |   2.4GB] train tag=full: matched S1=2083574 pairs=7638365 singles=123247 distractors=2681854
+[    30.9s |   2.2GB] ep0 batch 0/1528 loss 1.1942 (2s)
+[    77.2s |   4.8GB] ep0 batch 200/1528 loss 1.9670 (48s)
+[   126.6s |   4.8GB] ep0 batch 400/1528 loss 1.8985 (97s)
+[   172.0s |   5.1GB] ep0 batch 600/1528 loss 1.8337 (143s)
+[   219.0s |   5.1GB] ep0 batch 800/1528 loss 1.8650 (190s)
+[   270.5s |   5.1GB] ep0 batch 1000/1528 loss 1.8857 (241s)
+[   319.4s |   5.1GB] ep0 batch 1200/1528 loss 1.8921 (290s)
+[   372.7s |   4.1GB] ep0 batch 1400/1528 loss 1.8719 (344s)

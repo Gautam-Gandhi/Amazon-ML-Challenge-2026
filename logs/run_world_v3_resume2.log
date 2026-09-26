@@ -1,0 +1,48 @@
+[     0.0s |   0.1GB] args: {'stage': 'feats2', 'run': 'exp07', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+[    70.6s |   2.1GB] consistency s1 0..499994: pairs 21998504
+[   116.6s |   3.4GB] consistency s1 499995..1000000: pairs 21647771
+[   161.0s |   3.7GB] consistency s1 1000001..1499727: pairs 21594690
+[   207.4s |   3.9GB] consistency s1 1499728..2000008: pairs 21590235
+[   226.4s |   3.4GB] consistency s1 2000009..2206820: pairs 8932000
+[   229.4s |   4.5GB] stage-2 feats train: 33574237
+[   428.0s |   3.6GB] consistency s1 0..399999: pairs 21347739
+[   473.0s |   4.1GB] consistency s1 400000..799999: pairs 21032096
+[   518.3s |   4.4GB] consistency s1 800000..1199999: pairs 20977959
+[   564.0s |   4.0GB] consistency s1 1200000..1599999: pairs 20997502
+[   578.5s |   3.4GB] consistency s1 1600000..1732543: pairs 6953445
+[   582.1s |   4.5GB] stage-2 feats test: 32156169
+[     0.0s |   0.1GB] args: {'stage': 'train2', 'run': 'exp07', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+[    22.9s |   9.2GB] [stage2] features 120
+[0]	va-logloss:0.37826
+[200]	va-logloss:0.00725
+[266]	va-logloss:0.00727
+[   138.9s |   6.1GB] [stage2] fold 0: rows 7184762, best iter 216, logloss 0.00724, 48s
+[0]	va-logloss:0.37566
+[200]	va-logloss:0.00656
+[232]	va-logloss:0.00656
+[   230.1s |   5.9GB] [stage2] fold 1: rows 7102755, best iter 182, logloss 0.00655, 40s
+[   230.4s |   1.0GB] [stage2] top features: [('p1', 46628.4), ('p_margin_r', 43157.8), ('r_margin2', 2062.3), ('num1_eq', 1460.2), ('tk_b_idfun', 659.4), ('num_tset', 328.1), ('p_gap_s1', 237.5), ('tk_b_ncont', 196.6), ('b_ncomp', 192.9), ('p_rank_r', 157.7), ('b_hassfx', 144.6), ('tk_b_nsmax', 109.7), ('p_rank_s1', 85.4), ('num_inter', 72.5), ('ad_tset', 71.7), ('hn_logdiff', 56.7), ('ncl_tsort', 55.7), ('p_2nd_r', 55.5), ('p_sum_s1', 52.8), ('nc_first_eq', 51.0)]
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [06:42:55] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[   410.3s |   1.3GB] [exp05 stage2] assign decoding: 0.5:0.98685 0.6:0.98755 0.65:0.98773 0.7:0.98783 0.75:0.98787 0.8:0.98780 0.85:0.98753 0.9:0.98685
+[   418.6s |   1.4GB] [exp05 stage2] BEST thr=0.75 F0.5=0.98787 breakdown {'India': 0.98804, 'US': 0.98776, 'single': 0.99211, 'ngt1': 0.95084, 'ngt2': 0.98599, 'ngt3+': 0.99077}
+[     0.0s |   0.1GB] args: {'stage': 'predict', 'run': 'exp07', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+[   108.9s |   3.9GB] test France: thr 0.9 mean matches 3.130 empty 0.0652
+[   109.0s |   3.9GB] test India: thr 0.75 mean matches 3.362 empty 0.0590
+[   109.1s |   3.9GB] test US: thr 0.75 mean matches 3.378 empty 0.0589
+[   143.3s |   3.7GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (103750 empty, 1628794 non-empty).
+  candidate_pairs.tsv: 1732544 rows (0 empty, 1732544 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[   143.3s |   3.7GB] VALID
+WORLD_V3_DONE

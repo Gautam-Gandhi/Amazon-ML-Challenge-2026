@@ -1,0 +1,163 @@
+[     0.0s |   0.5GB] args: {'stage': 'pairs', 'run': 'exp06', 'lo': 0.01, 'hi': 0.99, 'max_len': 96, 'bs': 64, 'lr': 3e-05, 'epochs': 2, 'loco': False, 'thr': None, 'unseen_thr': 0.9}
+[     1.1s |   3.1GB] train: band (0.01,0.99) pairs 724607 of 33567884, pos rate 0.454
+[     2.7s |   3.5GB] test: band (0.01,0.99) pairs 975722 of 32127644
+[     0.0s |   0.5GB] args: {'stage': 'train', 'run': 'exp06', 'lo': 0.01, 'hi': 0.99, 'max_len': 96, 'bs': 64, 'lr': 3e-05, 'epochs': 2, 'loco': False, 'thr': None, 'unseen_thr': 0.9}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 6939.25it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: intfloat/multilingual-e5-small
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[   157.2s |   4.3GB] tokenized train 724607 test 975722 in 144s; mean len 44.9
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2097.69it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: intfloat/multilingual-e5-small
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[   166.7s |   4.7GB] fold 0: train 351107 (pos 0.463), score 373500
+[   168.6s |   5.4GB]   ep0 step 0/5487 loss 0.6878 (2s)
+[   212.7s |   5.4GB]   ep0 step 500/5487 loss 0.6402 (46s)
+[   255.2s |   5.4GB]   ep0 step 1000/5487 loss 0.5953 (88s)
+[   298.4s |   5.4GB]   ep0 step 1500/5487 loss 0.5359 (132s)
+[   341.4s |   5.3GB]   ep0 step 2000/5487 loss 0.5058 (175s)
+[   384.3s |   5.3GB]   ep0 step 2500/5487 loss 0.5048 (217s)
+[   426.8s |   5.3GB]   ep0 step 3000/5487 loss 0.4700 (260s)
+[   469.2s |   5.1GB]   ep0 step 3500/5487 loss 0.4675 (302s)
+[   511.6s |   5.1GB]   ep0 step 4000/5487 loss 0.4618 (345s)
+[   555.0s |   5.1GB]   ep0 step 4500/5487 loss 0.4534 (388s)
+[   598.5s |   5.1GB]   ep0 step 5000/5487 loss 0.4314 (432s)
+[   641.4s |   5.1GB]   ep1 step 0/5487 loss 0.5011 (475s)
+[   684.2s |   5.1GB]   ep1 step 500/5487 loss 0.4357 (517s)
+[   727.3s |   5.1GB]   ep1 step 1000/5487 loss 0.4052 (560s)
+[   769.9s |   5.1GB]   ep1 step 1500/5487 loss 0.3920 (603s)
+[   812.3s |   5.1GB]   ep1 step 2000/5487 loss 0.4124 (645s)
+[   855.3s |   5.1GB]   ep1 step 2500/5487 loss 0.3855 (688s)
+[   897.0s |   5.1GB]   ep1 step 3000/5487 loss 0.4063 (730s)
+[   939.9s |   5.1GB]   ep1 step 3500/5487 loss 0.4041 (773s)
+[   983.1s |   5.1GB]   ep1 step 4000/5487 loss 0.3855 (816s)
+[  1024.9s |   5.1GB]   ep1 step 4500/5487 loss 0.3962 (858s)
+[  1068.0s |   5.1GB]   ep1 step 5000/5487 loss 0.3815 (901s)
+[  1542.1s |   5.1GB] fold 0: OOF AUC ce 0.9042 vs stage-2 p 0.9415
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.79it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.79it/s]
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 9167.12it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: intfloat/multilingual-e5-small
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[  1548.2s |   5.4GB] fold 1: train 373500 (pos 0.447), score 351107
+[  1548.6s |   5.4GB]   ep0 step 0/5836 loss 0.6927 (0s)
+[  1591.5s |   5.4GB]   ep0 step 500/5836 loss 0.6428 (43s)
+[  1634.9s |   5.4GB]   ep0 step 1000/5836 loss 0.5857 (87s)
+[  1678.0s |   5.4GB]   ep0 step 1500/5836 loss 0.5423 (130s)
+[  1720.8s |   5.4GB]   ep0 step 2000/5836 loss 0.5041 (173s)
+[  1763.4s |   5.4GB]   ep0 step 2500/5836 loss 0.4955 (215s)
+[  1805.4s |   5.4GB]   ep0 step 3000/5836 loss 0.4927 (257s)
+[  1848.9s |   5.4GB]   ep0 step 3500/5836 loss 0.4524 (301s)
+[  1892.3s |   5.4GB]   ep0 step 4000/5836 loss 0.4399 (344s)
+[  1934.4s |   5.4GB]   ep0 step 4500/5836 loss 0.4353 (386s)
+[  1977.0s |   5.4GB]   ep0 step 5000/5836 loss 0.4224 (429s)
+[  2019.1s |   5.4GB]   ep0 step 5500/5836 loss 0.4165 (471s)
+[  2047.9s |   5.4GB]   ep1 step 0/5836 loss 0.5435 (500s)
+[  2091.0s |   5.4GB]   ep1 step 500/5836 loss 0.4095 (543s)
+[  2133.7s |   5.4GB]   ep1 step 1000/5836 loss 0.3993 (586s)
+[  2176.2s |   5.4GB]   ep1 step 1500/5836 loss 0.3823 (628s)
+[  2218.7s |   5.4GB]   ep1 step 2000/5836 loss 0.3995 (671s)
+[  2261.1s |   5.4GB]   ep1 step 2500/5836 loss 0.3992 (713s)
+[  2303.9s |   5.4GB]   ep1 step 3000/5836 loss 0.3767 (756s)
+[  2346.4s |   5.4GB]   ep1 step 3500/5836 loss 0.3852 (798s)
+[  2388.4s |   5.4GB]   ep1 step 4000/5836 loss 0.4082 (840s)
+[  2431.4s |   5.4GB]   ep1 step 4500/5836 loss 0.3611 (883s)
+[  2473.0s |   5.4GB]   ep1 step 5000/5836 loss 0.3736 (925s)
+[  2516.5s |   5.4GB]   ep1 step 5500/5836 loss 0.3852 (968s)
+[  2973.2s |   5.4GB] fold 1: OOF AUC ce 0.8998 vs stage-2 p 0.9397
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.68it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.68it/s]
+[     0.0s |   0.5GB] args: {'stage': 'stack', 'run': 'exp06', 'lo': 0.01, 'hi': 0.99, 'max_len': 96, 'bs': 64, 'lr': 3e-05, 'epochs': 2, 'loco': False, 'thr': None, 'unseen_thr': 0.9}
+[     3.9s |   1.4GB] stacker fit on fold 0: coef [0.832 0.606 0.041] intercept -0.097
+[     4.2s |   1.4GB] stacker fit on fold 1: coef [0.819 0.609 0.035] intercept -0.077
+[    62.4s |   1.8GB] [exp05 (reference)] assign decoding: 0.5:0.98654 0.6:0.98732 0.65:0.98753 0.7:0.98764 0.75:0.98763 0.8:0.98753 0.85:0.98723 0.9:0.98652
+[    71.1s |   1.9GB] [exp05 (reference)] BEST thr=0.7 F0.5=0.98764 breakdown {'India': 0.98786, 'US': 0.9875, 'single': 0.99049, 'ngt1': 0.95121, 'ngt2': 0.98563, 'ngt3+': 0.99063}
+[   128.8s |   2.3GB] [exp06 stacked] assign decoding: 0.5:0.98874 0.6:0.98932 0.65:0.98949 0.7:0.98954 0.75:0.98951 0.8:0.98940 0.85:0.98914 0.9:0.98858
+[   137.2s |   2.5GB] [exp06 stacked] BEST thr=0.7 F0.5=0.98954 breakdown {'India': 0.9901, 'US': 0.98917, 'single': 0.99435, 'ngt1': 0.96106, 'ngt2': 0.98789, 'ngt3+': 0.9917}
+[   195.3s |   2.8GB] [exp06 CE alone in band] assign decoding: 0.5:0.98456 0.6:0.98509 0.65:0.98532 0.7:0.98537 0.75:0.98517 0.8:0.98458 0.85:0.98416 0.9:0.98385
+[   203.7s |   2.9GB] [exp06 CE alone in band] BEST thr=0.7 F0.5=0.98537 breakdown {'India': 0.98655, 'US': 0.98458, 'single': 0.98817, 'ngt1': 0.95021, 'ngt2': 0.98406, 'ngt3+': 0.9881}
+[     0.0s |   0.5GB] args: {'stage': 'predict', 'run': 'exp06', 'lo': 0.01, 'hi': 0.99, 'max_len': 96, 'bs': 64, 'lr': 3e-05, 'epochs': 2, 'loco': False, 'thr': None, 'unseen_thr': 0.9}
+[    46.8s |   3.7GB] test France: thr 0.9 mean matches 3.141 empty 0.0641
+[    46.9s |   3.7GB] test India: thr 0.7 mean matches 3.371 empty 0.0582
+[    47.0s |   3.7GB] test US: thr 0.7 mean matches 3.379 empty 0.0582
+[    93.2s |   3.6GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (102344 empty, 1630200 non-empty).
+  candidate_pairs.tsv: 1732544 rows (0 empty, 1732544 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[    93.2s |   3.6GB] VALID
+[     0.0s |   0.5GB] args: {'stage': 'train', 'run': 'exp06', 'lo': 0.01, 'hi': 0.99, 'max_len': 96, 'bs': 64, 'lr': 3e-05, 'epochs': 2, 'loco': True, 'thr': None, 'unseen_thr': 0.9}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3333.01it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: intfloat/multilingual-e5-small
+Key               | Status  | 
+------------------+---------+-
+classifier.weight | MISSING | 
+classifier.bias   | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[   142.9s |   4.3GB] tokenized train 724607 test 975722 in 122s; mean len 44.9
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3165.09it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: intfloat/multilingual-e5-small
+Key               | Status  | 
+------------------+---------+-
+classifier.weight | MISSING | 
+classifier.bias   | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[   152.7s |   4.7GB] LOCO: train on US band (442186), score India band (282421)
+[   155.0s |   5.4GB]   ep0 step 0/6910 loss 0.6903 (2s)
+[   192.6s |   5.4GB]   ep0 step 500/6910 loss 0.6591 (40s)
+[   229.6s |   5.4GB]   ep0 step 1000/6910 loss 0.5990 (77s)
+[   267.0s |   5.4GB]   ep0 step 1500/6910 loss 0.5366 (114s)
+[   304.4s |   5.4GB]   ep0 step 2000/6910 loss 0.5188 (152s)
+[   341.8s |   5.4GB]   ep0 step 2500/6910 loss 0.4897 (189s)
+[   379.5s |   5.4GB]   ep0 step 3000/6910 loss 0.4687 (227s)
+[   418.5s |   5.4GB]   ep0 step 3500/6910 loss 0.4573 (266s)
+[   456.8s |   5.4GB]   ep0 step 4000/6910 loss 0.4689 (304s)
+[   494.4s |   5.4GB]   ep0 step 4500/6910 loss 0.4367 (342s)
+[   531.9s |   5.4GB]   ep0 step 5000/6910 loss 0.4242 (379s)
+[   569.5s |   5.4GB]   ep0 step 5500/6910 loss 0.4337 (417s)
+[   605.2s |   5.4GB]   ep0 step 6000/6910 loss 0.4369 (452s)
+[   643.1s |   5.4GB]   ep0 step 6500/6910 loss 0.4345 (490s)
+[   675.2s |   5.4GB]   ep1 step 0/6910 loss 0.4496 (522s)
+[   714.9s |   5.4GB]   ep1 step 500/6910 loss 0.4124 (562s)
+[   753.2s |   5.4GB]   ep1 step 1000/6910 loss 0.4013 (600s)
+[   791.2s |   5.4GB]   ep1 step 1500/6910 loss 0.4218 (638s)
+[   829.7s |   5.4GB]   ep1 step 2000/6910 loss 0.4092 (677s)
+[   868.4s |   5.4GB]   ep1 step 2500/6910 loss 0.4021 (716s)
+[   904.8s |   5.4GB]   ep1 step 3000/6910 loss 0.4017 (752s)
+[   940.7s |   5.4GB]   ep1 step 3500/6910 loss 0.3921 (788s)
+[   977.1s |   5.4GB]   ep1 step 4000/6910 loss 0.3907 (824s)
+[  1013.3s |   5.4GB]   ep1 step 4500/6910 loss 0.3906 (861s)
+[  1049.5s |   5.4GB]   ep1 step 5000/6910 loss 0.3838 (897s)
+[  1085.8s |   5.3GB]   ep1 step 5500/6910 loss 0.3776 (933s)
+[  1121.8s |   5.2GB]   ep1 step 6000/6910 loss 0.3927 (969s)
+[  1157.9s |   5.2GB]   ep1 step 6500/6910 loss 0.4188 (1005s)
+[     0.0s |   0.5GB] args: {'stage': 'loco_eval', 'run': 'exp06', 'lo': 0.01, 'hi': 0.99, 'max_len': 96, 'bs': 64, 'lr': 3e-05, 'epochs': 2, 'loco': False, 'thr': None, 'unseen_thr': 0.9}
+[    19.9s |   1.8GB] [India exp05 (reference)] assign decoding: 0.5:0.98674 0.6:0.98750 0.65:0.98775 0.7:0.98786 0.75:0.98784 0.8:0.98772 0.85:0.98744 0.9:0.98674
+[    22.3s |   2.0GB] [India exp05 (reference)] BEST thr=0.7 F0.5=0.98786 breakdown {'India': 0.98786, 'single': 0.9901, 'ngt1': 0.9533, 'ngt2': 0.98603, 'ngt3+': 0.9907}
+[    39.4s |   2.1GB] [India with US-trained CE] assign decoding: 0.5:0.98635 0.6:0.98678 0.65:0.98689 0.7:0.98694 0.75:0.98690 0.8:0.98675 0.85:0.98643 0.9:0.98588
+[    41.8s |   2.3GB] [India with US-trained CE] BEST thr=0.7 F0.5=0.98694 breakdown {'India': 0.98694, 'single': 0.99048, 'ngt1': 0.95107, 'ngt2': 0.98492, 'ngt3+': 0.98983}
+EXP06_DONE

@@ -1,0 +1,129 @@
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'run': 'exp05', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp05_tokfeat.py:119: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  toks = pl.concat([s1[c], r[c]]).str.split(" ").list.unique().explode()
+[    18.3s |   3.6GB] train: idf vocab 1974339
+[    59.9s |   4.6GB] train part000.parquet: 3000000 rows
+[    96.2s |   4.4GB] train part001.parquet: 3000000 rows
+[   131.3s |   4.4GB] train part002.parquet: 3000000 rows
+[   164.0s |   4.4GB] train part003.parquet: 3000000 rows
+[   182.2s |   3.1GB] train part004.parquet: 1557894 rows
+[   198.2s |   4.2GB] train part005.parquet: 3000000 rows
+[   214.6s |   4.2GB] train part006.parquet: 3000000 rows
+[   231.3s |   4.0GB] train part007.parquet: 3000000 rows
+[   248.1s |   4.0GB] train part008.parquet: 3000000 rows
+[   265.0s |   4.1GB] train part009.parquet: 3000000 rows
+[   282.0s |   4.1GB] train part010.parquet: 3000000 rows
+[   294.0s |   3.2GB] train part011.parquet: 2009990 rows
+[   313.8s |   6.6GB] test: idf vocab 1758605
+[   339.7s |   4.4GB] test part000.parquet: 3000000 rows
+[   348.7s |   3.5GB] test part001.parquet: 1837156 rows
+[   379.3s |   4.7GB] test part002.parquet: 3000000 rows
+[   411.2s |   4.6GB] test part003.parquet: 3000000 rows
+[   443.7s |   4.6GB] test part004.parquet: 3000000 rows
+[   475.6s |   4.7GB] test part005.parquet: 3000000 rows
+[   507.5s |   4.6GB] test part006.parquet: 3000000 rows
+[   512.1s |   2.6GB] test part007.parquet: 168840 rows
+[   527.9s |   4.4GB] test part008.parquet: 3000000 rows
+[   544.4s |   4.4GB] test part009.parquet: 3000000 rows
+[   561.1s |   4.4GB] test part010.parquet: 3000000 rows
+[   577.6s |   4.5GB] test part011.parquet: 3000000 rows
+[   580.0s |   2.4GB] test part012.parquet: 121648 rows
+[     0.0s |   0.1GB] args: {'stage': 'train1', 'run': 'exp05', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp05_tokfeat.py:162: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(a), pl.read_parquet(b)], how="horizontal") for a, b in zip(p1, p5))
+[    23.3s |   6.2GB] [stage1] features 86
+[0]	va-logloss:0.38259
+[200]	va-logloss:0.00984
+[400]	va-logloss:0.00909
+[600]	va-logloss:0.00893
+[800]	va-logloss:0.00889
+[841]	va-logloss:0.00889
+[   169.7s |   4.4GB] [stage1] fold 0: rows 7179587, best iter 791, logloss 0.00889, 113s
+[0]	va-logloss:0.38034
+[200]	va-logloss:0.00968
+[400]	va-logloss:0.00889
+[600]	va-logloss:0.00868
+[800]	va-logloss:0.00861
+[835]	va-logloss:0.00861
+[   308.7s |   4.2GB] [stage1] fold 1: rows 7106693, best iter 785, logloss 0.00860, 112s
+[   309.1s |   0.7GB] [stage1] top features: [('r_margin2', 11328.1), ('cos_j', 3732.5), ('hn_edit', 2917.2), ('num_tset', 2025.1), ('b_nnum', 1234.7), ('r_gap_j', 839.8), ('tk_b_nun', 803.1), ('s1_gap_j', 753.9), ('atk_b_nun', 661.2), ('tk_b_idfun', 640.8), ('hn_logdiff', 628.8), ('hn_prefix', 608.6), ('b_hassfx', 500.6), ('sfx_eq', 464.7), ('num1_eq', 459.0), ('r_rank_j', 339.0), ('nc_first_eq', 245.5), ('b_ntok', 215.2), ('num_jacc', 213.4), ('ncl_tsort', 206.5)]
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [16:28:00] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[   458.9s |   1.2GB] [exp05 stage1] assign decoding: 0.5:0.98472 0.6:0.98570 0.65:0.98607 0.7:0.98635 0.75:0.98656 0.8:0.98662 0.85:0.98653 0.9:0.98609
+[   465.2s |   1.3GB] [exp05 stage1] BEST thr=0.8 F0.5=0.98662 breakdown {'India': 0.98683, 'US': 0.98648, 'single': 0.98513, 'ngt1': 0.95962, 'ngt2': 0.98425, 'ngt3+': 0.98932}
+[     0.0s |   0.1GB] args: {'stage': 'feats2', 'run': 'exp05', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+[    60.7s |   2.3GB] consistency s1 0..499994: pairs 21999752
+[   102.5s |   3.3GB] consistency s1 499995..1000000: pairs 21642048
+[   146.9s |   3.3GB] consistency s1 1000001..1499727: pairs 21601750
+[   192.3s |   3.4GB] consistency s1 1499728..2000008: pairs 21590985
+[   210.9s |   2.9GB] consistency s1 2000009..2206820: pairs 8932945
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp05_tokfeat.py:205: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  full = pl.concat([t.drop("row"), cons.drop("row")], how="horizontal").rename({"p": "p1"}).drop("s1", "r")
+[   214.3s |   4.5GB] stage-2 feats train: 33567884
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp05_tokfeat.py:162: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(a), pl.read_parquet(b)], how="horizontal") for a, b in zip(p1, p5))
+[   431.9s |   4.2GB] consistency s1 0..399999: pairs 21335300
+[   477.1s |   4.0GB] consistency s1 400000..799999: pairs 21030532
+[   521.2s |   4.4GB] consistency s1 800000..1199999: pairs 20986382
+[   570.5s |   3.3GB] consistency s1 1200000..1599999: pairs 20998951
+[   585.7s |   2.6GB] consistency s1 1600000..1732543: pairs 6955967
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp05_tokfeat.py:205: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  full = pl.concat([t.drop("row"), cons.drop("row")], how="horizontal").rename({"p": "p1"}).drop("s1", "r")
+[   589.5s |   4.4GB] stage-2 feats test: 32127644
+[     0.0s |   0.1GB] args: {'stage': 'train2', 'run': 'exp05', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp05_tokfeat.py:162: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(a), pl.read_parquet(b)], how="horizontal") for a, b in zip(p1, p5))
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp05_tokfeat.py:168: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([a, pl.read_parquet(b)], how="horizontal") for a, b in zip(base(), p2))
+[    18.0s |   7.5GB] [stage2] features 104
+[0]	va-logloss:0.37894
+[200]	va-logloss:0.00741
+[247]	va-logloss:0.00745
+[    99.6s |   5.2GB] [stage2] fold 0: rows 7179587, best iter 197, logloss 0.00741, 38s
+[0]	va-logloss:0.37678
+[200]	va-logloss:0.00712
+[251]	va-logloss:0.00713
+[   180.0s |   5.0GB] [stage2] fold 1: rows 7106693, best iter 201, logloss 0.00712, 38s
+[   180.9s |   0.9GB] [stage2] top features: [('p1', 61592.9), ('p_margin_r', 29353.9), ('p_gap_s1', 342.3), ('p_2nd_r', 99.0), ('num_tset', 71.1), ('num_inter', 57.8), ('p_nhi_s1', 51.3), ('r_margin2', 50.3), ('num_jacc', 47.6), ('cons_num_max', 37.8), ('ad_ratio', 36.2), ('cons_n_name90_ssrc', 32.8), ('b_nnum', 31.5), ('nc_first_eq', 31.0), ('p_sum_s1', 30.6), ('hn_prefix', 30.5), ('b_hassfx', 30.2), ('cons_n_anchor', 24.1), ('ad_tset', 22.9), ('cons_addr_max', 22.6)]
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [16:43:33] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[   351.6s |   1.3GB] [exp05 stage2] assign decoding: 0.5:0.98654 0.6:0.98732 0.65:0.98753 0.7:0.98764 0.75:0.98763 0.8:0.98753 0.85:0.98723 0.9:0.98652
+[   359.8s |   1.4GB] [exp05 stage2] BEST thr=0.7 F0.5=0.98764 breakdown {'India': 0.98786, 'US': 0.9875, 'single': 0.99049, 'ngt1': 0.95121, 'ngt2': 0.98563, 'ngt3+': 0.99063}
+[     0.0s |   0.1GB] args: {'stage': 'predict', 'run': 'exp05', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp05_tokfeat.py:162: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(a), pl.read_parquet(b)], how="horizontal") for a, b in zip(p1, p5))
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp05_tokfeat.py:168: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([a, pl.read_parquet(b)], how="horizontal") for a, b in zip(base(), p2))
+[   104.5s |   3.5GB] test France: thr 0.9 mean matches 3.153 empty 0.0651
+[   104.6s |   3.5GB] test India: thr 0.7 mean matches 3.359 empty 0.0588
+[   104.7s |   3.5GB] test US: thr 0.7 mean matches 3.380 empty 0.0587
+[   139.3s |   3.3GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (103488 empty, 1629056 non-empty).
+  candidate_pairs.tsv: 1732544 rows (0 empty, 1732544 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[   139.3s |   3.3GB] VALID
+EXP05_DONE

@@ -1,0 +1,6 @@
+India: train rows 3456692, eval rows 4751054
+US: train rows 5116920, eval rows 7001769
+[[rank] US->India] BEST thr=0.98 F0.5=0.87235 breakdown {'India': 0.87235, 'single': 0.55898, 'ngt1': 0.77146, 'ngt2': 0.85267, 'ngt3+': 0.90924}
+[[rank] India->US] BEST thr=0.97 F0.5=0.87068 breakdown {'US': 0.87068, 'single': 0.55714, 'ngt1': 0.73829, 'ngt2': 0.85336, 'ngt3+': 0.90891}
+SUMMARY rank: US->IN @0.7 0.77675 best 0.87235@0.98 | IN->US @0.7 0.85329 best 0.87068@0.97
+LOCO_RANK_DONE
