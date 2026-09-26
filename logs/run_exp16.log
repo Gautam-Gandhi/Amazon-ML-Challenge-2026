@@ -1,0 +1,33 @@
+[     0.0s |   0.1GB] args: {'stage': 'fit_predict', 'run': 'exp16', 'base': 'exp15cr', 'base_pre_rule': 'exp15c', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 150, 'thr_seen': 0.01, 'thr_unseen': 0.003}
+[    10.8s |   1.7GB] pseudo-labels (unseen countries): positive 818,473 (rule flips 16,488), negative 40,134
+[    39.7s |   6.1GB] train rows: labeled 3,066,356, pseudo 858,607; features 142
+[    84.7s |   7.0GB] self-trained stage 2: 150 rounds, 17s
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [23:43:00] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[    91.8s |   1.2GB] unseen: matches per S1 @0.9 3.281, @0.98 3.209; share of p>0.3 in (0.3,0.98]: 0.0662
+[     0.0s |   0.1GB] args: {'stage': 'predict', 'run': 'exp16r', 'base': 'exp16', 'metrics_run': '', 'words': '', 'min_role': 0.1, 'pattern': 'noise', 'p_floor': 0.01, 'p_set': 0.99, 'thr': None, 'unseen_thr': 0.98}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp11_rolerule.py:58: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  ta = s1.filter(pl.col("country") == cc)["name_core"].str.split(" ").list.unique().explode().value_counts()
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp11_rolerule.py:60: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  tb = rc["name_core"].str.split(" ").list.unique().explode().value_counts()
+[    21.2s |   4.4GB] rule words (unseen countries): [('France', 'fils', 10303, 181, 0.76, 0.4), ('France', 'services', 5593, 101, 0.77, 0.9), ('France', 'groupe', 5421, 115, 0.7, 1.5), ('France', 'associes', 5307, 67, 0.75, 4.3), ('France', 'developpement', 5154, 74, 0.65, 2.4), ('France', 'france', 4857, 55, 0.61, 0.2)]
+[    21.6s |   4.4GB] flips 593 in 587 S1 (0.002 of France); S1 with no other accepted match: 52
+[    44.5s |   3.0GB] test France: mean matches 3.211 empty 0.0629
+[    44.5s |   3.0GB] test India: mean matches 3.376 empty 0.0580
+[    44.6s |   3.0GB] test US: mean matches 3.394 empty 0.0576
+[    68.8s |   3.0GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (101447 empty, 1631097 non-empty).
+  candidate_pairs.tsv: 1732544 rows (62686 empty, 1669858 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[    68.8s |   3.0GB] VALID
+EXP16_DONE

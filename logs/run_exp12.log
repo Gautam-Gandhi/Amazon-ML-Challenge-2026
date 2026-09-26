@@ -1,0 +1,27 @@
+[     0.0s |   0.6GB] args: {'stage': 'feats', 'tag': 'fold0', 'split': 'train', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 20000, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32, 'test_tag': 'fold0'}
+[     7.9s |   0.9GB] feats test_s1_name: rows=1732544 nnz=31255957 (18.0/row)
+[    14.0s |   1.0GB] feats test_s1_addr: rows=1732544 nnz=58988782 (34.0/row)
+[    52.2s |   1.6GB] feats test_r_name: rows=9969589 nnz=195011833 (19.6/row)
+[    86.9s |   1.9GB] feats test_r_addr: rows=9969589 nnz=297720751 (29.9/row)
+[     0.0s |   0.6GB] args: {'stage': 'search', 'tag': 'fold0', 'split': 'test', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 20000, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32, 'test_tag': 'fold0'}
+Traceback (most recent call last):
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_block.py", line 583, in <module>
+    main()
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_block.py", line 579, in main
+    stage_search(args, log)
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_block.py", line 521, in stage_search
+    cn, ca = pair_cos(enc, model, job["s1"].to_numpy(), job["r"].to_numpy())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\site-packages\torch\utils\_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_block.py", line 425, in pair_cos
+    ca[i:i + bs] = (enc.batch(model, "s1", "addr", a) * enc.batch(model, "r", "addr", b)).sum(1).cpu().numpy()
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_block.py", line 141, in batch
+    flat, off = gather(ip, ix, rows)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_block.py", line 113, in gather
+    flat = np.repeat(starts - offsets, lens) + np.arange(lens.sum())
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 84.8 MiB for an array with shape (11119930,) and data type int64

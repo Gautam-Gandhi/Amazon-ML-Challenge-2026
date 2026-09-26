@@ -1,0 +1,39 @@
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'run': 'exp13', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp13_rolefeat.py:82: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  d1 = s1.select("country", pl.col("tok").alias("t")).explode("t").group_by(["country", "t"]).len("c1")
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp13_rolefeat.py:83: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  dr = r.select(rcountry.alias("country"), pl.col("tok").alias("t")).explode("t").group_by(["country", "t"]).len("cr")
+[    23.9s |   3.2GB]   train India: 247732 extra-word roles; most frequent: center(sw 0.71, hn 0.56), services(sw 0.72, hn 0.57), enterprises(sw 0.05, hn 0.19), public(sw 0.0, hn 0.19), industries(sw 0.05, hn 0.21), service(sw 0.72, hn 0.56), ventures(sw 0.05, hn 0.21), exports(sw 0.04, hn 0.2), overseas(sw 0.01, hn 0.2), infratech(sw 0.01, hn 0.21), holdings(sw 0.01, hn 0.2), group(sw 0.01, hn 0.2)
+[    24.1s |   3.4GB]   train US: 463174 extra-word roles; most frequent: center(sw 0.79, hn 0.61), partners(sw 0.25, hn 0.19), services(sw 0.81, hn 0.62), holdings(sw 0.01, hn 0.01), group(sw 0.01, hn 0.01), service(sw 0.8, hn 0.61), north(sw 0.02, hn 0.01), valley(sw 0.02, hn 0.01), west(sw 0.03, hn 0.01), east(sw 0.02, hn 0.01), south(sw 0.02, hn 0.01), downtown(sw 0.01, hn 0.01)
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp13_rolefeat.py:109: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  fe = k.select("row", "country", pl.col("E").alias("t")).explode("t").drop_nulls("t").join(te, on=["country", "t"], how="left") \
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp13_rolefeat.py:115: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  fm = k.select("row", "country", pl.col("M").alias("t")).explode("t").drop_nulls("t").join(tm, on=["country", "t"], how="left") \
+[    27.5s |   4.2GB] train part000.parquet: 3000000 rows
+[    30.8s |   4.6GB] train part001.parquet: 3000000 rows
+[    34.2s |   3.8GB] train part002.parquet: 3000000 rows
+[    37.2s |   4.5GB] train part003.parquet: 3000000 rows
+[    38.9s |   3.9GB] train part004.parquet: 1568252 rows
+[    42.5s |   4.0GB] train part005.parquet: 3000000 rows
+[    46.0s |   4.1GB] train part006.parquet: 3000000 rows
+[    49.8s |   4.2GB] train part007.parquet: 3000000 rows
+[    53.3s |   4.2GB] train part008.parquet: 3000000 rows
+[    56.9s |   4.2GB] train part009.parquet: 3000000 rows
+[    60.5s |   4.2GB] train part010.parquet: 3000000 rows
+[    62.9s |   3.6GB] train part011.parquet: 2005985 rows
+[    74.7s |   4.4GB]   test France: 52603 extra-word roles; most frequent: groupe(sw 0.18, hn 0.18), developpement(sw 0.16, hn 0.19), france(sw 0.16, hn 0.19), participations(sw 0.01, hn 0.01), holding(sw 0.01, hn 0.01), distribution(sw 0.01, hn 0.01), international(sw 0.0, hn 0.01), fils(sw 0.76, hn 0.83), services(sw 0.77, hn 0.75), associes(sw 0.75, hn 0.79), club(sw 0.99, hn 0.4), comite(sw 0.98, hn 0.35)
+[    74.8s |   4.5GB]   test India: 258115 extra-word roles; most frequent: center(sw 0.72, hn 0.62), public(sw 0.0, hn 0.21), enterprises(sw 0.04, hn 0.2), industries(sw 0.05, hn 0.21), services(sw 0.75, hn 0.58), ventures(sw 0.05, hn 0.21), exports(sw 0.04, hn 0.22), overseas(sw 0.01, hn 0.21), infratech(sw 0.01, hn 0.21), holdings(sw 0.01, hn 0.21), group(sw 0.0, hn 0.21), service(sw 0.72, hn 0.61)
+[    74.9s |   4.3GB]   test US: 297131 extra-word roles; most frequent: partners(sw 0.17, hn 0.13), holdings(sw 0.01, hn 0.01), group(sw 0.01, hn 0.01), center(sw 0.83, hn 0.63), services(sw 0.83, hn 0.62), service(sw 0.84, hn 0.62), north(sw 0.0, hn 0.01), downtown(sw 0.0, hn 0.01), summit(sw 0.0, hn 0.01), metro(sw 0.0, hn 0.01), west(sw 0.01, hn 0.01), greater(sw 0.0, hn 0.01)
+[    78.3s |   4.1GB] test part000.parquet: 3000000 rows
+[    80.3s |   4.7GB] test part001.parquet: 1865699 rows
+[    83.5s |   4.4GB] test part002.parquet: 3000000 rows
+[    86.6s |   4.5GB] test part003.parquet: 3000000 rows
+[    89.6s |   4.9GB] test part004.parquet: 3000000 rows
+[    92.8s |   4.3GB] test part005.parquet: 3000000 rows
+[    95.9s |   4.2GB] test part006.parquet: 3000000 rows
+[    96.1s |   3.9GB] test part007.parquet: 170241 rows
+[   100.0s |   4.4GB] test part008.parquet: 3000000 rows
+[   106.3s |   4.2GB] test part009.parquet: 3000000 rows
+[   110.7s |   4.6GB] test part010.parquet: 3000000 rows
+[   117.4s |   4.5GB] test part011.parquet: 3000000 rows
+[   118.3s |   3.7GB] test part012.parquet: 120229 rows

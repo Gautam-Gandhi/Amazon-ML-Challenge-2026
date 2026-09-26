@@ -1,0 +1,78 @@
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\tools\loco.py:124: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  d = pl.concat([pl.read_parquet(p)] + [pl.read_parquet(e[i]) for e in extras], how="horizontal")
+India: train rows 3456692, eval rows 4751054
+US: train rows 5116920, eval rows 7001769
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [18:28:11] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[[base] US->India] assign decoding: 0.5:0.95112 0.6:0.95489 0.7:0.95831 0.8:0.96149 0.85:0.96310 0.9:0.96470 0.93:0.96523 0.95:0.96543 0.97:0.96475 0.98:0.96341
+[[base] US->India] BEST thr=0.95 F0.5=0.96543 breakdown {'India': 0.96543, 'single': 0.93655, 'ngt1': 0.90905, 'ngt2': 0.95966, 'ngt3+': 0.97331}
+[[base] India->US] assign decoding: 0.5:0.97052 0.6:0.97324 0.7:0.97588 0.8:0.97797 0.85:0.97882 0.9:0.97938 0.93:0.97922 0.95:0.97891 0.97:0.97778 0.98:0.97625
+[[base] India->US] BEST thr=0.9 F0.5=0.97938 breakdown {'US': 0.97938, 'single': 0.96116, 'ngt1': 0.93716, 'ngt2': 0.97565, 'ngt3+': 0.98484}
+SUMMARY base: US->IN @0.7 0.95831 best 0.96543@0.95 | IN->US @0.7 0.97588 best 0.97938@0.9
+[     0.0s |   0.1GB] args: {'stage': 'train1', 'run': 'exp13', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp13_rolefeat.py:136: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(f) for f in fs], how="horizontal") for fs in zip(*layers))
+[    44.4s |   6.9GB] [stage1] features 124
+[0]	va-logloss:0.38062
+[200]	va-logloss:0.00833
+[400]	va-logloss:0.00793
+[579]	va-logloss:0.00785
+[   264.9s |   5.9GB] [stage1] fold 0: rows 7184762, best iter 529, logloss 0.00784, 106s
+[0]	va-logloss:0.37798
+[200]	va-logloss:0.00769
+[400]	va-logloss:0.00723
+[600]	va-logloss:0.00717
+[643]	va-logloss:0.00719
+[   456.7s |   5.8GB] [stage1] fold 1: rows 7102755, best iter 593, logloss 0.00716, 119s
+[   457.1s |   1.1GB] [stage1] top features: [('r_margin2', 18381.9), ('cos_j', 6963.5), ('rl_e_hneq_min', 5862.1), ('rl_e_swap_min', 4822.0), ('rl_e_hneq_max', 4063.8), ('hn_edit', 1405.4), ('s1_gap_j', 1365.7), ('num_tset', 1194.4), ('atk_b_ncont', 1030.6), ('atk_b_nun', 1010.9), ('sfx_eq', 971.9), ('tk_b_ncont', 877.6), ('hn_prefix', 849.2), ('r_gap_j', 760.6), ('b_hassfx', 758.0), ('num1_eq', 701.3), ('b_nnum', 699.9), ('tk_b_nun', 635.2), ('r_rank_j', 625.1), ('b_ncomp', 516.1)]
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [18:41:47] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[   942.9s |   1.2GB] [exp05 stage1] assign decoding: 0.5:0.98598 0.6:0.98684 0.65:0.98710 0.7:0.98732 0.75:0.98745 0.8:0.98752 0.85:0.98745 0.9:0.98704
+[   948.9s |   1.3GB] [exp05 stage1] BEST thr=0.8 F0.5=0.98752 breakdown {'India': 0.98739, 'US': 0.9876, 'single': 0.98605, 'ngt1': 0.96026, 'ngt2': 0.985, 'ngt3+': 0.99027}
+[     0.0s |   0.1GB] args: {'stage': 'feats2', 'run': 'exp13', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+[    62.6s |   2.1GB] consistency s1 0..499994: pairs 21998361
+[   103.2s |   2.8GB] consistency s1 499995..1000000: pairs 21645088
+[   154.6s |   2.1GB] consistency s1 1000001..1499727: pairs 21594492
+[   200.1s |   2.8GB] consistency s1 1499728..2000008: pairs 21589110
+[   216.7s |   2.5GB] consistency s1 2000009..2206820: pairs 8934138
+[   247.8s |   4.6GB] stage-2 feats train: 33574237
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp13_rolefeat.py:136: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(f) for f in fs], how="horizontal") for fs in zip(*layers))
+[   583.6s |   3.4GB] consistency s1 0..399999: pairs 21538482
+[   646.4s |   2.1GB] consistency s1 400000..799999: pairs 21223261
+[   685.5s |   3.3GB] consistency s1 800000..1199999: pairs 21166143
+[   734.9s |   3.0GB] consistency s1 1200000..1599999: pairs 21181231
+[   750.6s |   2.2GB] consistency s1 1600000..1732543: pairs 7013530
+[   769.6s |   4.5GB] stage-2 feats test: 32156169
+[     0.0s |   0.1GB] args: {'stage': 'train2', 'run': 'exp13', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp13_rolefeat.py:136: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(f) for f in fs], how="horizontal") for fs in zip(*layers))
+[    30.9s |   4.2GB] [stage2] features 142
+Traceback (most recent call last):
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp13_rolefeat.py", line 167, in <module>
+    main()
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp13_rolefeat.py", line 162, in main
+    {"train1": E5.stage_train1, "feats2": E5.stage_feats2, "train2": E5.stage_train2,
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp05_tokfeat.py", line 220, in stage_train2
+    res = M3.cross_fit(args, log, iter_s2("train"), run_dir, "stage2", keep)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp03_dense.py", line 120, in cross_fit
+    dtr = xgb.QuantileDMatrix(T.select(feats).to_numpy().astype(np.float32), ytr, weight=wtr, feature_names=feats)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 3.80 GiB for an array with shape (7184762, 142) and data type float32

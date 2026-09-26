@@ -1,0 +1,46 @@
+[     0.0s |   0.5GB] args: {'stage': 'eval', 'run': 'exp14', 'base': 'exp13', 'ce_run': 'exp08', 'thr': None, 'unseen_thr': 0.9}
+[     4.9s |   2.3GB] stacker fold 0: coef [0.816 0.562 0.038]
+[     5.2s |   1.9GB] stacker fold 1: coef [0.816 0.562 0.038]
+[    63.0s |   3.0GB] [exp13 (reference)] assign decoding: 0.5:0.98748 0.6:0.98816 0.65:0.98833 0.7:0.98842 0.75:0.98841 0.8:0.98827 0.85:0.98795 0.9:0.98729
+[    71.6s |   3.1GB] [exp13 (reference)] BEST thr=0.7 F0.5=0.98842 breakdown {'India': 0.98842, 'US': 0.98841, 'single': 0.99082, 'ngt1': 0.95623, 'ngt2': 0.98638, 'ngt3+': 0.99113}
+[   128.9s |   2.9GB] [exp13 + exp08 CE] assign decoding: 0.5:0.98900 0.6:0.98954 0.65:0.98968 0.7:0.98975 0.75:0.98969 0.8:0.98955 0.85:0.98927 0.9:0.98867
+[   137.6s |   3.0GB] [exp13 + exp08 CE] BEST thr=0.7 F0.5=0.98975 breakdown {'India': 0.99023, 'US': 0.98943, 'single': 0.99486, 'ngt1': 0.96204, 'ngt2': 0.98806, 'ngt3+': 0.99183}
+[     0.0s |   0.5GB] args: {'stage': 'predict', 'run': 'exp14', 'base': 'exp13', 'ce_run': 'exp08', 'thr': None, 'unseen_thr': 0.9}
+[    61.8s |   5.4GB] test France: thr 0.9 mean matches 3.188 empty 0.0635
+[    61.9s |   5.4GB] test India: thr 0.7 mean matches 3.376 empty 0.0580
+[    61.9s |   5.4GB] test US: thr 0.7 mean matches 3.394 empty 0.0574
+[   164.8s |   3.8GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (101523 empty, 1631021 non-empty).
+  candidate_pairs.tsv: 1732544 rows (0 empty, 1732544 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[   164.8s |   3.8GB] VALID
+[     0.0s |   0.1GB] args: {'stage': 'predict', 'run': 'exp14r', 'base': 'exp14', 'metrics_run': '', 'words': '', 'min_role': 0.1, 'pattern': 'noise', 'p_floor': 0.01, 'p_set': 0.95, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp11_rolerule.py:55: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  ta = s1.filter(pl.col("country") == cc)["name_core"].str.split(" ").list.unique().explode().value_counts()
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp11_rolerule.py:57: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  tb = rc["name_core"].str.split(" ").list.unique().explode().value_counts()
+[    25.2s |   5.8GB] rule words (unseen countries): [('France', 'fils', 10387, 1503, 0.76, 0.4), ('France', 'services', 5618, 214, 0.77, 0.9), ('France', 'groupe', 5478, 5142, 0.2, 1.5), ('France', 'associes', 5353, 441, 0.76, 4.3), ('France', 'developpement', 5238, 5221, 0.17, 2.4), ('France', 'france', 4947, 4912, 0.17, 0.2)]
+[    25.8s |   2.7GB] flips 16876 in 16094 S1 (0.062 of France); S1 with no other accepted match: 444
+Traceback (most recent call last):
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\er_common.py", line 99, in _write
+    f.write(f"{sid}\t{lists.get(i, '')}\n")
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp11_rolerule.py", line 134, in <module>
+    main()
+  File "C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp11_rolerule.py", line 130, in main
+    stage_predict(args, log)
+object address  : 00000240CD61FE20
+object refcount : 2
+object repr     : 

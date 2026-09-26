@@ -1,0 +1,18 @@
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\tools\loco.py:124: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  d = pl.concat([pl.read_parquet(p)] + [pl.read_parquet(e[i]) for e in extras], how="horizontal")
+India: train rows 3456692, eval rows 4751054
+US: train rows 5116920, eval rows 7001769
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [15:15:30] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[[base] US->India] assign decoding: 0.5:0.95019 0.6:0.95387 0.7:0.95718 0.8:0.96016 0.85:0.96142 0.9:0.96251 0.93:0.96298 0.95:0.96294 0.97:0.96218 0.98:0.96100
+[[base] US->India] BEST thr=0.93 F0.5=0.96298 breakdown {'India': 0.96298, 'single': 0.92453, 'ngt1': 0.90465, 'ngt2': 0.95694, 'ngt3+': 0.97182}
+[[base] India->US] assign decoding: 0.5:0.96527 0.6:0.96901 0.7:0.97239 0.8:0.97557 0.85:0.97697 0.9:0.97813 0.93:0.97852 0.95:0.97844 0.97:0.97768 0.98:0.97623
+[[base] India->US] BEST thr=0.93 F0.5=0.97852 breakdown {'US': 0.97852, 'single': 0.95495, 'ngt1': 0.93686, 'ngt2': 0.97508, 'ngt3+': 0.98427}
+SUMMARY base: US->IN @0.7 0.95718 best 0.96298@0.93 | IN->US @0.7 0.97239 best 0.97852@0.93

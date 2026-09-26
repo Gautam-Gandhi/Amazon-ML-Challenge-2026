@@ -42,6 +42,7 @@ def stage_eval(args, log):
              .with_columns(pl.coalesce(["pn", "p"]).alias("p")).drop("pn")
     ref = M3.decode_eval(oof, keep, log, f"{args.base} (reference)")
     m = M3.decode_eval(new, keep, log, f"{args.base} + {args.ce_run} CE")
+    new.select("s1", "r", "p").write_parquet(os.path.join(RUNS, args.run, "oof_combined.parquet"))
     import pickle
     with open(os.path.join(RUNS, args.run, "stacker.pkl"), "wb") as fh:
         pickle.dump(E6.fit_stacker(has), fh)

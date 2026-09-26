@@ -1,0 +1,40 @@
+[     0.0s |   0.1GB] args: {'stage': 'train2', 'run': 'exp13', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp13_rolefeat.py:136: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(f) for f in fs], how="horizontal") for fs in zip(*layers))
+[    30.4s |   5.8GB] [stage2] features 142
+[0]	va-logloss:0.37810
+[184]	va-logloss:0.00691
+[   173.9s |   6.2GB] [stage2] fold 0: rows 7184762, best iter 134, logloss 0.00690, 36s
+[0]	va-logloss:0.37549
+[200]	va-logloss:0.00624
+[243]	va-logloss:0.00626
+[   367.8s |   5.2GB] [stage2] fold 1: rows 7102755, best iter 193, logloss 0.00624, 49s
+[   368.5s |   0.9GB] [stage2] top features: [('p1', 61387.3), ('p_margin_r', 56985.9), ('p_gap_s1', 332.3), ('p_rank_s1', 225.5), ('p_2nd_r', 99.2), ('atk_b_nun', 78.6), ('ad_tsort', 64.6), ('cons_addr_max', 46.6), ('p_rank_r', 42.1), ('r_gap_j', 36.3), ('num_tset', 36.2), ('p_sum_s1', 35.4), ('r_margin2', 33.6), ('b_hassfx', 32.5), ('p_nhi_s1', 31.7), ('hn_sup_r', 31.7), ('nc_tsort', 28.7), ('nc_jacc', 28.5), ('cons_n_name90_ssrc', 27.0), ('cons_num_max', 26.4)]
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [19:14:14] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[   628.1s |   1.2GB] [exp05 stage2] assign decoding: 0.5:0.98748 0.6:0.98816 0.65:0.98833 0.7:0.98842 0.75:0.98841 0.8:0.98827 0.85:0.98795 0.9:0.98729
+[   635.4s |   1.4GB] [exp05 stage2] BEST thr=0.7 F0.5=0.98842 breakdown {'India': 0.98842, 'US': 0.98841, 'single': 0.99082, 'ngt1': 0.95623, 'ngt2': 0.98638, 'ngt3+': 0.99113}
+[     0.0s |   0.1GB] args: {'stage': 'predict', 'run': 'exp13', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp13_rolefeat.py:136: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(f) for f in fs], how="horizontal") for fs in zip(*layers))
+[   152.4s |   3.0GB] test France: thr 0.9 mean matches 3.188 empty 0.0635
+[   152.4s |   3.0GB] test India: thr 0.7 mean matches 3.377 empty 0.0581
+[   152.5s |   3.0GB] test US: thr 0.7 mean matches 3.413 empty 0.0571
+[   180.7s |   2.9GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (101402 empty, 1631142 non-empty).
+  candidate_pairs.tsv: 1732544 rows (0 empty, 1732544 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[   180.7s |   2.9GB] VALID
+EXP13_DONE

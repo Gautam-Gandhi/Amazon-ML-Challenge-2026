@@ -1,0 +1,26 @@
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\tools\loco.py:131: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  d = pl.concat([pl.read_parquet(p)] + [pl.read_parquet(e[i]) for e in extras], how="horizontal")
+India: train rows 2300853, eval rows 3400083
+US: train rows 3413153, eval rows 4996138
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [19:28:02] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[[base] US->India] assign decoding: 0.5:0.94958 0.6:0.95295 0.7:0.95641 0.8:0.95963 0.85:0.96118 0.9:0.96283 0.93:0.96381 0.95:0.96422 0.97:0.96394 0.98:0.96305
+[[base] US->India] BEST thr=0.95 F0.5=0.96422 breakdown {'India': 0.96422, 'single': 0.92836, 'ngt1': 0.90506, 'ngt2': 0.95727, 'ngt3+': 0.97311}
+[[base] India->US] assign decoding: 0.5:0.96825 0.6:0.97086 0.7:0.97329 0.8:0.97580 0.85:0.97697 0.9:0.97803 0.93:0.97841 0.95:0.97833 0.97:0.97762 0.98:0.97659
+[[base] India->US] BEST thr=0.93 F0.5=0.97841 breakdown {'US': 0.97841, 'single': 0.96007, 'ngt1': 0.93502, 'ngt2': 0.97484, 'ngt3+': 0.98394}
+SUMMARY base: US->IN @0.7 0.95641 best 0.96422@0.95 | IN->US @0.7 0.97329 best 0.97841@0.93
+  self-training round 1: pseudo pos 570425, neg 816065 (true rate of pseudo-pos 0.9887)
+[[st] US->India] assign decoding: 0.5:0.95402 0.6:0.95575 0.7:0.95758 0.8:0.95935 0.85:0.96043 0.9:0.96164 0.93:0.96274 0.95:0.96352 0.97:0.96441 0.98:0.96503
+[[st] US->India] BEST thr=0.98 F0.5=0.96503 breakdown {'India': 0.96503, 'single': 0.90928, 'ngt1': 0.91211, 'ngt2': 0.95965, 'ngt3+': 0.97465}
+  self-training round 1: pseudo pos 862224, neg 1207471 (true rate of pseudo-pos 0.9964)
+[[st] India->US] assign decoding: 0.5:0.97040 0.6:0.97238 0.7:0.97450 0.8:0.97652 0.85:0.97764 0.9:0.97885 0.93:0.97963 0.95:0.98020 0.97:0.98073 0.98:0.98091
+[[st] India->US] BEST thr=0.98 F0.5=0.98091 breakdown {'US': 0.98091, 'single': 0.96547, 'ngt1': 0.94244, 'ngt2': 0.97788, 'ngt3+': 0.98572}
+SUMMARY st: US->IN @0.7 0.95758 best 0.96503@0.98 | IN->US @0.7 0.97450 best 0.98091@0.98
+LOCO_ST_DONE

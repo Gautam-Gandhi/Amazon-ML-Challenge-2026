@@ -8,7 +8,10 @@ Usage: python tools/loco.py --feat_dir data/cache/feat_v3/k80s0 --configs "base;
                  iw / iwN (covariate-shift importance weights: domain classifier source-vs-target on features only,
                  weight = odds(target|x), clipped to [1/N, N], default N=10),
                  rank (per-country rank normalization: each feature -> its percentile within the country's own
-                 unlabeled candidate pairs, removing per-country scale shifts)
+                 unlabeled candidate pairs, removing per-country scale shifts),
+                 st / stN (self-training, N rounds: target pairs the model is confident about become pseudo-labels -
+                 assigned & p > 0.98 -> 1, p < 0.02 -> 0 (sampled like the source negatives) - and the model is
+                 retrained on source + pseudo-labeled target; transductive, as for France on the test set)
 """
 import os
 import sys
@@ -41,12 +44,14 @@ MONO_NEG = ["rk_name", "rk_addr", "rk_joint", "rk_rev", "s1_rank_j", "r_rank_j"]
 
 
 def parse_config(cfg):
-    out = {"mono": False, "depth": 8, "drop": set(), "iw": 0.0, "rank": False}
+    out = {"mono": False, "depth": 8, "drop": set(), "iw": 0.0, "rank": False, "st": 0}
     for tok in [t for t in cfg.split(",") if t and t != "base"]:
         if tok == "mono":
             out["mono"] = True
         elif tok.startswith("d") and tok[1:].isdigit():
             out["depth"] = int(tok[1:])
+        elif tok.startswith("st"):
+            out["st"] = int(tok[2:] or 1)
         elif tok == "rank":
             out["rank"] = True
         elif tok.startswith("iw"):
@@ -102,6 +107,9 @@ def main():
     ap.add_argument("--configs", default="base")
     ap.add_argument("--neg_frac", type=float, default=0.3)
     ap.add_argument("--rounds", type=int, default=900)
+    ap.add_argument("--save_pred", default="", help="directory: save each config's target-country predictions")
+    ap.add_argument("--tr_frac", type=float, default=0.6, help="share of source S1 used for training")
+    ap.add_argument("--ev_frac", type=float, default=0.35, help="share of target S1 used for evaluation")
     args = ap.parse_args()
     import xgboost as xgb
     keep = M3.keep_mask(args)
@@ -110,8 +118,8 @@ def main():
     # memory-light: train on 60% of the source country's S1 (sampled negatives), evaluate on a fixed 35% of the
     # target country's S1 (all their candidate pairs). Same samples for every config -> fair comparison.
     h = (np.arange(len(country), dtype=np.uint64) * np.uint64(0x9E3779B1) % np.uint64(1000)).astype(np.int32)
-    tr_s1 = h < 600
-    ev_s1 = (h >= 600) & (h < 950)
+    tr_s1 = h < int(1000 * args.tr_frac)
+    ev_s1 = (h >= 600) & (h < 600 + int(1000 * args.ev_frac))
     rng = np.random.default_rng(0)
     Xtr = {c: [] for c in ["India", "US"]}; Ytr = {c: [] for c in Xtr}
     Xev = {c: [] for c in Xtr}; Kev = {c: [] for c in Xtr}
@@ -169,8 +177,29 @@ def main():
                 w = w * importance_weights(Xtr[tr_c][:, cols], Xev[te_c][:, cols], pc["iw"], xgb)
             dtr = xgb.QuantileDMatrix(Xtr[tr_c][:, cols], y, weight=w, feature_names=feats)
             bst = xgb.train(params, dtr, num_boost_round=args.rounds)  # fixed rounds: no peeking at the target
-            p = bst.inplace_predict(Xev[te_c][:, cols])
+            p = np.concatenate([bst.inplace_predict(Xev[te_c][i:i + 1_000_000][:, cols])     # chunks: 4 GB GPU
+                                for i in range(0, len(Xev[te_c]), 1_000_000)])
+            for it in range(pc["st"]):
+                r0 = Kev[te_c].select("s1", "r").with_columns(pl.Series("p", p)).with_row_index("i")
+                pos = r0.filter(pl.col("p") == pl.col("p").max().over("r")).unique(subset=["r"], keep="first")                         .filter(pl.col("p") > 0.98)["i"].to_numpy()
+                neg = r0.filter(pl.col("p") < 0.02)["i"].to_numpy()
+                neg = neg[np.random.default_rng(it).random(len(neg)) < args.neg_frac]
+                idx = np.sort(np.concatenate([pos, neg]))
+                yp = np.isin(idx, pos).astype(np.float32)
+                print(f"  self-training round {it + 1}: pseudo pos {len(pos)}, neg {len(neg)} "
+                      f"(true rate of pseudo-pos {Kev[te_c]['y'].to_numpy()[pos].mean():.4f})", flush=True)
+                del dtr
+                dtr = xgb.QuantileDMatrix(np.concatenate([Xtr[tr_c][:, cols], Xev[te_c][idx][:, cols]]),
+                                          np.concatenate([y, yp]),
+                                          weight=np.concatenate([w, np.where(yp == 1, 1, 1 / args.neg_frac).astype(np.float32)]),
+                                          feature_names=feats)
+                bst = xgb.train(params, dtr, num_boost_round=args.rounds)
+                p = np.concatenate([bst.inplace_predict(Xev[te_c][i:i + 1_000_000][:, cols])
+                                    for i in range(0, len(Xev[te_c]), 1_000_000)])
             res = Kev[te_c].with_columns(pl.Series("p", p))
+            if args.save_pred:
+                os.makedirs(args.save_pred, exist_ok=True)
+                res.write_parquet(os.path.join(args.save_pred, f"{cfg}_{tr_c}_{te_c}.parquet"))
             m = M3.decode_eval(res, keep & (country == te_c) & ev_s1, print, f"[{cfg}] {tr_c}->{te_c}",
                                thrs=(0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.93, 0.95, 0.97, 0.98))
             row += [m["curve"]["assign@0.7"], m["best_f05"], m["best_thr"]]

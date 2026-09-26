@@ -2,7 +2,7 @@
 
 **Metric:** macro F0.5 per S1 entity (precision-weighted; singletons score 1 only if the prediction is empty).
 **Validation ("OOF"):** 2-fold cross-fit by S1 over the *whole* train world. Blocking runs over the full train S2/S3 pool, exactly like test. From exp03 on, validation uses a *dense world* (see exp03), because the normal world proved optimistic.
-**Target:** LB ≈0.989–0.99 (leaderboard top-3 ≈0.989 on 09-26; we are ≈53rd at 0.9829). **Current best LB:** **0.982907** (exp05). Submission limit: 5/day.
+**Target:** LB ≈0.989–0.99 (leaderboard top-3 ≈0.989 on 09-26; we are ≈53rd at 0.9829). **Current best LB:** **0.986936** (exp14r, 09-26 night). Submission limit: 5/day.
 
 ## Scoreboard
 
@@ -20,8 +20,17 @@
 | exp07 | prep_v3 normalization (mined gaps) + noise-word and abbreviation features; full from-scratch deterministic run (`work_v3`) | – | 0.98787 (stage 2) | – | +0.0002 in-country only; base for exp08/09 |
 | exp08 | exp06-style cross-encoder on exp07 (v3 world), seen countries only | – | 0.98959 | – | CE +0.0017 over exp07 |
 | exp09 | cluster-consensus features (does a record's differing word or number recur among other candidates?) | – | 0.98808 (stage 2) | – | logloss −7% (stage 1), F0.5 +0.0002 in-country; LOCO avg +0.0002 (no transfer gain) |
-| exp10 | exp09 stage 2 + exp08 CE stacker (seen countries); France = exp09 p @0.9 | – | **0.98965** | _to submit_ | best in-country; `work_v3/runs/exp10/output` |
-| exp10_diag | exp10 with every France row empty (US/India identical) | – | – | _to submit_ | **diagnostic**: the LB difference isolates France's score |
+| exp10 | exp09 stage 2 + exp08 CE stacker (seen countries); France = exp09 p @0.9 | – | **0.98965** | **0.985008** | +0.0021 over exp05 (≈ the in-country gain × 0.85 + a little France) |
+| exp10_diag | exp10 with every France row empty (US/India identical) | – | – | 0.849712 | **diagnostic**: France ≈0.96, US/India ≈0.9896 on test (see decomposition) |
+| exp11a | exp10 + word-role rule for France, noise words fils/associés only (13,944 French rows gain a match) | – | = | 0.985847 | **+0.00084**: fils/associés are noise words |
+| exp11b | exp10 + word-role rule for France, all rule words (fils, associés, groupe, développement, france; 25,185 rows) | – | = | **0.986449** | **best, +0.00144**; groupe/développement/france swaps are noise too (+0.0006 more) |
+| exp12 / exp12r | role translation of French words into training vocabulary (fils/associés→services, groupe/développement/france→partners, family words→holdings), test side recomputed in work_v4; r = + exp11 rule on top | – | = | **not submitted** | +24.1K / −5.7K French accepts vs exp11b; merging distinct family words into one token made sister-company distractors look like duplicates, and ~4K+ were accepted |
+| exp12s / exp12sr | exp12 with pure noise words only, each onto a distinct training noise word (fils→center, associés→service); dual-use handled by the exp11 rule (sr); family words untouched | – | = | not submitted | sr vs exp11b: +7,012 accepts (mostly "Et Fils"/"& Associés" appended at the same address), −2,341 mixed drops; expected ≈ +0.0001 |
+| exp14 / r / rc / rcd | exp13 + exp08 CE (seen; dense **0.98975**) / + exp11 rule / + descriptor swaps / + dual-use words appended at the same address | – | 0.98975 | **rcd: 0.983376 (−0.0031)** | France 3.248 / 3.358 / 3.376 matches. rcd bundled 2 untested rules: +33,062 French matches (descriptor swaps + dual-use appends), consistent with them being mostly **sibling organisations** (≈−0.0044 if all wrong). Mistake: never bundle untested hypotheses into a submission |
+| exp16r | exp15cr + self-trained stage 2 for France (pseudo-labels incl. rule flips), unseen thr 0.98 | – | = | not submitted | France −14.8K / +3.7K matches, mixed audit (drops usually-true patterns) |
+| exp15cr | exp14r recipe on a compact candidate set: ANN → stage-1 filter (p1 > 0.01 seen / 0.003 unseen) → stage 2 retrained on it | – | 0.98982 | _to submit_ | **3.95 candidates per S1 (was 18.56)**, dense F0.5 +0.00007 |
+| **exp14r** | exp13 role-feature model + exp08 CE (seen countries) + exp11 rule; LB-validated parts only | – | 0.98975 | **0.986936 (best)** | +0.00049 over exp11b: the role model helps France too (my estimate was 0.9867, range 0.9860–0.9873) |
+| exp11c | exp11b + French **descriptor** swaps at the same house number (club/école/amicale/comité/amis/sportive/parents/centre/…; 25,816 flips in 9.5% of French S1) | – | = | _to submit (09-26 last slot)_ | France empty share 0.0625 → 0.0571 (US/India 0.0576–0.0581, train singleton rate 0.0558) |
 | exp06_ood | as above, but France uses the CE with a transfer-calibrated weight (OOD stacker, CE coef 0.22) | – | = | not submitted | differs from exp06_exp05 in only 9,272 French pairs (0.5% of S1): LB effect ≈±0.0002, not informative enough |
 
 ## Key findings so far (read these first)
@@ -334,6 +343,268 @@ Evaluated on 35% of the target country's S1, trained on 60% of the source countr
   - LB 0.9829 (exp05) vs dense 0.9876 leaves a 0.005 gap. It is either (a) France weak (≈0.966, my working assumption) or (b) test US/India harder than the dense world, with France fine. These need different fixes.
   - **Diagnostic:** submit exp10 and exp10 with France emptied. LB(exp10) − LB(diag) = 0.15 × (F_France − s_France), with s_France the French singleton share (≈0.06). This gives France's score within about ±0.005, and US/India's test score within ±0.001.
 - **Expected LB of exp10:** US/India ≈ dense − 0.002 ≈ 0.9877 → ×0.85 ≈ 0.8395. France unknown: at ≈0.966 the total is ≈0.984–0.985; at ≈0.98 it is ≈0.987.
+
+## exp11 — Word roles: why France loses matches (`exp11_rolerule.py`)
+**Where France is uncertain.** About 10% of accepted French pairs are in the uncertain band (0.3–0.98), vs 3.5% for US/India. The matched-side name adds a word the base name lacks:
+- groupe 6.5%, france 6.0%, associés 5.4%, fils 5.0%, cie 3.1%, développement 2.9% of uncertain French pairs;
+- each below 0.1% of confident French pairs.
+
+**The generator adds words in two roles, with a separate vocabulary per country** (training labels, assigned pairs whose names differ by one extra word):
+- **Family / sister-company distractor:** the full base name plus the word, usually with another house number ("Falcon Corp" → "Falcon Group", 3179 → 3200).
+  - US: holdings, group, north/east/west/south/central/downtown/uptown/metro.
+  - India: enterprises, public, industries, exports, overseas, ventures, infratech, holdings, group, solutions.
+  - True-match rate **0.2%**. Nothing dropped from the base name in 94–97% of cases.
+- **Noise:** the word *replaces* a descriptor and the address stays ("Obrien Lion LLC" → "Obrien LLC Services").
+  - US: center, services, service. India: the same + partners.
+  - US "partners" is dual-use: 18% swaps (true), 82% appends (distractors).
+
+**Per-word structure in test** (swap share / same house number / model's mean p on swap-with-same-number pairs):
+
+| word | swap share | same number | mean p (swap + same number) |
+|---|---|---|---|
+| US center / services | 0.83 | 0.63 | **1.00** |
+| US partners | 0.18 | 0.13 | 0.98 |
+| US holdings / group | 0.01 | 0.01 | – |
+| France services | 0.77 | 0.76 | 0.98 |
+| **France fils** | 0.76 | 0.85 | **0.27** |
+| **France associés** | 0.76 | 0.80 | **0.50** |
+| **France groupe / développement / france** | 0.17–0.20 | 0.20 | **0.79 / 0.31 / 0.56** |
+| France international / holding / participations / distribution | ~0.01 | 0.02 | – (family, correctly rejected) |
+
+**Rule** (country-agnostic, no labels). An assigned pair is accepted when all of these hold:
+- the names differ by one S1 word swapped for one R word;
+- the first house number is equal;
+- the swapped-in word has a noise role in its own split and country: swap share ≥ 0.1, R-over-representation > 0.1, ≥ 200 occurrences.
+
+**Rule on training labels:**
+- true-match rate **0.9990 (US, 171,759 pairs) and 0.9849 (India, 96,881)**;
+- the in-country model already accepts 99% (US) / 92% (India) of these; its rejections are real exceptions (true-match rate 0.42–0.48).
+
+**Rule on test:**
+- US: 0.9% rejected;
+- **France: 27,945 of 36,881 rule pairs (76%) are rejected**, and their p is spread over 0.01–0.9, i.e. word-driven, not confident.
+
+**Applied to unseen countries only** (p := max(p, 0.95) when p > 0.01). US/India rows are byte-identical to exp10.
+
+**Expected on the LB:**
+- if the flipped pairs are true matches: about **+0.0008 (exp11a) / +0.0015 (exp11b)**;
+- if they are distractors: about −0.002 / −0.004.
+
+**Cross-country check (US→India, labels): not informative.** US and India share their noise words (center/services/partners), so the rule barely fires: 1,297 flips with a true-match rate of 0.41, which are genuine exceptions. It also shows the danger of low swap shares: India words with a swap share of 0.10–0.13 (agencies, motors, steel) are sister-company words (true-match rate 0). France is the unique case of an unfamiliar noise vocabulary.
+
+**LB results (09-26):**
+
+| submission | LB | vs exp10 |
+|---|---|---|
+| exp10_diag (France emptied) | 0.849712 | – |
+| exp11a (fils/associés) | 0.985847 | **+0.00084** |
+| exp11b (all five words) | **0.986449** | **+0.00144** |
+
+The rule works, and the dual-use words (groupe/développement/france) add another +0.0006.
+
+**LB decomposition** (France weight 0.14975; true singleton share 0.0558 in both training countries, assumed the same for France):
+- **US+India on test ≈ 0.9896**, exactly the dense validation (0.98965). The dense world is accurate, and **the whole remaining gap is France**.
+- **France: exp10 ≈0.960 → exp11a ≈0.965 → exp11b ≈0.969**, still ≈0.02 below US/India.
+- **Ceiling:** France at the US/India level gives LB ≈0.9896. 0.99 would need France ≈0.992, above in-country.
+- Every +0.01 on France is +0.0015 on the LB.
+
+## exp12 — Role translation of French words (`exp12_roletrans.py`, work_v4) · not submitted
+- **Map (all roles):**
+  - fils/associés → services;
+  - groupe/développement/france → partners;
+  - international/holding/participations/distribution/enterprises/trading → holdings;
+  - "5as" (the SAS typo, appended at the *same* address, hn_eq 0.85) excluded by a house-number guard.
+- **Recompute:** test side only, with unchanged exp09 models. Blocking volume is unchanged (France 4.86M vs 4.87M pruned candidates).
+- **Result vs exp11b:** France 3.300 matches per S1 (exp11b 3.229); +24,109 / −5,731 accepted pairs.
+- **Audit of the new accepts:**
+  - 7,162 are appended word + different house number, the sister-company signature ("Ets Rural SARL, 135" → "Ets Rural Participations S.A.R.L., 136").
+  - About 4,000 carry pure family words.
+- **Cause:** mapping several distinct family words onto ONE token ("holdings") turns a sister-company family ("X Participations", "X International", "X Holding") into identical records. That distorts the consensus, frequency and noise statistics.
+- **Fix → exp12s:** translate only pure noise words, each onto a distinct training noise word. Leave family words (already rejected) and dual-use words (exp11 rule) alone.
+
+## Remaining France gaps: structural pattern comparison (after exp11b)
+**Method:** for country-agnostic patterns (name difference × house-number relation), compare the dense-world training true-match rate with the French acceptance rate. Caveat: the test contains extra distractor types, so a gap is only a lead.
+
+**1. Identical name, different house number (31K French pairs; train true 0.962, France acc 0.305). No action.**
+- Split by legal form and number distance, US training shows a **sister-entity distractor**: same name, *neighbouring* number (≤12), different legal form. True-match rate 0.127 (legal form missing on one side: 0.603).
+- US test has 15–25× more of them per S1 than the dense world, and the model rejects them (mean p 0.11) while US still scores ≈0.9896.
+- France behaves like the US (mean p 0.14), so this is probably correct.
+- India's training labels say these are mostly true (0.90); its model accepts ~60%.
+
+**2. One-word swap with a frequent French *descriptor* word, same number (≈17K pairs; mean p 0.24–0.62). Open, LB probe candidate.**
+- Words: club, école, amicale, comité, amis, sportive, centre, parents, société, fêtes, collège, primaire.
+- In US/India, same-number swaps are 99% true (280K US), but they are typos spread over rare tokens. No frequent descriptor↔descriptor swaps exist there, so the labels cannot decide.
+- Arguments for true: every swap type in US/India is true, even at a different number (0.952), and France's confirmed noise words use the same swap mechanism.
+- Argument against: these words are *not* over-represented on the R side (nsc −0.2, unlike noise words), which is also consistent with distractors built as "base + other descriptor".
+- **Break-even true rate ≈0.67.** If true: ≈+0.001–0.0013 LB; if distractors: ≈−0.002.
+- **Structural argument for the same-number subset:** descriptor swaps sit at the same house number 40% of the time (noise words ~80%, sister-company words ~2%). That makes the whole population a ≈50/50 mixture, but the same-number subset ≈97% noise.
+- **Probe = exp11c.** After the flips, France's empty share (0.0571) matches US/India, a consistency signal.
+
+## Where the in-country loss is (09-26 evening; dense validation, exp09 stage 2 = 0.98808)
+**Oracle decomposition** (each fix alone):
+
+| fix | F0.5 | gain |
+|---|---|---|
+| add true pairs missing from candidates | 0.99294 | **+0.0049** |
+| accept true pairs the matcher rejected | 0.99289 | +0.0048 |
+| remove false positives | 0.99050 | +0.0024 |
+
+**Candidate recall is 98.4%.** 95,803 true pairs (1.57%) never reach the matcher:
+- **35% were retrieved but pruned** (embedding rank 15–80).
+- **65% were never retrieved**, and 86.5% of those have an **empty address** on the S2/S3 side.
+- **Recall by address:** records with no address 71.7% (4.4% of true pairs); records with an address 99.67%.
+
+**Most of it is unrecoverable:** an address-less record whose name is shared by more than 20 kept S1s cannot be placed (41.8K of the misses). When such records *are* retrieved, the matcher accepts:
+
+| S1s sharing the name | acceptance |
+|---|---|
+| 1 (unique) | 94.7% |
+| 2 | 25% |
+| 3–5 | 11% |
+| more | ≈0 |
+
+- **Recoverable:** ≈13.5K unique-name misses, plus part of the pruned ones. Worth about **+0.0006–0.001**.
+- **No leakage:** IDs and file order are random (corr 0.0001), and name / address / country are the only columns.
+
+**Implication for 0.99:** our US/India on test ≈0.9896. A team at 0.99 with France ≈0.985–0.99 has US/India ≈0.990–0.991, so their main edge is **France (≈0.985–0.99 vs our ≈0.969)**: cross-country generalization, not in-country accuracy.
+
+## exp13 — Word-role features in the model (`exp13_rolefeat.py`, feat_v13)
+**Idea:** give the model the word-role information itself, so it learns "noise-role word swapped at the same address → match" from US/India and applies it to any vocabulary.
+
+**Role table** per split and country, model-free:
+- built from near-duplicate candidate pairs (names differ by one extra R token plus at most one missing S1 token) where the S1 is the R's top embedding candidate;
+- per word: swap share, same-house-number share, log rate;
+- the same statistics for a word as the missing S1 token;
+- document frequency in S1 names and R over-representation.
+
+**Pair features:** 13, min/max over the extra and the missing tokens.
+
+**The tables recover the roles without labels:**
+
+| role | example words | swap share |
+|---|---|---|
+| noise | center, services, fils, associés | 0.71–0.84 |
+| family | holdings, enterprises, participations | 0.00–0.05 |
+| dual-use | partners, groupe | 0.16–0.25 |
+| French descriptors | club, comité | 0.98–0.99 (same number 35–40%) |
+
+**Test:** cross-country benchmark, same samples as the baseline (0.96298 / 0.97852), then the in-country stages (`scripts/run_exp13.sh`).
+
+## Deep-dive 09-26 night: why we are not at ~0.99 (all measured with labels unless stated)
+**LB decomposition** (exp10_diag):
+- US+India on test ≈ **0.9896–0.990**, the same as dense validation;
+- France ≈ **0.966–0.969** (exp11b; about +0.003 after exp14r).
+- The assumption behind it (France singleton share like US/India) is supported: 4.8% of French S1 have no plausible candidate (best p < 0.05) vs 5.1% US / 5.3% India.
+- Top-3 was ≈0.989 on 09-26. With US/India ≈0.9896, reaching it needs France ≈0.986.
+
+**In-country error anatomy** (exp13 OOF, base 0.98842, oracle fix per category):
+
+| error | pairs | F gain if fixed |
+|---|---|---|
+| true match not in candidates | 95,803 | +0.0049 |
+| — of which address-less R with a shared S1 name | 62,807 | +0.0032 |
+| true match in candidates but rejected | 74,693 | +0.0043 |
+| — of which address-less R with a shared S1 name | 44,241 | +0.0023 |
+| FP: R is a pure distractor | 6,839 | +0.0011 |
+| FP: R's S1 was dropped (orphan) | 7,382 | +0.0010 |
+| FP: R belongs to another S1 | 3,634 | +0.0005 |
+
+**Address-less R with a name shared by ≥2 S1s = 0.0055, half of all loss. Irreducible.**
+- Records per S1 per source vary widely (1–4 per source, no quota to exploit).
+- IDs and file order are random.
+- Test count: 265,506 address-less R (2.7%). 81,873 are ambiguous (France 17,287, India 37,518, US 27,068); exp11b accepts only 11,592 of them.
+- **Dropping the accepted ambiguous ones hurts:** precision is 0.855 (2 same-name S1) / 0.797 (3–5) / 0.734 (6+), vs a removal break-even of ≈0.72. F changes −0.00021 / −0.00004 / 0.
+- Unique-name address-less: precision 0.966; dropping them costs −0.0061.
+
+**Levers checked (no hyperparameter is worth more than +0.0002):**
+
+| lever | result |
+|---|---|
+| candidate pool 15 → 30 per S1 | oracle +0.00017 (pruned true pairs sit at embedding rank 30–80) |
+| all non-ambiguous missed candidates (pruned + never retrieved) | oracle +0.0017 |
+| two-threshold decode (S1 with no accepted match: t_empty; others: t_main), in-country | best t_main 0.75 / t_empty 0.6 = 0.98856 (**+0.00014**) |
+| same decode, cross-country | a lower t_empty *hurts*: lone candidates of empty S1 are mostly distractors out-of-country |
+| France threshold | 0.9 is at the cross-country optimum (0.90–0.93) |
+| ensemble exp09 + exp13 stage-2 OOF (weight 0.3/0.7) | 0.98857 (**+0.00015**) |
+| reverse descriptor rule (reject accepted French descriptor swaps) | the model already rejects them (< 1K accepted) |
+
+**The cross-encoder is anti-correlated on France.** On LB-established French truths (CE logits on exp08 test_ce):
+- known-true fils/associés swaps: CE mean **−3.9** (4% > 0.5);
+- known-false descriptor swaps: CE mean −0.77 (37% > 0.5).
+
+It memorised the US/India noise vocabulary. It stays off for France.
+
+**New constraint (organisers' update, 09-26 night):** `candidate_pairs.tsv` counts in the final ranking, and **a smaller candidate set per S1 ranks higher**. Ours: **18.56 per S1** (median 17, p90 24, max 434; 32.2M pairs) for ~3.4 true matches per S1. So bigger candidate pools are out, and compaction becomes a goal.
+
+## exp15 — Compact candidate set (`exp15_compact.py`)
+**Goal:** the organisers' update ranks a smaller `candidate_pairs.tsv` higher, without losing F0.5.
+
+**Dense validation** (exp13 OOF; final F0.5 with stage-2 p restricted to the kept pairs):
+
+| candidate generation | per S1 | recall | F0.5 |
+|---|---|---|---|
+| current: ANN top-15 + R-rank ≤ 2 | 19.02 | 0.9843 | 0.98842 |
+| ANN only, S1 top-3 / 5 / 8 / 10 + R top-1 | 6.00 / 6.79 / 9.18 / 11.03 | 0.9756 / 0.9766 / 0.9786 / 0.9797 | 0.98784 / 0.98797 / 0.98810 / 0.98816 |
+| **ANN + stage-1 filter p1 > 0.001 / 0.005 / 0.01 / 0.03** | **3.88 / 3.71 / 3.65 / 3.57** | 0.9843 / 0.9842 / 0.9842 / 0.9838 | **0.98842 (all)** |
+| stage-1 top-k per S1 (+ each R's best S1), k = 3–6 | 6.0–7.2 | 0.981–0.984 | 0.98842 |
+
+**Test** (exp14r accepted pairs that each filter would drop):
+
+| filter | US | India | France |
+|---|---|---|---|
+| p1 > 0.01 | 4.02 per S1, drops 0 | 3.75, drops 10 | 4.10, drops 9 |
+| p1 > 0.003 | 4.19, drops 0 | 3.92, drops 0 | 4.39, drops 0 |
+
+**Chosen:** p1 > 0.01 for training countries and p1 > 0.003 for unseen countries (stage 1 is less calibrated out of country). That gives **≈3.95 per S1 vs 18.56 (−79%)**.
+
+**Pipeline, kept honest:** `candidate_pairs.tsv` = exactly the pairs fed to the matcher.
+1. ANN blocking (exp01_block, ≈19 per S1).
+2. Learned pair filter (exp13 stage-1 GBDT, cross-fitted OOF on train).
+3. Candidate set.
+4. Stage 2 **retrained** on the filtered set, with its competition and consistency features computed only over kept pairs.
+5. exp08 CE stack (seen countries), then the exp11 rule (unseen countries).
+
+**Results:**
+- **Kept:** train (dense world) 6.44M of 33.6M pairs (2.92 per S1, was 15.21); **test 6.84M of 32.2M (3.95 per S1, was 18.56)**. 62,686 test S1 (3.6%) have no candidate left; the validator accepts empty candidate rows.
+- **Stage 2 on the filtered set:** logloss 0.0338 / 0.0324 (on harder negatives, not comparable); **F0.5 0.98858 @0.75** (exp13 on all candidates: 0.98842). Removing hopeless pairs sharpens the competition features.
+- **+ CE (exp15c):** **0.98982 @0.7** (exp14: 0.98975).
+- **exp15cr (+ exp11 rule):** France 3.254 matches per S1 (exp14r 3.248), empty 0.0612; US / India 3.394 / 3.376. It differs from exp14r in US 7,350 / India 4,407 / France 6,120 rows.
+- **Candidate file:** 3.95 per S1, median 4, p90 6, **max 63 (was 434)**; 6.84M pairs (−79%).
+- **Expected LB:** ≈ exp14r (0.9869–0.9872). It becomes the base for the final package, because candidate size now counts in the ranking.
+
+## Two-threshold decode on the CE-stacked exp15c (seen countries)
+Grid on `runs/exp15c/oof_combined.parquet` (now saved by `exp10_combine.py eval`):
+
+| | F0.5 |
+|---|---|
+| single threshold 0.7 | 0.98982 |
+| **t_main 0.75, t_empty 0.6** | **0.98990 (+0.00008)** |
+
+Validated but tiny: fold it into the final candidate rather than spend a submission on it.
+
+## exp16 — Self-trained stage 2 for unseen countries (`exp16_selftrain.py`) · not recommended
+**Threshold dependence** (LOCO single stage, base → st):
+
+| threshold | US → India | India → US |
+|---|---|---|
+| 0.9 | 0.96283 → 0.96164 (−0.0012) | 0.97803 → 0.97885 (+0.0008) |
+| 0.98 (both directions peak) | 0.96305 → **0.96503** | 0.97659 → **0.98091** |
+
+The self-trained model is over-confident, so the unseen threshold is **fixed a priori to 0.98** (not tuned on France). The rule's p_set is raised to 0.99 to stay above it.
+
+**Pseudo-labels on France** (exp15cr):
+- positives: assigned and p > 0.98, **plus the exp11 rule flips** (LB-validated, so the model can learn the dual-use words from French data);
+- negatives: p < 0.02, sampled 0.3.
+
+**Model:** stage 2 trained on all labeled train pairs (filtered set) + French pseudo-labels, 150 rounds (≈ exp15's best iteration of 131). It re-scores every French candidate; US/India stay as exp15cr. The exp11 rule is then re-applied (exp16r).
+
+**Results:**
+- **Training data:** labeled pairs = one S1 fold (3.07M; the full 6.1M × 142 features runs out of RAM in XGBoost); pseudo-labels 818K positive (16.5K rule flips) + 40K negative.
+- **Effect on France:** the uncertain share drops from ≈10% to **6.6%**. At 0.98, France has **3.211** matches per S1 (exp15cr 3.254), empty share 0.0629 (0.0612). The rule now flips only 593 pairs.
+- **Audit vs exp15cr (France):** −14,841 / +3,728 accepted pairs.
+  - The drops include patterns that are usually true in training: x1m2 same number 5,263 (true 0.971), x0m0 missing number 4,249 (0.917), **x0m0 same number 719 (0.999)**, and only a few descriptor swaps (club/école).
+  - The adds are mostly dual-use words *appended* at the same address (groupe/développement/france, ≈3K), the pattern suspected false in exp14rcd.
+- **Verdict:** at the a-priori 0.98 threshold the self-trained model is too conservative on France, and the LOCO gain (+0.0017) does not clearly transfer. **Not a candidate.** At most a labelled probe with an uncertain sign.
 
 ## Workspace map
 - `prep_v1.py`, `exp01_block.py`, `exp01_match.py`, `exp02_stack.py`, `exp03_dense.py`: one file per structural experiment. Earlier files are frozen and later ones import them.

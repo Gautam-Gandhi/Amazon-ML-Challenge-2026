@@ -117,9 +117,11 @@ def cross_fit(args, log, parts_iter, run_dir, name, keep):
         V = pl.concat(va[1 - k])
         ytr = T["y"].to_numpy()
         wtr = np.where(ytr == 1, 1.0, 1.0 / args.neg_frac).astype(np.float32)
-        dtr = xgb.QuantileDMatrix(T.select(feats).to_numpy().astype(np.float32), ytr, weight=wtr, feature_names=feats)
+        # cast in polars: to_numpy() of mixed columns would build a float64 copy first (2x the RAM)
+        dtr = xgb.QuantileDMatrix(T.select([pl.col(c).cast(pl.Float32) for c in feats]).to_numpy(), ytr, weight=wtr,
+                                  feature_names=feats)
         del T
-        dva = xgb.QuantileDMatrix(V.select(feats).to_numpy().astype(np.float32), V["y"].to_numpy(), ref=dtr,
+        dva = xgb.QuantileDMatrix(V.select([pl.col(c).cast(pl.Float32) for c in feats]).to_numpy(), V["y"].to_numpy(), ref=dtr,
                                   feature_names=feats)
         t0 = time.time()
         bst = xgb.train(M1.xgb_params(args), dtr, num_boost_round=args.rounds, evals=[(dva, "va")],
@@ -136,7 +138,7 @@ def cross_fit(args, log, parts_iter, run_dir, name, keep):
     for part in parts_iter():
         part = M1.add_labels(part)
         f = fold[part["s1"].to_numpy()]
-        X = part.select(feats).to_numpy().astype(np.float32)
+        X = part.select([pl.col(c).cast(pl.Float32) for c in feats]).to_numpy()
         p = np.zeros(len(X), np.float32)
         for k in (0, 1):
             m = f == k

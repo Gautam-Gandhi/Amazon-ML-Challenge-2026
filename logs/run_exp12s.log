@@ -1,0 +1,129 @@
+[     0.0s |   0.6GB] args: {'stage': 'feats', 'tag': 'fold0', 'split': 'train', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 20000, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32, 'test_tag': 'fold0'}
+[     7.6s |   0.9GB] feats test_s1_name: rows=1732544 nnz=31207994 (18.0/row)
+[    13.6s |   1.0GB] feats test_s1_addr: rows=1732544 nnz=58988782 (34.0/row)
+[    40.8s |   1.6GB] feats test_r_name: rows=9969589 nnz=195258376 (19.6/row)
+[    72.6s |   2.0GB] feats test_r_addr: rows=9969589 nnz=297720751 (29.9/row)
+[     0.0s |   0.6GB] args: {'stage': 'search', 'tag': 'fold0', 'split': 'test', 'dim': 128, 'epochs': 3, 'bs': 2048, 'lr': 0.01, 'tau': 0.05, 'hard_frac': 0.5, 'eval_q': 20000, 'k_name': 20, 'k_addr': 20, 'k_joint': 30, 'k_rev': 3, 'nprobe': 32, 'test_tag': 'fold0'}
+[    94.6s |   5.9GB] search test tag=fold0 country=France: q=259452 corpus=1434993 pairs=17179373 78s
+[   648.6s |   4.4GB] search test tag=fold0 country=India: q=809986 corpus=4717565 pairs=53989707 553s
+[  1119.7s |   4.0GB] search test tag=fold0 country=US: q=663106 corpus=3817031 pairs=41439329 471s
+[  1120.1s |   1.5GB] candidates test: 112608409 pairs, 65.0 per S1, files 3
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'split': 'test', 'run': 'exp01', 'max_cand': 15, 'keep_rrank': 2, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 1500, 'mode': None, 'thr': None}
+[     5.2s |   4.9GB] tables loaded
+[     9.5s |   4.3GB] test France: 17179373 candidate pairs -> 4863978 after pruning
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp01_match.py:168: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  feat = pl.concat([c, pl.DataFrame(f), sets, extra], how="horizontal")
+[    34.4s |   5.0GB] part 0: rows 3000000 cols 67 25s
+[    49.7s |   4.3GB] part 1: rows 1863978 cols 67 15s
+[    64.2s |   6.5GB] test India: 53989707 candidate pairs -> 15170269 after pruning
+[    97.1s |   4.3GB] part 2: rows 3000000 cols 67 33s
+[   130.7s |   5.8GB] part 3: rows 3000000 cols 67 34s
+[   164.7s |   5.6GB] part 4: rows 3000000 cols 67 34s
+[   202.6s |   4.8GB] part 5: rows 3000000 cols 67 38s
+[   248.5s |   6.1GB] part 6: rows 3000000 cols 67 46s
+[   250.8s |   4.3GB] part 7: rows 170269 cols 67 2s
+[   262.2s |   5.7GB] test US: 41439329 candidate pairs -> 12120626 after pruning
+[   287.3s |   5.3GB] part 8: rows 3000000 cols 67 25s
+[   311.6s |   5.9GB] part 9: rows 3000000 cols 67 24s
+[   336.7s |   5.9GB] part 10: rows 3000000 cols 67 25s
+[   361.4s |   5.9GB] part 11: rows 3000000 cols 67 25s
+[   362.8s |   4.3GB] part 12: rows 120626 cols 67 1s
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'run': 'exp07', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp07_tokfeat2.py:109: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  vc = x.str.split(" ").list.unique().explode().value_counts()
+[    59.2s |   5.1GB] train: idf 1932928, name noise vocab 1314034; noisiest name words: northside:8.3, eastgate:8.3, lndia:6.7, stil:6.5, stors:6.5, tekstails:6.5, phrnicr:6.4, jnrl:6.4, svits:6.4, bekri:6.4, tredrs:6.4, medikls:6.3, garmemts:6.3, motrs:6.2, pharmesi:6.2
+[   130.4s |   6.7GB] test: idf 1724376, name noise vocab 1099778; noisiest name words: eastgate:8.1, northside:8.1, participations:8.0, stors:7.0, stil:7.0, tekstails:6.9, jnrl:6.8, bekri:6.8, phrnicr:6.8, tredrs:6.8, svits:6.8, medikls:6.8, southside:6.7, motrs:6.7, garmemts:6.7
+[   172.7s |   4.7GB] test part000.parquet: 3000000 rows
+[   187.7s |   3.8GB] test part001.parquet: 1863978 rows
+[   239.3s |   4.4GB] test part002.parquet: 3000000 rows
+[   297.3s |   3.0GB] test part003.parquet: 3000000 rows
+[   357.7s |   2.5GB] test part004.parquet: 3000000 rows
+[   454.4s |   4.3GB] test part005.parquet: 3000000 rows
+[   509.7s |   4.0GB] test part006.parquet: 3000000 rows
+[   519.3s |   1.6GB] test part007.parquet: 170269 rows
+[   545.5s |   4.0GB] test part008.parquet: 3000000 rows
+[   573.2s |   4.2GB] test part009.parquet: 3000000 rows
+[   601.7s |   4.1GB] test part010.parquet: 3000000 rows
+[   629.3s |   4.2GB] test part011.parquet: 3000000 rows
+[   634.5s |   1.6GB] test part012.parquet: 120626 rows
+[     0.0s |   0.1GB] args: {'stage': 'feats', 'run': 'exp09', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+[     6.4s |   5.0GB] train: tables ready
+[     8.1s |   8.7GB] test: tables ready
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp09_consensus.py:39: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  return keys.with_columns(tok_list.alias(col)).explode(col).filter(pl.col(col).is_not_null() & (pl.col(col) != ""))
+[    22.1s |   5.8GB] test part000.parquet: 3000000 rows
+[    29.7s |   7.5GB] test part001.parquet: 1863978 rows
+[    46.8s |   5.5GB] test part002.parquet: 3000000 rows
+[    64.5s |   4.1GB] test part003.parquet: 3000000 rows
+[    80.7s |   4.1GB] test part004.parquet: 3000000 rows
+[    99.2s |   4.1GB] test part005.parquet: 3000000 rows
+[   114.4s |   4.1GB] test part006.parquet: 3000000 rows
+[   115.0s |   3.7GB] test part007.parquet: 170269 rows
+[   126.6s |   4.4GB] test part008.parquet: 3000000 rows
+[   138.0s |   3.4GB] test part009.parquet: 3000000 rows
+[   149.3s |   3.7GB] test part010.parquet: 3000000 rows
+[   160.7s |   3.9GB] test part011.parquet: 3000000 rows
+[   161.5s |   5.0GB] test part012.parquet: 120626 rows
+[     0.0s |   0.1GB] args: {'stage': 'feats2', 'run': 'exp09', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+[    64.5s |   2.0GB] consistency s1 0..499994: pairs 21998164
+[   104.8s |   3.2GB] consistency s1 499995..1000000: pairs 21646418
+[   145.0s |   2.8GB] consistency s1 1000001..1499727: pairs 21596352
+[   213.9s |   2.0GB] consistency s1 1499728..2000008: pairs 21588976
+[   230.3s |   2.3GB] consistency s1 2000009..2206820: pairs 8934383
+[   256.4s |   4.5GB] stage-2 feats train: 33574237
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp09_consensus.py:143: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(a), pl.read_parquet(b), pl.read_parquet(c)], how="horizontal")
+[   478.6s |   2.2GB] consistency s1 0..399999: pairs 21567750
+[   523.0s |   3.2GB] consistency s1 400000..799999: pairs 21251490
+[   585.3s |   2.0GB] consistency s1 800000..1199999: pairs 21196365
+[   625.8s |   3.2GB] consistency s1 1200000..1599999: pairs 21208260
+[   638.2s |   2.6GB] consistency s1 1600000..1732543: pairs 7023272
+[   646.0s |   4.4GB] stage-2 feats test: 32154873
+[     0.0s |   0.1GB] args: {'stage': 'predict', 'run': 'exp09', 'test_feat': 'feat_v1/test', 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp09_consensus.py:143: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  return lambda: (pl.concat([pl.read_parquet(a), pl.read_parquet(b), pl.read_parquet(c)], how="horizontal")
+[   115.1s |   3.8GB] test France: thr 0.9 mean matches 3.197 empty 0.0636
+[   115.1s |   3.8GB] test India: thr 0.75 mean matches 3.374 empty 0.0586
+[   115.2s |   3.8GB] test US: thr 0.75 mean matches 3.416 empty 0.0576
+[   149.1s |   3.4GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (102137 empty, 1630407 non-empty).
+  candidate_pairs.tsv: 1732544 rows (0 empty, 1732544 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[   149.1s |   3.4GB] VALID
+[     0.0s |   0.1GB] args: {'stage': 'combine', 'run': 'exp12s', 'base': 'exp10', 'model_run': 'exp09', 'out_world': 'C:/Users/gandh/Downloads/amazon-ml-challenge-2026/work_v5', 'rule': False, 'mode': 'all', 'unseen_thr': 0.9}
+[    33.3s |   4.1GB] test France: mean matches 3.197 empty 0.0636
+[    33.4s |   4.1GB] test India: mean matches 3.375 empty 0.0581
+[    33.4s |   4.1GB] test US: mean matches 3.397 empty 0.0576
+[    36.1s |   3.0GB] unseen: share of pairs p>0.3 that are in (0.3,0.98]: 0.0980
+[    70.6s |   2.9GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (101719 empty, 1630825 non-empty).
+  candidate_pairs.tsv: 1732544 rows (0 empty, 1732544 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[    70.6s |   2.9GB] VALID
+[     0.0s |   0.1GB] args: {'stage': 'combine', 'run': 'exp12sr', 'base': 'exp10', 'model_run': 'exp09', 'out_world': 'C:/Users/gandh/Downloads/amazon-ml-challenge-2026/work_v5', 'rule': True, 'mode': 'all', 'unseen_thr': 0.9}
+[    25.6s |   5.9GB] rule on top: 37320 rule pairs, 14910 flips
+[    57.7s |   4.5GB] test France: mean matches 3.247 empty 0.0620
+[    57.7s |   4.5GB] test India: mean matches 3.375 empty 0.0581
+[    57.8s |   4.5GB] test US: mean matches 3.397 empty 0.0576
+[    60.3s |   4.1GB] unseen: share of pairs p>0.3 that are in (0.3,0.98]: 0.1025
+[    90.6s |   3.4GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (101289 empty, 1631255 non-empty).
+  candidate_pairs.tsv: 1732544 rows (0 empty, 1732544 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[    90.6s |   3.4GB] VALID
+EXP12_DONE

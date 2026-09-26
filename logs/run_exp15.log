@@ -1,0 +1,99 @@
+[     0.0s |   0.1GB] args: {'stage': 'feats2', 'run': 'exp15', 'test_feat': 'feat_v1/test', 'thr_seen': 0.01, 'thr_unseen': 0.003, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp15_compact.py:44: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  d = pl.concat([pl.read_parquet(b, columns=["s1", "r"]), pl.read_parquet(o, columns=["p1"])], how="horizontal")
+[    14.0s |   1.0GB] train: kept 6,444,127 of 33,574,237 pairs (19.2%); 2.92 per S1 (was 15.21)
+[    33.5s |   2.9GB] consistency s1 0..521061: pairs 4166278
+[    43.9s |   2.9GB] consistency s1 521063..1043309: pairs 4026908
+[    53.9s |   2.9GB] consistency s1 1043310..1565334: pairs 4014773
+[    64.2s |   3.0GB] consistency s1 1565335..2088125: pairs 4007464
+[    66.6s |   2.9GB] consistency s1 2088127..2206820: pairs 914958
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp15_compact.py:57: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  full = pl.concat([t.drop("row"), cons.drop("row")], how="horizontal").rename({"p": "p1"}).drop("s1", "r")
+[    67.4s |   3.3GB] stage-2 feats train: 6,444,127
+[    68.1s |   3.3GB] test: kept 6,842,248 of 32,156,169 pairs (21.3%); 3.95 per S1 (was 18.56)
+[    90.0s |   3.7GB] consistency s1 0..414282: pairs 4548134
+[   102.1s |   3.7GB] consistency s1 414283..829382: pairs 4409022
+[   113.9s |   3.8GB] consistency s1 829383..1244720: pairs 4382999
+[   125.6s |   3.8GB] consistency s1 1244721..1660062: pairs 4383663
+[   127.7s |   3.7GB] consistency s1 1660063..1732543: pairs 763298
+[   128.5s |   3.2GB] stage-2 feats test: 6,842,248
+[     0.0s |   0.1GB] args: {'stage': 'train2', 'run': 'exp15', 'test_feat': 'feat_v1/test', 'thr_seen': 0.01, 'thr_unseen': 0.003, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp15_compact.py:78: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  yield pl.concat([a[rows], s.drop("_row")], how="horizontal")
+[    31.1s |   7.1GB] [stage2] features 142
+[0]	va-logloss:0.16856
+[181]	va-logloss:0.03385
+[    71.1s |   7.6GB] [stage2] fold 0: rows 3066230, best iter 131, logloss 0.03378, 17s
+[0]	va-logloss:0.16499
+[181]	va-logloss:0.03242
+[   109.8s |   7.5GB] [stage2] fold 1: rows 3077252, best iter 131, logloss 0.03241, 17s
+[   110.3s |   2.0GB] [stage2] top features: [('p1', 5659.2), ('p_gap_s1', 1500.8), ('p_nhi_s1', 578.5), ('cos_j', 183.9), ('nc_first_eq', 134.9), ('cons_addr_max', 84.1), ('p_margin_r', 83.6), ('ad_tset', 81.3), ('b_hassfx', 75.9), ('cons_num_max', 73.9), ('num_jacc', 48.2), ('r_margin2', 43.7), ('p_2nd_r', 43.1), ('num_tset', 40.6), ('hn_sup_r', 37.5), ('b_s1cnt', 35.3), ('hn_prefix', 33.6), ('p_sum_s1', 32.8), ('p_rank_r', 31.6), ('cons_n_anchor', 31.4)]
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\.venv\Lib\site-packages\xgboost\core.py:751: UserWarning: [23:23:42] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\common\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+[   225.9s |   1.1GB] [exp05 stage2] assign decoding: 0.5:0.98767 0.6:0.98828 0.65:0.98846 0.7:0.98856 0.75:0.98858 0.8:0.98849 0.85:0.98819 0.9:0.98757
+[   236.2s |   1.2GB] [exp05 stage2] BEST thr=0.75 F0.5=0.98858 breakdown {'India': 0.98859, 'US': 0.98857, 'single': 0.99286, 'ngt1': 0.95638, 'ngt2': 0.98644, 'ngt3+': 0.99117}
+[     0.0s |   0.1GB] args: {'stage': 'predict', 'run': 'exp15', 'test_feat': 'feat_v1/test', 'thr_seen': 0.01, 'thr_unseen': 0.003, 'neg_frac': 0.3, 'depth': 8, 'device': 'cuda', 'eta': 0.1, 'rounds': 2000, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp15_compact.py:78: DeprecationWarning: the default behavior of `how='horizontal'` for `concat` is deprecated and will require equal heights in the next breaking release. Use `how='horizontal_extend'` to keep the current behavior.
+(Deprecated in version 1.42.1)
+  yield pl.concat([a[rows], s.drop("_row")], how="horizontal")
+[    63.3s |   2.7GB] test France: thr 0.9 mean matches 3.195 empty 0.0629
+[    63.4s |   2.7GB] test India: thr 0.75 mean matches 3.371 empty 0.0583
+[    63.5s |   2.7GB] test US: thr 0.75 mean matches 3.402 empty 0.0576
+[    87.8s |   2.7GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (101731 empty, 1630813 non-empty).
+  candidate_pairs.tsv: 1732544 rows (62686 empty, 1669858 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[    87.8s |   2.7GB] VALID
+[     0.0s |   0.5GB] args: {'stage': 'eval', 'run': 'exp15c', 'base': 'exp15', 'ce_run': 'exp08', 'thr': None, 'unseen_thr': 0.9}
+[     3.9s |   1.0GB] stacker fold 0: coef [0.83  0.559 0.042]
+[     4.1s |   1.0GB] stacker fold 1: coef [0.821 0.557 0.041]
+[    71.6s |   1.6GB] [exp15 (reference)] assign decoding: 0.5:0.98767 0.6:0.98828 0.65:0.98846 0.7:0.98856 0.75:0.98858 0.8:0.98849 0.85:0.98819 0.9:0.98757
+[    82.0s |   1.8GB] [exp15 (reference)] BEST thr=0.75 F0.5=0.98858 breakdown {'India': 0.98859, 'US': 0.98857, 'single': 0.99286, 'ngt1': 0.95638, 'ngt2': 0.98644, 'ngt3+': 0.99117}
+[   149.0s |   1.6GB] [exp15 + exp08 CE] assign decoding: 0.5:0.98907 0.6:0.98963 0.65:0.98977 0.7:0.98982 0.75:0.98981 0.8:0.98969 0.85:0.98940 0.9:0.98883
+[   159.4s |   1.8GB] [exp15 + exp08 CE] BEST thr=0.7 F0.5=0.98982 breakdown {'India': 0.9903, 'US': 0.98951, 'single': 0.99484, 'ngt1': 0.96262, 'ngt2': 0.98805, 'ngt3+': 0.9919}
+[     0.0s |   0.5GB] args: {'stage': 'predict', 'run': 'exp15c', 'base': 'exp15', 'ce_run': 'exp08', 'thr': None, 'unseen_thr': 0.9}
+[    26.9s |   2.7GB] test France: thr 0.9 mean matches 3.195 empty 0.0629
+[    26.9s |   2.7GB] test India: thr 0.7 mean matches 3.376 empty 0.0580
+[    27.0s |   2.7GB] test US: thr 0.7 mean matches 3.394 empty 0.0576
+[    51.8s |   2.7GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (101435 empty, 1631109 non-empty).
+  candidate_pairs.tsv: 1732544 rows (62686 empty, 1669858 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[    51.8s |   2.7GB] VALID
+[     0.0s |   0.1GB] args: {'stage': 'predict', 'run': 'exp15cr', 'base': 'exp15c', 'metrics_run': '', 'words': '', 'min_role': 0.1, 'pattern': 'noise', 'p_floor': 0.01, 'p_set': 0.95, 'thr': None, 'unseen_thr': 0.9}
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp11_rolerule.py:58: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  ta = s1.filter(pl.col("country") == cc)["name_core"].str.split(" ").list.unique().explode().value_counts()
+C:\Users\gandh\Downloads\amazon-ml-challenge-2026\exp11_rolerule.py:60: DeprecationWarning: In Polars 2.0, the default behavior for `empty_as_null` will change to `False`. To keep the current behavior, explicitly set `empty_as_null=True`.
+  tb = rc["name_core"].str.split(" ").list.unique().explode().value_counts()
+[    20.6s |   4.3GB] rule words (unseen countries): [('France', 'fils', 10301, 1128, 0.76, 0.4), ('France', 'services', 5584, 156, 0.77, 0.9), ('France', 'groupe', 5405, 5085, 0.7, 1.5), ('France', 'associes', 5303, 193, 0.75, 4.3), ('France', 'developpement', 5154, 5146, 0.65, 2.4), ('France', 'france', 4855, 4820, 0.61, 0.2)]
+[    21.0s |   4.4GB] flips 16488 in 15747 S1 (0.061 of France); S1 with no other accepted match: 428
+[    44.1s |   2.7GB] test France: mean matches 3.254 empty 0.0612
+[    44.2s |   2.7GB] test India: mean matches 3.376 empty 0.0580
+[    44.2s |   2.7GB] test US: mean matches 3.394 empty 0.0576
+[    68.0s |   2.7GB] validator: ML Challenge 2026 — submission validator
+  test dir: C:\Users\gandh\Downloads\amazon-ml-challenge-2026\dataset\test
+  required S1 entities: 1732544
+  matching_results.tsv: 1732544 rows (101007 empty, 1631537 non-empty).
+  candidate_pairs.tsv: 1732544 rows (62686 empty, 1669858 non-empty).
+
+WARNING: ID-existence check is OFF (the default) — not checking that matched/candidate IDs exist in the test set. Every other rule is still checked. Re-run with --check-ids to enable it (needs test_source2/3.tsv; uses more memory). A nonexistent ID only lowers your score, never rejects your submission.
+PASS — no blocking issues found. Safe to submit. 
+[    68.0s |   2.7GB] VALID
+EXP15_DONE
