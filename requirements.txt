@@ -1,0 +1,14 @@
+# Python 3.11.9 (tested on Windows 11, NVIDIA RTX 3050 Laptop 4 GB, CUDA 12.8 driver)
+# torch with CUDA 12.8 wheels:  pip install torch==2.9.0 --index-url https://download.pytorch.org/whl/cu128
+torch==2.9.0
+transformers==5.15.1
+numpy==2.4.6
+polars==1.44.2
+polars-runtime-32==1.44.2
+pyarrow==25.0.1
+scipy==1.17.1
+scikit-learn==1.7.2
+xgboost==3.2.0
+rapidfuzz==3.14.5
+anyascii==0.3.3
+psutil==7.2.2
