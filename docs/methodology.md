@@ -226,19 +226,14 @@ A fourth cross-encoder (multilingual-e5-base, 278M) reached 0.99054: noise-level
 
 ### A. Code Artefacts
 
-`code/business_entity_resolution/src/`:
+This repository contains the submitted pipeline as a modular package; `README.md` describes the layout.
 
-- **Entry point:** `run_pipeline.py --data <dataset> --work <scratch> --out <output>`. It runs every step in order and resumes with `--from_step`.
-- **Shared code:** `er_common.py` (paths, IO, metric, writer).
-- **Preprocessing and blocking:** `prep_v3.py` (and `prep_v1.py`, which it imports); `exp01_block.py` (embedding blocker + IVF search); `exp01_match.py` (pair features).
-- **Validation world and features:** `exp03_dense.py` (dense validation world, cross-fitting, decoding); `exp05_tokfeat.py`, `exp07_tokfeat2.py`, `exp09_consensus.py`, `exp13_rolefeat.py` (feature layers and model stages); `exp02_stack.py` (stage-2 features).
-- **Compaction and cross-encoders:** `exp15_compact.py` (learned filter + stage 2 on the filtered set); `exp06_crossenc.py` (cross-encoder training and scoring); `exp17_cefill.py` (cross-encoder coverage); `exp10_combine.py` (stacking + decoding).
-- **Stacking:** `exp28_gbstack.py` (gradient-boosted stacker with rival features).
-- **Unseen countries and decoding:** `exp11_rolerule.py` (word-role rule); `exp19_align.py` (final decoding; its alignment option is disabled).
-- **Post-decoding rules:** `exp31_sibprior.py` (US legal-form siblings), `exp32_acro.py` (French acronyms), `exp33_descswap.py` (French descriptor siblings), `exp35_acrocand.py` (French acronym candidate channel).
+- **Entry point:** `python main.py --data <dataset> --output <output>`. It runs every stage in order and writes `matching_results.tsv` and `candidate_pairs.tsv`.
+- **`entity_resolution/`:** `preprocessing.py` (normalization); `blocking/` (embedding blocker, GPU IVF search, candidate pruning); `features/` (the four feature layers); `models/` (cross-fitted XGBoost matchers, cross-encoders, logistic and gradient-boosted stackers); `postprocessing/` (word-role rule, count-matching rules, assignment decoding, candidate gate); `config.py` (all settings).
+- **`research/`:** the original experiment-by-experiment code (`exp01` … `exp39`) from which the package was assembled, including the experiments that were not kept.
 
-See `README.md` for the environment, hardware and per-step runtimes. All models are trained from scratch on the provided training data, except the pretrained multilingual-e5-small (MIT) and bert-base-uncased (Apache-2.0) encoders, which are fine-tuned. No external data, lookups or APIs are used. The unlabeled test records are used transductively only for per-split statistics (IDF, word roles).
+See `README.md` for the environment, hardware and runtime. All models are trained from scratch on the provided training data, except the pretrained multilingual-e5-small (MIT) and bert-base-uncased (Apache-2.0) encoders, which are fine-tuned. No external data, lookups or APIs are used. The unlabeled test records are used transductively only for per-split statistics (IDF, word roles).
 
 ### B. Additional Results
 
-The full experiment log (≈20 experiments, including negative results and leaderboard probes) is summarised in the project's `EXPERIMENTS.md`.
+The full experiment log (≈20 experiments, including negative results and leaderboard probes) is in `docs/experiment_log.md`.

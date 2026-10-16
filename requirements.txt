@@ -12,3 +12,4 @@ xgboost==3.2.0
 rapidfuzz==3.14.5
 anyascii==0.3.3
 psutil==7.2.2
+tqdm==4.67.1

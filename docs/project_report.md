@@ -14,11 +14,12 @@
 | **Metric** | Macro F0.5 per reference business (precision counts twice as much as recall). |
 | **Twist** | Training data covers the US and India only. The test set also contains **France** (15% of the businesses), with no labels at all. |
 | **Best public leaderboard score** | **0.988929**, up from 0.978934 for our first submission |
+| **Final submitted code** | The exp35 configuration (three cross-encoders): public LB **0.98891** |
 | **Final standing** | **Top 50** overall, which earned Pre-Placement Interviews for the Applied Scientist Intern role |
 | **Candidate set** | **3.80 candidates per reference business** (from 10M records), with 98.4% of true pairs kept |
 | **Hardware** | One laptop: Intel i5-12450H (12 threads), 16 GB RAM, NVIDIA RTX 3050 Laptop GPU with 4 GB VRAM |
 
-**Final pipeline in one line:** text normalization → learned embedding blocker with GPU nearest-neighbour search → 124 pair features → two-stage gradient-boosted matcher with a learned candidate filter → four fine-tuned cross-encoders and a gradient-boosted stacker (US/India) → word-role and structural rules for the unseen country (France) → assignment decoding.
+**Final pipeline in one line:** text normalization → learned embedding blocker with GPU nearest-neighbour search → 124 pair features → two-stage gradient-boosted matcher with a learned candidate filter → three fine-tuned cross-encoders and a gradient-boosted stacker (US/India) → word-role and structural rules for the unseen country (France) → assignment decoding.
 
 ---
 
@@ -77,7 +78,7 @@ We also had access to Kaggle notebooks (T4 ×2 / P100 GPUs). In the end every ex
 |---|---|---|---|
 | intfloat/multilingual-e5-small | MIT | 118M | cross-encoders 1 and 2 |
 | bert-base-uncased | Apache-2.0 | 110M | cross-encoder 3 |
-| intfloat/multilingual-e5-base | MIT | 278M | cross-encoder 4 |
+| intfloat/multilingual-e5-base | MIT | 278M | cross-encoder 4 (tested in exp30/exp36, not in the final code) |
 | Qwen2.5-1.5B-Instruct | Apache-2.0 | 1.5B | zero-shot judge experiment (rejected, deleted) |
 
 Everything else, including the embedding blocker and all the matchers, we trained from scratch on the competition data.
@@ -85,7 +86,7 @@ Everything else, including the embedding blocker and all the matchers, we traine
 ### 2.3 How we worked
 We followed a few rules from the start, and they shaped the whole project:
 - **Hypothesis first.** Each experiment started from a measured problem. It became a new versioned code file (`exp01`, `exp02`, … up to `exp39`) with a docstring explaining why it exists.
-- **One experiment log** (`EXPERIMENTS.md`). Every result was recorded: the hypothesis, the change, the numbers, the conclusion, and the leaderboard score if any. Most of this report is drawn from it.
+- **One experiment log** (`EXPERIMENTS.md`, now [docs/experiment_log.md](experiment_log.md)). Every result was recorded: the hypothesis, the change, the numbers, the conclusion, and the leaderboard score if any. Most of this report is drawn from it.
 - **Honest validation.** We only trusted gains measured on a validation setup we had shown to match the leaderboard (Section 5).
 - **Leaderboard discipline.** We had 5 submissions per day. Each submission tested at most one untested idea on top of an already-validated base, and we wrote down the expected score before submitting. We learned this rule the hard way (Section 9.5).
 - **Reproducibility.** Every entry point fixes its random seeds and uses deterministic GPU kernels. We checked the final package by regenerating the submitted files byte for byte.
@@ -512,6 +513,8 @@ If test accepts noticeably more of a type than validation says is true, the exce
 - **exp35** (exp29gf + all four count-matching fixes): leaderboard **0.98891** (+0.00102), our first gain of this size since the word-role rule.
 - **exp36** (the same rules on the 4-cross-encoder stack): **0.988929, our best score.**
 
+**Why the final code is exp35, not exp36.** The 4th cross-encoder (multilingual-e5-base, 278M parameters) added only +0.00004 on validation and +0.00002 on the leaderboard, both within run-to-run noise. It also added about 4 hours to a full run and the largest model of the pipeline. We therefore submitted the simpler three-cross-encoder pipeline (exp35, LB 0.98891) as our final code. The final candidate gate (Section 14.4) is part of it.
+
 ---
 
 ## 14. Final checks and a last bet
@@ -581,8 +584,8 @@ A final gate removes them from `candidate_pairs.tsv`: **3.95 → 3.80 candidates
         ▼
  5. Learned filter p1 > 0.01 / 0.003 → 3.95 per business → stage-2 XGBoost (142 features)
         │
-        ├── US / India ──► 6. Four cross-encoders on the uncertain band
-        │                     (e5-small ×2, bert-base, e5-base; frozen embeddings, cross-fitted)
+        ├── US / India ──► 6. Three cross-encoders on the uncertain band
+        │                     (e5-small ×2, bert-base; frozen embeddings, cross-fitted)
         │                  7. GBDT stacker: p + CE scores + 12 structural + rival features
         │
         └── France ──────► 8. Word-role rule for noise words (learned per country, no labels)
@@ -596,10 +599,9 @@ A final gate removes them from `candidate_pairs.tsv`: **3.95 → 3.80 candidates
 ```
 
 **Reproducibility:**
-- One script (`run_pipeline.py`) runs every step (about 40) from the raw TSVs. It takes about 11 hours on the laptop; the long parts are the embedding models, the training-side search, and the cross-encoders.
-- Every stage caches its outputs, so a run can resume after an interruption.
-- All entry points fix seeds and use deterministic GPU kernels.
-- We verified the package by regenerating the decoding stages from cached intermediate results and comparing SHA-256 checksums with the submitted files: identical.
+- One command (`python main.py --data dataset --output output`) runs all 28 stages from the raw TSVs and writes the two output files. The code is in the `entity_resolution/` package; the experiment-by-experiment research code is kept in `research/`.
+- Each stage runs in its own process with fixed seeds and deterministic GPU kernels. Intermediate data lives in a temporary folder that is deleted at the end.
+- A full run takes about 7 hours on the laptop; the long parts are the embedding blocker, the training-side search and the cross-encoders.
 
 ---
 
@@ -619,12 +621,12 @@ A final gate removes them from `candidate_pairs.tsv`: **3.95 → 3.80 candidates
 | exp14r | Word-role features in the model | 0.986936 |
 | exp29gf | Compact candidates + 3 cross-encoders + GBDT stacker with rivals | 0.987891 |
 | exp29t80 | *Probe:* France threshold 0.8 | 0.987799 |
-| exp35 | + count-matching rules (US siblings, French acronyms, French descriptor siblings) | 0.98891 |
-| **exp36** | **+ 4th cross-encoder** | **0.988929** |
+| **exp35** | **+ count-matching rules (US siblings, French acronyms, French descriptor siblings): final submitted code** | **0.98891** |
+| exp36 | + 4th cross-encoder (best score; not packaged, see Section 13.3) | 0.988929 |
 | exp38 | *Probe:* self-trained France model | 0.988669 |
 
 ### 16.2 Validation progression (US/India, dense world)
-0.98576 → 0.98764 → 0.98787 → 0.98808 → 0.98965 → 0.98975 → 0.98985 → 0.98998 → 0.99015 → 0.99032 → **0.99050** → 0.99054
+0.98576 → 0.98764 → 0.98787 → 0.98808 → 0.98965 → 0.98975 → 0.98985 → 0.98998 → 0.99015 → 0.99032 → **0.99050** (final code) → 0.99054 (with the 4th cross-encoder)
 
 ### 16.3 Final picture
 - **US/India on test ≈ 0.9905**, the same as validation.
@@ -710,7 +712,7 @@ A final gate removes them from `candidate_pairs.tsv`: **3.95 → 3.80 candidates
 | exp31 | US legal-form sibling demotion (count matching) | in exp35 |
 | exp32 | French acronym rule | in exp35 |
 | exp33 | French descriptor-sibling demotion | in exp35 |
-| exp35 | French acronym candidate channel | LB 0.98891 |
-| exp36 | Rules on the 4-cross-encoder stack | **LB 0.988929 (best)** |
+| exp35 | French acronym candidate channel | **LB 0.98891 (final code)** |
+| exp36 | Rules on the 4-cross-encoder stack | LB 0.988929 (best) |
 | exp37 | Final candidate gate | 3.80 per business, matches unchanged |
 | exp38 | Self-trained France, final probe | LB 0.988669 |

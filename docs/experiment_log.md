@@ -2,7 +2,6 @@
 
 **Metric:** macro F0.5 per S1 entity (precision-weighted; singletons score 1 only if the prediction is empty).
 **Validation ("OOF"):** 2-fold cross-fit by S1 over the *whole* train world. Blocking runs over the full train S2/S3 pool, exactly like test. From exp03 on, validation uses a *dense world* (see exp03), because the normal world proved optimistic.
-**Target:** LB > 0.99 (user, 09-27; almost all of the top 50 are ≈0.99). **Current best LB:** **0.987891** (exp29gf, 09-27). Submission limit: 5/day.
 
 ## Scoreboard
 

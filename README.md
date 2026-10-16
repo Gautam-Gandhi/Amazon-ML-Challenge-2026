@@ -24,7 +24,7 @@ For every business record in a reference source, find all records in two other n
    │                       candidate consensus, per-country word roles (learned without labels)
    │ 4. Stage-1 XGBoost (cross-fitted, trained in a "dense world" that matches test density)
    │ 5. Learned candidate filter → 3.95 per business → stage-2 XGBoost with competition features
-   ├── US / India → 6. four fine-tuned cross-encoders on the uncertain band → 7. GBDT stacker with "rival" features
+   ├── US / India → 6. three fine-tuned cross-encoders on the uncertain band → 7. GBDT stacker with "rival" features
    └── France     → 8. word-role rule for noise words (statistics from the country's own unlabeled data)
    │ 9. Assignment decoding (each record → its best business) + count-matching rules + final candidate gate (3.80)
    ▼
@@ -49,10 +49,12 @@ For every business record in a reference source, find all records in two other n
 | exp11b | French word-role rule | 0.986449 |
 | exp14r | Word-role features in the model | 0.986936 |
 | exp29gf | Compact candidates + 3 cross-encoders + GBDT stacker with rivals | 0.987891 |
-| exp35 | Count-matching rules (US siblings, French acronyms, French descriptor siblings) | 0.98891 |
-| **exp36** | **+ 4th cross-encoder** | **0.988929** |
+| **exp35** | **Count-matching rules (US siblings, French acronyms, French descriptor siblings): final submitted code** | **0.98891** |
+| exp36 | + 4th cross-encoder (best score, not packaged) | 0.988929 |
 
-Validation (US/India) rose from 0.98490 to 0.99054. The full list of submissions, including probes and failures, is in [docs/experiment_log.md](docs/experiment_log.md).
+Validation (US/India) rose from 0.98490 to 0.99050.
+
+**Why the final code is exp35 and not exp36:** the 4th cross-encoder (multilingual-e5-base, 278M parameters) gained only +0.00004 on validation and +0.00002 on the leaderboard, within run-to-run noise, while adding about 4 hours of runtime and the largest model of the pipeline. We submitted the simpler three-cross-encoder pipeline. The full list of submissions, including probes and failures, is in [docs/experiment_log.md](docs/experiment_log.md).
 
 ## Tech stack
 Python 3.11 · **polars** · numpy · **rapidfuzz** · **PyTorch 2.9** (CUDA 12.8) · **XGBoost 3.2** (GPU) · scikit-learn · Hugging Face **transformers** · anyascii
@@ -60,7 +62,7 @@ Python 3.11 · **polars** · numpy · **rapidfuzz** · **PyTorch 2.9** (CUDA 12.
 Pretrained models (all within the competition's license and size rules, pinned revisions, downloaded automatically):
 - `intfloat/multilingual-e5-small` (MIT): cross-encoders 1–2;
 - `bert-base-uncased` (Apache-2.0): cross-encoder 3;
-- `intfloat/multilingual-e5-base` (MIT): cross-encoder 4.
+- `intfloat/multilingual-e5-base` (MIT): cross-encoder 4, tested in exp30/exp36 only (not used by the final code).
 
 Everything else (the blocker, the matchers, the stackers) is trained from scratch on the competition data.
 
@@ -69,42 +71,44 @@ Everything else (the blocker, the matchers, the stackers) is trained from scratc
 ## Repository layout
 
 ```
-├── src/
-│   ├── run_pipeline.py        ← final pipeline: raw data → both output files
-│   ├── er_common.py           ← paths, IO, metric, cross-fitting folds, output writer
-│   ├── prep_v1.py, prep_v3.py ← normalization
-│   ├── exp01_*.py … exp39_*.py← one file per experiment (pipeline stages and research experiments)
-│   ├── utils/validate_submission.py   ← official submission validator
-│   ├── tools/                 ← reusable analysis tools (leave-one-country-out, loss breakdown, decoding checks, …)
-│   └── analysis/              ← one-off analyses and audits (see analysis/INDEX.md)
-├── scripts/                   ← run_expNN.sh: the exact command chain of each experiment
+├── main.py                        ← entry point: raw data → both output files
+├── entity_resolution/             ← the final pipeline
+│   ├── config.py                  ← every setting (seeds, model sizes, thresholds, rule parameters)
+│   ├── pipeline.py                ← the ordered list of stages; each stage runs in its own process
+│   ├── data_io.py                 ← reading the TSVs, writing and validating the output files
+│   ├── preprocessing.py           ← normalization of names and addresses
+│   ├── blocking/
+│   │   ├── embedding_model.py     ← hashed char-3-gram two-tower encoder, contrastive training
+│   │   ├── vector_search.py       ← GPU IVF nearest-neighbour search
+│   │   └── candidate_generation.py← search channels, pruning, dense validation world
+│   ├── features/
+│   │   ├── pair_features.py       ← 65 base features (fuzzy scores, numbers, legal forms, ranks)
+│   │   ├── token_features.py      ← 37 word-alignment, noise-word and house-number features
+│   │   ├── consensus_features.py  ← 9 features over a business's other candidates
+│   │   ├── role_features.py       ← 13 per-country word-role features (no labels)
+│   │   └── competition_features.py← features comparing a pair with its rival candidates
+│   ├── models/
+│   │   ├── validation.py          ← dense validation world, labels, F0.5 threshold search
+│   │   ├── gradient_boosting.py   ← cross-fitted XGBoost matchers, candidate filter
+│   │   ├── cross_encoder.py       ← cross-encoder training and scoring on the uncertain band
+│   │   └── stacking.py            ← logistic stack and GBDT stack with rival features
+│   └── postprocessing/
+│       ├── rules.py               ← French word-role rule and the count-matching rules
+│       └── decoding.py            ← assignment decoding, candidate gate, output files
+├── utils/validate_submission.py   ← official submission validator
+├── research/                      ← the original experiment-by-experiment code (see research/README.md)
 ├── docs/
-│   ├── project_report.md      ← the full project story
-│   ├── methodology.md         ← methodology document submitted with the final package
-│   ├── experiment_log.md      ← every experiment: hypothesis, change, result, conclusion
-│   ├── france_problem.md      ← everything tried for the unseen country
-│   └── dataset_description.md ← our notes on the dataset
+│   ├── project_report.md          ← the full project story
+│   ├── methodology.md             ← methodology document submitted with the final package
+│   ├── experiment_log.md          ← every experiment: hypothesis, change, result, conclusion
+│   ├── france_problem.md          ← everything tried for the unseen country
+│   └── dataset_description.md     ← our notes on the dataset
 └── requirements.txt
 ```
 
-**Which modules form the final pipeline:**
-
-| Stage | Modules |
-|---|---|
-| Normalization | `prep_v3.py` (imports `prep_v1.py`) |
-| Blocking | `exp01_block.py` (embedding + GPU IVF search), `exp01_match.py` / `exp03_dense.py` (pruning, base features) |
-| Pair features | `exp07_tokfeat2.py` (tokens, noise words), `exp09_consensus.py` (consensus), `exp13_rolefeat.py` (word roles) |
-| Stage-1 / stage-2 matchers | `exp13_rolefeat.py` (+ `exp05_tokfeat.py`, `exp02_stack.py`), `exp15_compact.py` (candidate filter + stage 2) |
-| Cross-encoders | `exp06_crossenc.py`, `exp17_cefill.py` |
-| Stacking | `exp10_combine.py` (logistic), `exp28_gbstack.py` (GBDT with rival features) |
-| France rule, decoding | `exp11_rolerule.py`, `exp19_align.py` |
-| Post-decoding rules | `exp31_sibprior.py`, `exp32_acro.py`, `exp33_descswap.py`, `exp35_acrocand.py`, `exp37_candgate.py` |
-
-The other `exp*.py` files are experiments that were tested and not kept: translating French words, self-training, importance weighting, a zero-shot LLM judge, French type alignment, and so on. [docs/experiment_log.md](docs/experiment_log.md) describes each one and its result.
-
 ---
 
-## Reproducing the submission
+## Running the pipeline
 
 ### 1. Environment (Windows, Linux or macOS; an NVIDIA GPU is required)
 ```bash
@@ -113,7 +117,7 @@ python -m venv .venv
 pip install torch==2.9.0 --index-url https://download.pytorch.org/whl/cu128
 pip install -r requirements.txt
 ```
-On Windows without symlink rights, set `HF_HUB_DISABLE_SYMLINKS_WARNING=1` before the first run (the pretrained models are downloaded from the Hugging Face hub on first use).
+The pretrained models are downloaded from the Hugging Face hub on first use (pinned revisions). On Windows without symlink rights, set `HF_HUB_DISABLE_SYMLINKS_WARNING=1`.
 
 ### 2. Data
 Place the competition data in `dataset/` (it is not part of this repository):
@@ -124,18 +128,14 @@ dataset/test/test_source1.tsv    test_source2.tsv   test_source3.tsv
 
 ### 3. Run
 ```bash
-cd src
-python run_pipeline.py --data ../dataset --work ../work --out ../output
+python main.py --data dataset --output output
 ```
-- **Outputs:** `output/matching_results.tsv` and `output/candidate_pairs.tsv`. The validator runs automatically at every decoding step.
-- **Caches:** every step caches its results under `--work` (about 40 GB at peak).
-- **Resume or partial runs:** resume an interrupted run with `--from_step <name>`. List the steps with `python run_pipeline.py --list`, and stop early with `--to_step <name>`.
-- **Runtime:** about 11 hours on the laptop above. The long steps are the embedding models, the training-side search, and the four cross-encoders.
-- **Determinism:** every entry point fixes its seeds and uses deterministic GPU kernels, so reruns on the same hardware and software reproduce the same files. Other GPUs may differ in the 4th–5th decimal. XGBoost results depend on the thread count; we used the default.
-- **Memory:** 16 GB RAM is enough because the steps run one at a time. Avoid running other heavy jobs alongside.
-
-### Running individual experiments
-Each `scripts/run_expNN.sh` reproduces one experiment's command chain. These scripts expect the virtual environment at `.venv/` (Windows layout `.venv/Scripts/python.exe`; adjust `PY=` on Linux/macOS) and write caches to `work/` (override with `ER_WORK_DIR`). Most experiments build on the caches of the main pipeline, so run the pipeline first. The analysis scripts in `src/analysis/` read the same caches.
+- **Outputs:** `output/matching_results.tsv` and `output/candidate_pairs.tsv`, checked with the official validator at the end.
+- **Progress:** the console shows the current phase and stage, progress bars inside each stage (normalization, blocker epochs, search, feature parts, boosting rounds, cross-encoder batches), the time of every stage, and a summary table with the time per stage and the total at the end.
+- **Intermediate data:** normalized tables, models, candidates and feature layers are kept in a temporary folder (about 40 GB at peak) that is deleted when the run ends. Use `--temp-dir <folder>` to place it on a drive with enough space.
+- **Runtime:** about 7 hours on the laptop above. The long stages are the embedding blocker, the training-side search and the three cross-encoders.
+- **Memory:** 16 GB RAM is enough because the stages run one at a time, each in its own process. Avoid running other heavy jobs alongside.
+- **Determinism:** every stage fixes its seeds and uses deterministic GPU kernels, so reruns on the same hardware and software give identical files. Other GPUs may differ in the 4th–5th decimal.
 
 ---
 
